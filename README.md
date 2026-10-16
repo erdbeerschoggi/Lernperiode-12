@@ -8,7 +8,7 @@ Beschreibung des Projekts wäre gut!!!
 - Head of R&D: Joshua
 
 ## 23.10
-**Arbeitspakete für alle gleich**
+**Arbeitspakete für alle**
 - [ ] Sich mit Luau bekannt machen
 - [ ] Umgebung für die entwicklung vom Spiel einstellen
 - [ ] Aufgaben für unseres Projekt genau erstellen
