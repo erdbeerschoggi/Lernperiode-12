@@ -2,10 +2,10 @@
 Beschreibung des Projekts wäre gut!!!
 
 # Rollen Aufteilung
-CEO - Mina
-CTO - Maja
-COO - Nena
-Head of R&D - Joshua
+- CEO: Mina
+- CTO: Maja
+- COO: Nena
+- Head of R&D: Joshua
 
 ## 23.10
 **Arbeitspakete für alle gleich**
