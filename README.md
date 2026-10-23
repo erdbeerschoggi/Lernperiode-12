@@ -9,10 +9,10 @@ Beschreibung des Projekts wäre gut!!!
 
 ## 23.10
 **Arbeitspakete für alle**
-- [ ] Sich mit Luau bekannt machen
 - [x] Umgebung für die entwicklung vom Spiel einstellen und das projekt mit allen teilen
 - [ ] Aufgaben für unseres Projekt genau erstellen
-- [ ] Aufgaben für das Projekt aufteilen und auf Gantt-Chart eintragen
+- [ ] Aufgaben für unseres Projekt genau aufteilen
+- [ ] Sich mit Luau bekannt machen
 
 **Nena**
 - [ ] Gantt-Chart anpassen
