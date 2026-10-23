@@ -22,18 +22,26 @@ Beschreibung des Projekts wäre gut!!!
 **Nena**
 - [x] Gantt-Chart anpassen
 
-Für das asynchron dezentral packet haben wir erstmal alle Roblox studio heruntergeladen und das Projekt mit allen geteilt. Dazu haben wir einpaar sachen direkt auf roblox studio erstellt und einbisschen mit dem Programm herumgespielt.
+Für das Paket „Asynchron dezentral“ haben wir zunächst alle Roblox Studio heruntergeladen und das Projekt innerhalb der Gruppe geteilt. Danach haben wir erste Objekte direkt in Roblox Studio erstellt, um uns mit dem Programm vertraut zu machen. Im Anschluss haben wir die grundlegende Spiellogik implementiert: Zwei Spieler können nun gemeinsam ein Spiel starten und dieses komplett durchspielen, vorerst jedoch noch ohne Datenverarbeitung. Darüber hinaus haben wir uns sehr lange mit Git beschäftigt, da die benötigten Extensions, um das Projekt auf GitHub hochzuladen, zu einigen Komplikationen geführt haben.
 
 ## 30.10
-**Arbeitspakete für alle** 
-- [ ] Lobby fürs Spiel gestalten (dezentral A.)
-- [ ]⁣ Weg finden,Code aus Roblox Studio auf Github zu laden 
 
 **Nena**
+- [ ] Bilder zu den Fussballern suchen (dezentral a.)
 - [ ] Sich über die Verwendung der Bilder von Fussballern in Roblox informieren
-- [ ] Bilder zu den Fussballern suchen
+- [ ] Extensions einstellen zum Code auf github hochladen zu können.
 
-**Mina, Maja und Joshua**
-- [ ] Zufällige Spielervergabe hinzufügen
+**Maja** 
+- [ ]⁣ Skripte von Roblox Studio auf Github hochladen. (dezentral A.)
+- [ ] Anderen helfen die extensions für das hochladen vom code auf github einzustellen.
 - [ ] Informationen zum gegnerischen Spieler an der Seite hinzufügen
+
+**Mina**
+- [ ] Lobby fürs Spiel gestalten (dezentral A.)
 - [ ] Besetzte Spieltische blockieren für weitere Spieler
+- [ ] Extensions einstellen zum Code auf github hochladen zu können.
+
+**Joshua**
+- [ ] Lobby fürs Spiel gestalten (dezentral A.)
+- [ ] Zufällige Spielervergabe hinzufügen
+- [ ] Extensions einstellen zum Code auf github hochladen zu können.
