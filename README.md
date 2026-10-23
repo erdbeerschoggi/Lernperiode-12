@@ -17,7 +17,7 @@ Beschreibung des Projekts wäre gut!!!
 - [ ] Spiel anfangen zu bauen
 
 **Maja**
-- [ ] Herausfinden wie wir das Projekta auf github hochladen.
+- [ ] Herausfinden wie wir das Projekt auf github hochladen.
 
 **Nena**
 - [ ] Gantt-Chart anpassen
