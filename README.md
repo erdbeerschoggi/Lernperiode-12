@@ -10,17 +10,17 @@ Beschreibung des Projekts wäre gut!!!
 ## 23.10
 **Arbeitspakete für alle**
 - [x] Umgebung für die entwicklung vom Spiel einstellen und das projekt mit allen teilen
-- [ ] Aufgaben für unseres Projekt genau erstellen aufteilen
-- [ ] Sich mit Luau bekannt machen
+- [x] Aufgaben für unseres Projekt genau erstellen aufteilen
+- [x] Sich mit Luau bekannt machen
 
 **Mina und Joshua**
-- [ ] Spiel anfangen zu bauen
+- [x] Spiel anfangen zu bauen
 
 **Maja**
 - [ ] Herausfinden wie wir das Projekt auf github hochladen.
 
 **Nena**
-- [ ] Gantt-Chart anpassen
+- [x] Gantt-Chart anpassen
 
 Für das asynchron dezentral packet haben wir erstmal alle Roblox studio heruntergeladen und das Projekt mit allen geteilt. Dazu haben wir einpaar sachen direkt auf roblox studio erstellt und einbisschen mit dem Programm herumgespielt.
 
