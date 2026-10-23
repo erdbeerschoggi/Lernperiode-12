@@ -10,9 +10,14 @@ Beschreibung des Projekts wäre gut!!!
 ## 23.10
 **Arbeitspakete für alle**
 - [x] Umgebung für die entwicklung vom Spiel einstellen und das projekt mit allen teilen
-- [ ] Aufgaben für unseres Projekt genau erstellen
-- [ ] Aufgaben für unseres Projekt genau aufteilen
+- [ ] Aufgaben für unseres Projekt genau erstellen aufteilen
 - [ ] Sich mit Luau bekannt machen
+
+**Mina und Joshua**
+- [ ] Spiel anfangen zu bauen
+
+**Maja**
+- [ ] Herausfinden wie wir das Projekta auf github hochladen.
 
 **Nena**
 - [ ] Gantt-Chart anpassen
