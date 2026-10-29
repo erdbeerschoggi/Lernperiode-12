@@ -32,9 +32,11 @@ Für das Paket „Asynchron dezentral“ haben wir zunächst alle Roblox Studio 
 - [ ] Extensions einstellen zum Code auf github hochladen zu können.
 
 **Maja** 
-- [ ]⁣ herausfinden wie man die skripte von Roblox Studio auf Github hochladen kann. (dezentral A.)
+- [x]⁣ herausfinden wie man die skripte von Roblox Studio auf Github hochladen kann. (dezentral A.)
 - [ ] Anderen helfen die extensions für das hochladen vom code auf github einzustellen.
 - [ ] Informationen zum gegnerischen Spieler an der Seite hinzufügen
+
+Für mein dezentrales A. Arbeitspaket habe ich mich informiert, welche die beste und meistverwendete Variante für die Verbindung zwischen GitHub und Roblox Studio ist. Letztes Mal habe ich es schon mit Rojo ausprobiert, doch fand das als ineffizient. Es stellte sich jedoch heraus, dass die Arbeit mit Rojo in VS Code am effizientesten sei und dass alle anderen Entwickler genau das Gleiche. Ich habe alles eingerichtet und den Code auf GitHub gepusht, der von unserer letzten Sitzung relevant war. 
 
 **Mina**
 - [ ] Lobby fürs Spiel gestalten (dezentral A.)
