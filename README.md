@@ -32,7 +32,7 @@ Für das Paket „Asynchron dezentral“ haben wir zunächst alle Roblox Studio 
 - [ ] Extensions einstellen zum Code auf github hochladen zu können.
 
 **Maja** 
-- [ ]⁣ Skripte von Roblox Studio auf Github hochladen. (dezentral A.)
+- [ ]⁣ herausfinden wie man die skripte von Roblox Studio auf Github hochladen kann. (dezentral A.)
 - [ ] Anderen helfen die extensions für das hochladen vom code auf github einzustellen.
 - [ ] Informationen zum gegnerischen Spieler an der Seite hinzufügen
 
