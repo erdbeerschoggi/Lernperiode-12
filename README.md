@@ -27,9 +27,11 @@ Für das Paket „Asynchron dezentral“ haben wir zunächst alle Roblox Studio 
 ## 30.10
 
 **Nena**
-- [ ] Bilder zu den Fussballern suchen (dezentral a.)
+- [x] Bilder zu den Fussballern suchen (dezentral a.)
 - [ ] Sich über die Verwendung der Bilder von Fussballern in Roblox informieren
 - [ ] Extensions einstellen zum Code auf github hochladen zu können.
+
+Im dezentral arbeitspaket habe ich bilder von den CLub logos für jeden Spieler geammelt. Der plan war Bilder von den Spielern einzeln zu nehmen aber da es oft nich möglich ist oder zu kompliziert wegen dem copyright habe ich mich dazu entschieden die Fussballmannschafts logos zu sammeln. Alle logos sind beschriftet und weisen auch an wo in der exel tabelle es dazugehört.
 
 **Maja** 
 - [ ] Anderen helfen die extensions für das hochladen vom code auf github einzustellen.
