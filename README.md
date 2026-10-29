@@ -48,6 +48,8 @@ Für mein dezentrales A. Arbeitspaket habe ich mich informiert, welche die beste
 Für mein dezentrales Arbeitspaket habe ich an der Lobby weitergearbeitet. Ich habe einen unsichtbaren Rand gemacht, damit man nicht mehr von der Map runterfallen kann. Danach habe ich die Baseplate entfernt, weil sie nicht gut zum Design gepasst hat. Zusätzlich habe ich links auf dem Bildschirm einen Shop-Button eingebaut, den wir später noch weiter ausbauen können.
 
 **Joshua**
-- [ ] Lobby fürs Spiel gestalten (dezentral A.)
+- [x] Lobby fürs Spiel gestalten (dezentral A.)
 - [ ] Zufällige Spielervergabe hinzufügen
 - [ ] Extensions einstellen zum Code auf github hochladen zu können.
+
+Für mein dezentrales Arbeitspaket habe ich an der Lobby weitergearbeitet. Zuerst habe ich Mina dabei geholfen, den Shop-Button fertigzustellen. Danach habe ich mich von bereits existierenden Spielen inspirieren lassen und einige Designelemente herausgesucht, die ich in unser Spiel implementieren wollte. Anschliessend habe ich an den Rändern Palmen platziert und das Design des Himmels angepasst, dass es etwas lebendiger wirkt.
