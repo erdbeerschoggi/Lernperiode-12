@@ -41,9 +41,11 @@ Im dezentral arbeitspaket habe ich bilder von den CLub logos für jeden Spieler 
 Für mein dezentrales A. Arbeitspaket habe ich mich informiert, welche die beste und meistverwendete Variante für die Verbindung zwischen GitHub und Roblox Studio ist. Letztes Mal habe ich es schon mit Rojo ausprobiert, doch fand das als ineffizient. Es stellte sich jedoch heraus, dass die Arbeit mit Rojo in VS Code am effizientesten sei und dass alle anderen Entwickler genau das Gleiche. Ich habe alles eingerichtet und den Code auf GitHub gepusht, der von unserer letzten Sitzung relevant war. 
 
 **Mina**
-- [ ] Lobby fürs Spiel gestalten (dezentral A.)
-- [ ] Besetzte Spieltische blockieren für weitere Spieler
+- [x] Lobby verbessern: Rand einbauen, Baseplate entfernen und Shop-Button hinzufügen (dezentral A.)
+- [ ] Fussballspieler mit Daten erstellen und den Spielern zufällig zuweisen
 - [ ] Extensions einstellen zum Code auf github hochladen zu können.
+
+Für mein dezentrales Arbeitspaket habe ich an der Lobby weitergearbeitet. Ich habe einen unsichtbaren Rand gemacht, damit man nicht mehr von der Map runterfallen kann. Danach habe ich die Baseplate entfernt, weil sie nicht gut zum Design gepasst hat. Zusätzlich habe ich links auf dem Bildschirm einen Shop-Button eingebaut, den wir später noch weiter ausbauen können.
 
 **Joshua**
 - [ ] Lobby fürs Spiel gestalten (dezentral A.)
