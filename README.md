@@ -34,7 +34,7 @@ Für das Paket „Asynchron dezentral“ haben wir zunächst alle Roblox Studio 
 Im dezentral arbeitspaket habe ich bilder von den CLub logos für jeden Spieler geammelt. Der plan war Bilder von den Spielern einzeln zu nehmen aber da es oft nich möglich ist oder zu kompliziert wegen dem copyright habe ich mich dazu entschieden die Fussballmannschafts logos zu sammeln. Alle logos sind beschriftet und weisen auch an wo in der exel tabelle es dazugehört.
 
 **Maja** 
-- [ ] Anderen helfen die extensions für das hochladen vom code auf github einzustellen.
+- [x] Anderen helfen die extensions für das hochladen vom code auf github einzustellen.
 - [ ] Informationen zum gegnerischen Spieler an der Seite hinzufügen
 - [x] herausfinden wie man die skripte von Roblox Studio auf Github hochladen kann. (dezentral A.)
 
