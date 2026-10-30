@@ -53,3 +53,25 @@ Für mein dezentrales Arbeitspaket habe ich an der Lobby weitergearbeitet. Ich h
 - [x] Extensions einstellen zum Code auf github hochladen zu können.
 
 Für mein dezentrales Arbeitspaket habe ich an der Lobby weitergearbeitet. Zuerst habe ich Mina dabei geholfen, den Shop-Button fertigzustellen. Danach habe ich mich von bereits existierenden Spielen inspirieren lassen und einige Designelemente herausgesucht, die ich in unser Spiel implementieren wollte. Anschliessend habe ich an den Rändern Palmen platziert und das Design des Himmels angepasst, dass es etwas lebendiger wirkt.
+
+## 06.11
+
+**Nena**
+- [ ] Geldsystem einbauen, damit man nach einem Sieg 50 CHF bekommt(dezentral A.)
+- [ ] Verschiedene farbige Stühle erstellen, die man später im Shop kaufen kann
+- [ ] Die Stühle in den Shop einfügen und Preise dafür festlegen
+
+**Maja**
+- [ ] Die 50 CHF nach einem Sieg mit der Geldanzeige verbinden(dezentral A.)
+- [ ] Programmieren, dass man mit dem Geld neue Stühle kaufen kann
+- [ ] Dafür sorgen, dass gekaufte Stühle später auch benutzt werden können
+
+**Mina**
+- [ ] Das bisherige Fragensystem überarbeiten und vorgefertigte Fragen einbauen(dezentral A.)
+- [ ] Die Ja- und Nein-Buttons entfernen und stattdessen ein Textfeld für Antworten machen
+- [ ] Das Spiel an das neue Frage- und Antwortsystem anpassen
+
+**Joshua**
+- [ ] Vorgefertigte Fragen erstellen und ins Spiel einbauen(dezentral A.)
+- [ ] Die Antworten zwischen den beiden Spielern über das Textfeld anzeigen
+- [ ] Zusammen mit Mina das neue Fragensystem testen und verbessern
