@@ -64,9 +64,12 @@ Für mein dezentrales Arbeitspaket habe ich an der Lobby weitergearbeitet. Zuers
 Ich habe den bestehenden Geld- und Shopcode von Maja erweitert und die Stuhlfarben Grün, Violett und Gold mit passenden Preisen ergänzt. Die Geldanzeige zeigt jetzt CHF an und ist auch ausserhalb einer Spielrunde sichtbar. Ausserdem habe ich einen Fehler behoben, damit bereits gekaufte Farben auch bei 0 CHF kostenlos ausgewählt werden können. Der besetzte Stuhl übernimmt die ausgewählte Farbe und erhält beim Aufstehen seine Originalfarbe zurück. Den GUI-Code habe ich korrekt in der Clientdatei eingeordnet, die alte Datei gesichert und VS Code über Rojo mit Roblox Studio verbunden. Die bestehende Spiellogik und die Belohnung von 50 CHF pro Sieg wurden beibehalten.
 
 **Maja**
-- [ ] Die 50 CHF nach einem Sieg mit der Geldanzeige verbinden
-- [ ] Programmieren, dass man mit dem Geld neue Stühle kaufen kann
-- [ ] Dafür sorgen, dass gekaufte Stühle später auch benutzt werden können
+- [x] Die 50 CHF nach einem Sieg mit der Geldanzeige verbinden
+- [x] Programmieren, dass man mit dem Geld neue Stühle kaufen kann
+- [x] Dafür sorgen, dass gekaufte Stühle später auch benutzt werden können
+
+Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusammen mit Nena habe ich zuerst programmiert, dass der Gewinner nach einer Runde automatisch 50 CHF bekommt. Danach habe ich den Shop gemacht, damit man sich mit diesem Geld neue Stühle kaufen kann. Zum Schluss habe ich noch dafür gesorgt, dass die Käufe gespeichert werden – man behält die gekauften Stühle also und kann sie später jederzeit wieder kostenlos ausrüsten.
+
 
 **Mina**
 - [ ] Das bisherige Fragensystem überarbeiten und vorgefertigte Fragen einbauen
