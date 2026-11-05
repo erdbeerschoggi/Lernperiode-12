@@ -18,26 +18,363 @@ if not actionEvent then
 	actionEvent.Parent = ReplicatedStorage
 end
 
-local CORRECT_GUESS = "ok"
+local shopEvent = ReplicatedStorage:FindFirstChild("ShopEvent")
+if not shopEvent then
+	shopEvent = Instance.new("RemoteEvent")
+	shopEvent.Name = "ShopEvent"
+	shopEvent.Parent = ReplicatedStorage
+end
+
+
+-- Shop Items definieren 
+local SHOP_ITEMS = {
+	["Item 1"] = {Price = 100, Color = Color3.fromRGB(255, 80, 80)},  
+	["Item 2"] = {Price = 250, Color = Color3.fromRGB(80, 150, 255)}  
+}
+
+-- Geld und Inventar für Spieler initialisieren
+Players.PlayerAdded:Connect(function(player)
+	local leaderstats = Instance.new("Folder")
+	leaderstats.Name = "leaderstats"
+	leaderstats.Parent = player
+
+	local cash = Instance.new("IntValue")
+	cash.Name = "Cash"
+	cash.Value = 0 
+	cash.Parent = leaderstats
+
+	local inventory = Instance.new("Folder")
+	inventory.Name = "Inventory"
+	inventory.Parent = player
+
+	local equippedChair = Instance.new("StringValue")
+	equippedChair.Name = "EquippedChair"
+	equippedChair.Value = "Default" 
+	equippedChair.Parent = player
+end)
+
+-- Verarbeitet Kaufanfragen aus dem Shop
+shopEvent.OnServerEvent:Connect(function(player, action, itemName)
+	if action == "BUY" then
+		local item = SHOP_ITEMS[itemName]
+		if item then
+			
+			if player.Inventory:FindFirstChild(itemName) then
+				player.EquippedChair.Value = itemName
+				
+			elseif player.leaderstats.Cash.Value >= item.Price then
+				player.leaderstats.Cash.Value -= item.Price
+				
+				local ownedItem = Instance.new("StringValue")
+				ownedItem.Name = itemName
+				ownedItem.Parent = player.Inventory
+
+				player.EquippedChair.Value = itemName
+			end
+			
+		end
+	end
+end)
+
+local footballPlayers = {
+	{
+		Name = "Cristiano Ronaldo",
+		Age = 41,
+		Nationality = "Portugal",
+		Club = "Al Nassr",
+		Number = 7,
+		LeagueTitles = 8,
+		UCL = 5,
+		WorldCups = 0,
+		Euros = 1,
+		Position = "Stürmer",
+		BallonDor = 5
+	},
+
+	{
+		Name = "Lionel Messi",
+		Age = 39,
+		Nationality = "Argentinien",
+		Club = "Inter Miami",
+		Number = 10,
+		LeagueTitles = 13,
+		UCL = 4,
+		WorldCups = 1,
+		Euros = 0,
+		Position = "Flügel",
+		BallonDor = 8
+	},
+
+	{
+		Name = "Kylian Mbappe",
+		Age = 27,
+		Nationality = "Frankreich",
+		Club = "Real Madrid",
+		Number = 10,
+		LeagueTitles = 7,
+		UCL = 0,
+		WorldCups = 1,
+		Euros = 0,
+		Position = "Stürmer",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Erling Haaland",
+		Age = 26,
+		Nationality = "Norwegen",
+		Club = "Manchester City",
+		Number = 9,
+		LeagueTitles = 4,
+		UCL = 1,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Stürmer",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Lamine Yamal",
+		Age = 19,
+		Nationality = "Spanien",
+		Club = "Barcelona",
+		Number = 10,
+		LeagueTitles = 3,
+		UCL = 0,
+		WorldCups = 1,
+		Euros = 1,
+		Position = "Flügel",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Jude Bellingham",
+		Age = 23,
+		Nationality = "England",
+		Club = "Real Madrid",
+		Number = 5,
+		LeagueTitles = 1,
+		UCL = 1,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Zentrales Mittelfeld",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Michael Olise",
+		Age = 24,
+		Nationality = "Frankreich",
+		Club = "Bayern München",
+		Number = 17,
+		LeagueTitles = 2,
+		UCL = 0,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Offensives Mittelfeld",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Robert Lewandowski",
+		Age = 38,
+		Nationality = "Polen",
+		Club = "Chicago Fire",
+		Number = 9,
+		LeagueTitles = 14,
+		UCL = 1,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Stürmer",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Neymar Jr.",
+		Age = 34,
+		Nationality = "Brasilien",
+		Club = "Santos FC",
+		Number = 10,
+		LeagueTitles = 8,
+		UCL = 1,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Flügel",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Jamal Musiala",
+		Age = 24,
+		Nationality = "Deutschland",
+		Club = "Bayern München",
+		Number = 10,
+		LeagueTitles = 6,
+		UCL = 1,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Offensives Mittelfeld",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Vinicius jr",
+		Age = 26,
+		Nationality = "Brasilien",
+		Club = "Real Madrid",
+		Number = 7,
+		LeagueTitles = 2,
+		UCL = 2,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Flügel",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Luka Modric",
+		Age = 41,
+		Nationality = "Kroatien",
+		Club = "Ac Milan",
+		Number = 14,
+		LeagueTitles = 7,
+		UCL = 6,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Zentrales Mittelfeld",
+		BallonDor = 1
+	},
+
+	{
+		Name = "Kevin de Bruyne",
+		Age = 35,
+		Nationality = "Belgien",
+		Club = "SSC Neapel",
+		Number = 11,
+		LeagueTitles = 7,
+		UCL = 1,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Zentrales Mittelfeld",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Harry Kane",
+		Age = 33,
+		Nationality = "England",
+		Club = "Bayern München",
+		Number = 9,
+		LeagueTitles = 2,
+		UCL = 0,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "?",
+		BallonDor = 1
+	},
+
+	{
+		Name = "Manuel Neuer",
+		Age = 40,
+		Nationality = "Deutschland",
+		Club = "Bayern München",
+		Number = 1,
+		LeagueTitles = 13,
+		UCL = 2,
+		WorldCups = 1,
+		Euros = 0,
+		Position = "Torhüter",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Thomas Müller",
+		Age = 37,
+		Nationality = "Deutschland",
+		Club = "Vancouver Whitecaps",
+		Number = 13,
+		LeagueTitles = 12,
+		UCL = 2,
+		WorldCups = 1,
+		Euros = 0,
+		Position = "Offensives Mittelfeld",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Mohamed Salah",
+		Age = 34,
+		Nationality = "Ägypten",
+		Club = "Trabzonspor",
+		Number = 11,
+		LeagueTitles = 4,
+		UCL = 1,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Flügel",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Karim Benzema",
+		Age = 38,
+		Nationality = "Frankreich",
+		Club = "Al-Hilal",
+		Number = 9,
+		LeagueTitles = 9,
+		UCL = 5,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Stürmer",
+		BallonDor = 1
+	},
+
+	{
+		Name = "Xherdan Shaqiri",
+		Age = 35,
+		Nationality = "Schweiz",
+		Club = "Fc Basel",
+		Number = 10,
+		LeagueTitles = 6,
+		UCL = 2,
+		WorldCups = 0,
+		Euros = 0,
+		Position = "Offensives Mittelfeld",
+		BallonDor = 0
+	},
+
+	{
+		Name = "Ousmane Dembélé",
+		Age = 29,
+		Nationality = "Frankreich",
+		Club = "PSG",
+		Number = 10,
+		LeagueTitles = 4,
+		UCL = 1,
+		WorldCups = 1,
+		Euros = 0,
+		Position = "Stürmer/Flügel",
+		BallonDor = 0
+	}
+}
 
 local spawnLocation = workspace:FindFirstChildWhichIsA("SpawnLocation", true)
 
 if spawnLocation then
 
-	local raycastParams = RaycastParams.new()
-	raycastParams.FilterType = Enum.RaycastFilterType.Exclude
-	raycastParams.FilterDescendantsInstances = {spawnLocation}
+	local params = RaycastParams.new()
+	params.FilterType = Enum.RaycastFilterType.Exclude
+	params.FilterDescendantsInstances = {spawnLocation}
 
 	local result = workspace:Raycast(
 		spawnLocation.Position + Vector3.new(0, 5, 0),
 		Vector3.new(0, -500, 0),
-		raycastParams
+		params
 	)
 
 	if result and result.Instance and result.Instance:IsA("BasePart") then
 
 		local ground = result.Instance
-
 		local oldWalls = workspace:FindFirstChild("MapBoundaryWalls")
 
 		if oldWalls then
@@ -51,22 +388,16 @@ if spawnLocation then
 		local wallHeight = 40
 		local wallThickness = 2
 
-		local function createWall(name, size, offset)
+		local function createWall(size, offset)
 
 			local wall = Instance.new("Part")
-
-			wall.Name = name
 			wall.Size = size
 			wall.Anchored = true
 			wall.CanCollide = true
 			wall.CanTouch = false
 			wall.CanQuery = false
 			wall.Transparency = 1
-
-			wall.CFrame =
-				ground.CFrame
-				* CFrame.new(offset)
-
+			wall.CFrame = ground.CFrame * CFrame.new(offset)
 			wall.Parent = folder
 
 		end
@@ -76,7 +407,6 @@ if spawnLocation then
 			+ wallHeight / 2
 
 		createWall(
-			"FrontWall",
 			Vector3.new(
 				ground.Size.X,
 				wallHeight,
@@ -90,7 +420,6 @@ if spawnLocation then
 		)
 
 		createWall(
-			"BackWall",
 			Vector3.new(
 				ground.Size.X,
 				wallHeight,
@@ -104,7 +433,6 @@ if spawnLocation then
 		)
 
 		createWall(
-			"LeftWall",
 			Vector3.new(
 				wallThickness,
 				wallHeight,
@@ -118,7 +446,6 @@ if spawnLocation then
 		)
 
 		createWall(
-			"RightWall",
 			Vector3.new(
 				wallThickness,
 				wallHeight,
@@ -191,6 +518,8 @@ for _, seat1 in ipairs(seats) do
 				player2 = nil,
 				humanoid1 = nil,
 				humanoid2 = nil,
+				playerData1 = nil,
+				playerData2 = nil,
 				oldSettings = {}
 			})
 
@@ -201,6 +530,34 @@ for _, seat1 in ipairs(seats) do
 end
 
 local activeGames = {}
+
+local function randomPlayerPair()
+
+	local first =
+		math.random(
+			1,
+			#footballPlayers
+		)
+
+	local second =
+		math.random(
+			1,
+			#footballPlayers
+		)
+
+	while second == first do
+
+		second =
+			math.random(
+				1,
+				#footballPlayers
+			)
+
+	end
+
+	return footballPlayers[first], footballPlayers[second]
+
+end
 
 local function lockPlayer(pair, humanoid, seat)
 
@@ -223,8 +580,11 @@ local function lockPlayer(pair, humanoid, seat)
 
 		while pair.started and not pair.finished do
 
-			if humanoid.Parent and seat.Occupant ~= humanoid then
+			if humanoid.Parent
+				and seat.Occupant ~= humanoid then
+
 				seat:Sit(humanoid)
+
 			end
 
 			task.wait(0.1)
@@ -237,17 +597,24 @@ end
 
 local function unlockPlayer(pair, humanoid)
 
-	if not humanoid or not humanoid.Parent then
+	if not humanoid
+		or not humanoid.Parent then
 		return
 	end
 
-	local old = pair.oldSettings[humanoid]
+	local old =
+		pair.oldSettings[humanoid]
 
 	if old then
 
-		humanoid.JumpPower = old.JumpPower
-		humanoid.JumpHeight = old.JumpHeight
-		humanoid.AutoRotate = old.AutoRotate
+		humanoid.JumpPower =
+			old.JumpPower
+
+		humanoid.JumpHeight =
+			old.JumpHeight
+
+		humanoid.AutoRotate =
+			old.AutoRotate
 
 	end
 
@@ -266,7 +633,8 @@ end
 
 local function getOpponent(player)
 
-	local pair = activeGames[player]
+	local pair =
+		activeGames[player]
 
 	if not pair then
 		return nil
@@ -276,43 +644,126 @@ local function getOpponent(player)
 		return pair.player2
 	end
 
-	if pair.player2 == player then
-		return pair.player1
-	end
-
-	return nil
+	return pair.player1
 
 end
 
-local function filterText(text, fromPlayer, toPlayer)
+local function getOwnFootballPlayer(player)
+
+	local pair =
+		activeGames[player]
+
+	if not pair then
+		return nil
+	end
+
+	if pair.player1 == player then
+		return pair.playerData1
+	end
+
+	return pair.playerData2
+
+end
+
+local function normalize(text)
+
+	text =
+		tostring(text or "")
+
+	text = text:gsub("Ä", "a")
+	text = text:gsub("ä", "a")
+	text = text:gsub("Ö", "o")
+	text = text:gsub("ö", "o")
+	text = text:gsub("Ü", "u")
+	text = text:gsub("ü", "u")
+	text = text:gsub("É", "e")
+	text = text:gsub("é", "e")
+	text = text:gsub("È", "e")
+	text = text:gsub("è", "e")
+	text = text:gsub("Á", "a")
+	text = text:gsub("á", "a")
+
+	text =
+		string.lower(text)
+
+	text =
+		string.gsub(
+			text,
+			"^%s*(.-)%s*$",
+			"%1"
+		)
+
+	return text
+
+end
+
+local function isCorrectGuess(guess, playerData)
+
+	local guessed =
+		normalize(guess)
+
+	local correct =
+		normalize(playerData.Name)
+
+	if guessed == correct then
+		return true
+	end
+
+	if #guessed >= 4
+		and string.find(
+			correct,
+			guessed,
+			1,
+			true
+		)
+	then
+		return true
+	end
+
+	return false
+
+end
+
+local function filterText(
+	text,
+	fromPlayer,
+	toPlayer
+)
 
 	if typeof(text) ~= "string" then
 		return nil
 	end
 
-	text = string.sub(text, 1, 100)
-
-	local success, result = pcall(function()
-
-		return TextService:FilterStringAsync(
+	text =
+		string.sub(
 			text,
-			fromPlayer.UserId,
-			Enum.TextFilterContext.PrivateChat
+			1,
+			100
 		)
 
-	end)
+	local success, result =
+		pcall(function()
+
+			return TextService:FilterStringAsync(
+				text,
+				fromPlayer.UserId,
+				Enum.TextFilterContext.PrivateChat
+			)
+
+		end)
 
 	if not success then
 		return nil
 	end
 
-	local success2, filtered = pcall(function()
+	local success2, filtered =
+		pcall(function()
 
-		return result:GetNonChatStringForUserAsync(
-			toPlayer.UserId
-		)
+			return result:GetNonChatStringForUserAsync(
+				toPlayer.UserId
+			)
 
-	end)
+		end)
 
 	if success2 then
 		return filtered
@@ -322,7 +773,11 @@ local function filterText(text, fromPlayer, toPlayer)
 
 end
 
-local function finishGame(pair, winner, loser)
+local function finishGame(
+	pair,
+	winner,
+	loser
+)
 
 	if pair.finished then
 		return
@@ -330,20 +785,39 @@ local function finishGame(pair, winner, loser)
 
 	pair.finished = true
 
+	-- 50 CHF an den Gewinner geben
+	if winner:FindFirstChild("leaderstats") and winner.leaderstats:FindFirstChild("Cash") then
+		winner.leaderstats.Cash.Value += 50
+	end
+
+
 	chairEvent:FireClient(
 		winner,
-		"WIN"
+		"WIN",
+		pair.player1 == winner
+			and pair.playerData1.Name
+			or pair.playerData2.Name
 	)
 
 	chairEvent:FireClient(
 		loser,
-		"LOSE"
+		"LOSE",
+		pair.player1 == loser
+			and pair.playerData1.Name
+			or pair.playerData2.Name
 	)
 
 	task.wait(1)
 
-	unlockPlayer(pair, pair.humanoid1)
-	unlockPlayer(pair, pair.humanoid2)
+	unlockPlayer(
+		pair,
+		pair.humanoid1
+	)
+
+	unlockPlayer(
+		pair,
+		pair.humanoid2
+	)
 
 	activeGames[pair.player1] = nil
 	activeGames[pair.player2] = nil
@@ -359,8 +833,25 @@ local function finishGame(pair, winner, loser)
 	pair.humanoid1 = nil
 	pair.humanoid2 = nil
 
+	pair.playerData1 = nil
+	pair.playerData2 = nil
+
 	pair.oldSettings = {}
 
+end
+
+
+-- Stühle anpassen, wenn ein Spieler einen Skin aus dem Shop gekauft hat
+local function applyChairSkin(player, chairModel)
+	local equipped = player:FindFirstChild("EquippedChair")
+	if equipped and SHOP_ITEMS[equipped.Value] then
+		local newColor = SHOP_ITEMS[equipped.Value].Color
+		for _, part in ipairs(chairModel:GetDescendants()) do
+			if part:IsA("BasePart") then
+				part.Color = newColor
+			end
+		end
+	end
 end
 
 local function setupPair(pair)
@@ -374,10 +865,14 @@ local function setupPair(pair)
 			return
 		end
 
-		local humanoid1 = seat1.Occupant
-		local humanoid2 = seat2.Occupant
+		local humanoid1 =
+			seat1.Occupant
 
-		if humanoid1 and not humanoid2 then
+		local humanoid2 =
+			seat2.Occupant
+
+		if humanoid1
+			and not humanoid2 then
 
 			local player =
 				Players:GetPlayerFromCharacter(
@@ -385,15 +880,18 @@ local function setupPair(pair)
 				)
 
 			if player then
+
 				chairEvent:FireClient(
 					player,
 					"WAITING"
 				)
+
 			end
 
 		end
 
-		if humanoid2 and not humanoid1 then
+		if humanoid2
+			and not humanoid1 then
 
 			local player =
 				Players:GetPlayerFromCharacter(
@@ -401,10 +899,12 @@ local function setupPair(pair)
 				)
 
 			if player then
+
 				chairEvent:FireClient(
 					player,
 					"WAITING"
 				)
+
 			end
 
 		end
@@ -423,16 +923,34 @@ local function setupPair(pair)
 
 			if player1 and player2 then
 
+				local football1, football2 =
+					randomPlayerPair()
+
 				pair.started = true
 
-				pair.player1 = player1
-				pair.player2 = player2
+				pair.player1 =
+					player1
 
-				pair.humanoid1 = humanoid1
-				pair.humanoid2 = humanoid2
+				pair.player2 =
+					player2
 
-				activeGames[player1] = pair
-				activeGames[player2] = pair
+				pair.humanoid1 =
+					humanoid1
+
+				pair.humanoid2 =
+					humanoid2
+
+				pair.playerData1 =
+					football1
+
+				pair.playerData2 =
+					football2
+
+				activeGames[player1] =
+					pair
+
+				activeGames[player2] =
+					pair
 
 				lockPlayer(
 					pair,
@@ -446,6 +964,10 @@ local function setupPair(pair)
 					seat2
 				)
 
+				-- gekaufte Stuhl-Skins anwenden
+				applyChairSkin(player1, seat1.Parent)
+				applyChairSkin(player2, seat2.Parent)
+
 				chairEvent:FireClient(
 					player1,
 					"START",
@@ -456,6 +978,18 @@ local function setupPair(pair)
 					player2,
 					"START",
 					player1.Name
+				)
+
+				chairEvent:FireClient(
+					player1,
+					"PLAYER_DATA",
+					football2
+				)
+
+				chairEvent:FireClient(
+					player2,
+					"PLAYER_DATA",
+					football1
 				)
 
 			end
@@ -481,7 +1015,8 @@ end
 actionEvent.OnServerEvent:Connect(
 	function(player, action, value)
 
-		local pair = activeGames[player]
+		local pair =
+			activeGames[player]
 
 		if not pair
 			or not pair.started
@@ -489,7 +1024,8 @@ actionEvent.OnServerEvent:Connect(
 			return
 		end
 
-		local opponent = getOpponent(player)
+		local opponent =
+			getOpponent(player)
 
 		if not opponent then
 			return
@@ -529,7 +1065,8 @@ actionEvent.OnServerEvent:Connect(
 
 		elseif action == "GUESS" then
 
-			if typeof(value) ~= "string" then
+			if typeof(value)
+				~= "string" then
 				return
 			end
 
@@ -550,16 +1087,17 @@ actionEvent.OnServerEvent:Connect(
 
 			end
 
-			local guess =
-				string.lower(
-					string.gsub(
-						value,
-						"^%s*(.-)%s*$",
-						"%1"
-					)
+			local ownFootballPlayer =
+				getOwnFootballPlayer(
+					player
 				)
 
-			if guess == CORRECT_GUESS then
+			if ownFootballPlayer
+				and isCorrectGuess(
+					value,
+					ownFootballPlayer
+				)
+			then
 
 				task.spawn(function()
 
@@ -570,6 +1108,13 @@ actionEvent.OnServerEvent:Connect(
 					)
 
 				end)
+
+			else
+
+				chairEvent:FireClient(
+					player,
+					"WRONG_GUESS"
+				)
 
 			end
 

@@ -4,11 +4,8 @@ local UserInputService = game:GetService("UserInputService")
 
 local player = Players.LocalPlayer
 
-local chairEvent =
-	ReplicatedStorage:WaitForChild("ChairGameEvent")
-
-local actionEvent =
-	ReplicatedStorage:WaitForChild("GameActionEvent")
+local chairEvent = ReplicatedStorage:WaitForChild("ChairGameEvent")
+local actionEvent = ReplicatedStorage:WaitForChild("GameActionEvent")
 
 local gameStarted = false
 
@@ -273,19 +270,22 @@ infoTitle.Font = Enum.Font.GothamBold
 infoTitle.Parent = infoFrame
 
 local info = Instance.new("TextLabel")
-info.Size = UDim2.fromScale(0.84, 0.70)
-info.Position = UDim2.fromScale(0.08, 0.22)
+info.Size = UDim2.fromScale(0.84, 0.74)
+info.Position = UDim2.fromScale(0.08, 0.21)
 info.BackgroundTransparency = 1
 info.Text = [[Nationality: ?
 Club: ?
 Age: ?
-League: ?
-Titles: ?
+Number: ?
+League Titles: ?
 UCL Titles: ?
 World Cups: ?
-...]]
+Euro Titles: ?
+Position: ?
+Ballon d'Or: ?]]
 info.TextColor3 = Color3.new(1, 1, 1)
-info.TextSize = 22
+info.TextSize = 20
+info.TextWrapped = true
 info.TextXAlignment = Enum.TextXAlignment.Left
 info.TextYAlignment = Enum.TextYAlignment.Top
 info.Font = Enum.Font.GothamMedium
@@ -410,9 +410,7 @@ if player.Character then
 	setupCharacter(player.Character)
 end
 
-player.CharacterAdded:Connect(
-	setupCharacter
-)
+player.CharacterAdded:Connect(setupCharacter)
 
 local function freezeCamera(opponentName)
 
@@ -430,13 +428,11 @@ local function freezeCamera(opponentName)
 		myCharacter:FindFirstChild("Head")
 
 	if not myHead then
-
 		myHead =
 			myCharacter:WaitForChild(
 				"Head",
 				3
 			)
-
 	end
 
 	if not myHead then
@@ -465,13 +461,11 @@ local function freezeCamera(opponentName)
 		)
 
 	if not opponentHead then
-
 		opponentHead =
 			opponentCharacter:WaitForChild(
 				"Head",
 				3
 			)
-
 	end
 
 	if not opponentHead then
@@ -556,95 +550,157 @@ local function restoreCamera()
 
 end
 
-chairEvent.OnClientEvent:Connect(
-	function(status, value)
+chairEvent.OnClientEvent:Connect(function(status, value)
 
-		if status == "WAITING" then
+	if status == "WAITING" then
 
-			waitingText.Text =
-				"Waiting for Player 2..."
+		waitingText.Text =
+			"Waiting for Player 2..."
 
-			waitingText.Visible =
-				true
+		waitingText.Visible =
+			true
 
-		elseif status == "START" then
+	elseif status == "START" then
 
-			gameStarted = true
+		gameStarted = true
 
-			waitingText.Text =
-				"GAME STARTED!"
+		waitingText.Text =
+			"GAME STARTED!"
 
-			waitingText.Visible =
-				true
+		waitingText.Visible =
+			true
 
-			freezeCamera(value)
+		info.Text =
+			"Loading player..."
 
-			task.wait(1)
+		questionStatus.Text = ""
+		guessStatus.Text = ""
 
-			waitingText.Visible =
-				false
+		freezeCamera(value)
 
-			gameFrame.Visible =
-				true
+		task.wait(1)
 
-		elseif status ==
-			"OPPONENT_QUESTION" then
+		waitingText.Visible =
+			false
 
-			questionStatus.Text =
-				"Opponent asked: "
-				.. value
+		gameFrame.Visible =
+			true
 
-		elseif status ==
-			"OPPONENT_ANSWER" then
+	elseif status == "PLAYER_DATA" then
 
-			questionStatus.Text =
-				"Opponent answered: "
-				.. value
+		info.Text =
+			"Player: "
+			.. tostring(value.Name)
+			.. "\nNationality: "
+			.. tostring(value.Nationality)
+			.. "\nClub: "
+			.. tostring(value.Club)
+			.. "\nAge: "
+			.. tostring(value.Age)
+			.. "\nNumber: "
+			.. tostring(value.Number)
+			.. "\nLeague Titles: "
+			.. tostring(value.LeagueTitles)
+			.. "\nUCL Titles: "
+			.. tostring(value.UCL)
+			.. "\nWorld Cups: "
+			.. tostring(value.WorldCups)
+			.. "\nEuro Titles: "
+			.. tostring(value.Euros)
+			.. "\nPosition: "
+			.. tostring(value.Position)
+			.. "\nBallon d'Or: "
+			.. tostring(value.BallonDor)
 
-		elseif status ==
-			"OPPONENT_GUESS" then
+	elseif status == "OPPONENT_QUESTION" then
 
-			guessStatus.Text =
-				"Opponent guessed: "
-				.. value
+		questionStatus.Text =
+			"Opponent asked: "
+			.. tostring(value)
 
-		elseif status == "WIN" then
+	elseif status == "OPPONENT_ANSWER" then
 
-			gameFrame.Visible =
-				false
+		questionStatus.Text =
+			"Opponent answered: "
+			.. tostring(value)
 
-			resultText.Text =
-				"YOU WIN!"
+	elseif status == "OPPONENT_GUESS" then
 
-			resultText.Visible =
-				true
+		guessStatus.Text =
+			"Opponent guessed: "
+			.. tostring(value)
 
-			restoreCamera()
+	elseif status == "WRONG_GUESS" then
 
-			task.wait(3)
+		guessStatus.Text =
+			"Wrong guess!"
 
-			resultText.Visible =
-				false
+	elseif status == "WIN" then
 
-		elseif status == "LOSE" then
+		gameFrame.Visible =
+			false
 
-			gameFrame.Visible =
-				false
+		resultText.Text =
+			"YOU WIN!\nYou were "
+			.. tostring(value)
 
-			resultText.Text =
-				"YOU LOST!"
+		resultText.Visible =
+			true
 
-			resultText.Visible =
-				true
+		restoreCamera()
 
-			restoreCamera()
+		task.wait(3)
 
-			task.wait(3)
+		resultText.Visible =
+			false
 
-			resultText.Visible =
-				false
+	elseif status == "LOSE" then
 
-		end
+		gameFrame.Visible =
+			false
+
+		resultText.Text =
+			"YOU LOST!\nYou were "
+			.. tostring(value)
+
+		resultText.Visible =
+			true
+
+		restoreCamera()
+
+		task.wait(3)
+
+		resultText.Visible =
+			false
 
 	end
-)
+
+end)
+
+-- Shop-System 
+local shopEvent = ReplicatedStorage:WaitForChild("ShopEvent")
+
+item1.MouseButton1Click:Connect(function()
+	shopEvent:FireServer("BUY", "Item 1")
+end)
+
+item2.MouseButton1Click:Connect(function()
+	shopEvent:FireServer("BUY", "Item 2")
+end)
+
+-- Automatische Geld-Aktualisierung im UI
+task.spawn(function()
+	local leaderstats = player:WaitForChild("leaderstats")
+	local cashValue = leaderstats:WaitForChild("Cash")
+	
+	local function updateCash()
+		cash.Text = "Cash: $" .. cashValue.Value
+		shopCash.Text = "Cash: $" .. cashValue.Value
+	end
+	
+	
+	updateCash()
+	
+	
+	cashValue.Changed:Connect(updateCash)
+end)
