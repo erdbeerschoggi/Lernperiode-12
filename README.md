@@ -57,9 +57,11 @@ Für mein dezentrales Arbeitspaket habe ich an der Lobby weitergearbeitet. Zuers
 ## 06.11
 
 **Nena**
-- [ ] Geldsystem einbauen, damit man nach einem Sieg 50 CHF bekommt
-- [ ] Verschiedene farbige Stühle erstellen, die man später im Shop kaufen kann
-- [ ] Die Stühle in den Shop einfügen und Preise dafür festlegen
+- [x] Geldsystem einbauen, damit man nach einem Sieg 50 CHF bekommt
+- [x] Verschiedene farbige Stühle erstellen, die man später im Shop kaufen kann
+- [x] Die Stühle in den Shop einfügen und Preise dafür festlegen
+
+Ich habe den bestehenden Geld- und Shopcode von Maja erweitert und die Stuhlfarben Grün, Violett und Gold mit passenden Preisen ergänzt. Die Geldanzeige zeigt jetzt CHF an und ist auch ausserhalb einer Spielrunde sichtbar. Ausserdem habe ich einen Fehler behoben, damit bereits gekaufte Farben auch bei 0 CHF kostenlos ausgewählt werden können. Der besetzte Stuhl übernimmt die ausgewählte Farbe und erhält beim Aufstehen seine Originalfarbe zurück. Den GUI-Code habe ich korrekt in der Clientdatei eingeordnet, die alte Datei gesichert und VS Code über Rojo mit Roblox Studio verbunden. Die bestehende Spiellogik und die Belohnung von 50 CHF pro Sieg wurden beibehalten.
 
 **Maja**
 - [ ] Die 50 CHF nach einem Sieg mit der Geldanzeige verbinden
