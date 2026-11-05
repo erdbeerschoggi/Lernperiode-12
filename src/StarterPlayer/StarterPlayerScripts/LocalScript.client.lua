@@ -97,15 +97,14 @@ shopCash.Font = Enum.Font.GothamBold
 shopCash.TextXAlignment = Enum.TextXAlignment.Left
 shopCash.ZIndex = 31
 shopCash.Parent = shopFrame
-
 -- Farbvarianten fuer den bestehenden ShopEvent.
 local SHOP_CHAIRS = {
-    {Id = "Default", Name = "Standard", Price = 0, Color = Color3.fromRGB(115, 120, 130)},
-    {Id = "Item 1", Name = "Rot", Price = 100, Color = Color3.fromRGB(255, 80, 80)},
-    {Id = "Item 2", Name = "Blau", Price = 250, Color = Color3.fromRGB(80, 150, 255)},
-    {Id = "Item 3", Name = "Gruen", Price = 150, Color = Color3.fromRGB(65, 195, 110)},
-    {Id = "Item 4", Name = "Violett", Price = 350, Color = Color3.fromRGB(165, 90, 225)},
-    {Id = "Item 5", Name = "Gold", Price = 500, Color = Color3.fromRGB(245, 195, 55)},
+	{Id = "Default", Name = "Standard", Price = 0, Color = Color3.fromRGB(115, 120, 130)},
+	{Id = "Item 1", Name = "Rot", Price = 100, Color = Color3.fromRGB(255, 80, 80)},
+	{Id = "Item 2", Name = "Blau", Price = 250, Color = Color3.fromRGB(80, 150, 255)},
+	{Id = "Item 3", Name = "Gruen", Price = 150, Color = Color3.fromRGB(65, 195, 110)},
+	{Id = "Item 4", Name = "Violett", Price = 350, Color = Color3.fromRGB(165, 90, 225)},
+	{Id = "Item 5", Name = "Gold", Price = 500, Color = Color3.fromRGB(245, 195, 55)},
 }
 local shopButtons = {}
 
@@ -141,19 +140,19 @@ chairGrid.SortOrder = Enum.SortOrder.LayoutOrder
 chairGrid.Parent = chairList
 
 for index, item in ipairs(SHOP_CHAIRS) do
-    local button = Instance.new("TextButton")
-    button.Name = "ChairButton_" .. index
-    button.LayoutOrder = index
-    button.BackgroundColor3 = item.Color
-    button.Text = item.Name .. "\n" .. item.Price .. " CHF\nLaedt ..."
-    button.TextColor3 = Color3.fromRGB(10, 15, 25)
-    button.TextSize = 19
-    button.TextWrapped = true
-    button.Font = Enum.Font.GothamBold
-    button.ZIndex = 32
-    button.Parent = chairList
-    rounded(button, 12)
-    shopButtons[item.Id] = button
+	local button = Instance.new("TextButton")
+	button.Name = "ChairButton_" .. index
+	button.LayoutOrder = index
+	button.BackgroundColor3 = item.Color
+	button.Text = item.Name .. "\n" .. item.Price .. " CHF\nLaedt ..."
+	button.TextColor3 = Color3.fromRGB(10, 15, 25)
+	button.TextSize = 19
+	button.TextWrapped = true
+	button.Font = Enum.Font.GothamBold
+	button.ZIndex = 32
+	button.Parent = chairList
+	rounded(button, 12)
+	shopButtons[item.Id] = button
 end
 
 shopButton.MouseButton1Click:Connect(function()
@@ -185,36 +184,91 @@ gameFrame.BackgroundTransparency = 1
 gameFrame.Visible = false
 gameFrame.Parent = gui
 
-local questionBox = Instance.new("TextBox")
-questionBox.Size = UDim2.fromScale(0.38, 0.095)
-questionBox.Position = UDim2.fromScale(0.27, 0.12)
-questionBox.BackgroundColor3 = Color3.fromRGB(15, 20, 28)
-questionBox.BackgroundTransparency = 0.18
-questionBox.TextColor3 = Color3.new(1, 1, 1)
-questionBox.PlaceholderColor3 = Color3.fromRGB(180, 180, 185)
-questionBox.PlaceholderText = "Type in your question..."
-questionBox.Text = ""
-questionBox.Font = Enum.Font.GothamMedium
-questionBox.TextScaled = true
-questionBox.ClearTextOnFocus = false
-questionBox.Parent = gameFrame
+local QUESTIONS = {
+	"Am I older than 30?",
+	"Am I a striker?",
+	"Am I a midfielder?",
+	"Am I from Europe?",
+	"Have I won the World Cup?",
+	"Have I won the Champions League?",
+	"Have I won the Ballon d'Or?",
+	"Is my shirt number 10?",
+	"Do I play for a club in Spain?",
+	"Do I play for a club in Germany?",
+	"What position do I play?",
+	"How many UCL titles have I won?",
+}
 
-rounded(questionBox, 14)
-outline(questionBox)
+local questionFrame = Instance.new("Frame")
+questionFrame.Name = "QuestionsFrame"
+questionFrame.Size = UDim2.fromScale(0.54, 0.30)
+questionFrame.Position = UDim2.fromScale(0.16, 0.075)
+questionFrame.BackgroundColor3 = Color3.fromRGB(15, 20, 28)
+questionFrame.BackgroundTransparency = 0.18
+questionFrame.Parent = gameFrame
+rounded(questionFrame, 18)
+outline(questionFrame)
+
+local questionTitle = Instance.new("TextLabel")
+questionTitle.Size = UDim2.fromScale(0.92, 0.15)
+questionTitle.Position = UDim2.fromScale(0.04, 0.025)
+questionTitle.BackgroundTransparency = 1
+questionTitle.Text = "CHOOSE A QUESTION"
+questionTitle.TextColor3 = Color3.new(1, 1, 1)
+questionTitle.TextScaled = true
+questionTitle.Font = Enum.Font.GothamBold
+questionTitle.Parent = questionFrame
+
+local questionList = Instance.new("ScrollingFrame")
+questionList.Name = "QuestionList"
+questionList.Size = UDim2.fromScale(0.92, 0.76)
+questionList.Position = UDim2.fromScale(0.04, 0.20)
+questionList.BackgroundTransparency = 1
+questionList.BorderSizePixel = 0
+questionList.ScrollBarThickness = 5
+questionList.CanvasSize = UDim2.new()
+questionList.AutomaticCanvasSize = Enum.AutomaticSize.Y
+questionList.Parent = questionFrame
+
+local questionGrid = Instance.new("UIGridLayout")
+questionGrid.CellSize = UDim2.new(0.48, -4, 0, 55)
+questionGrid.CellPadding = UDim2.new(0.04, 0, 0, 8)
+questionGrid.SortOrder = Enum.SortOrder.LayoutOrder
+questionGrid.Parent = questionList
 
 local questionStatus = Instance.new("TextLabel")
-questionStatus.Size = UDim2.fromScale(0.38, 0.04)
-questionStatus.Position = UDim2.fromScale(0.27, 0.22)
+questionStatus.Size = UDim2.fromScale(0.54, 0.055)
+questionStatus.Position = UDim2.fromScale(0.16, 0.38)
 questionStatus.BackgroundTransparency = 1
 questionStatus.TextColor3 = Color3.fromRGB(220, 220, 220)
 questionStatus.Text = ""
-questionStatus.TextScaled = true
+questionStatus.TextSize = 16
+questionStatus.TextWrapped = true
 questionStatus.Font = Enum.Font.Gotham
 questionStatus.Parent = gameFrame
 
+for index, question in ipairs(QUESTIONS) do
+	local button = Instance.new("TextButton")
+	button.Name = "Question" .. index
+	button.LayoutOrder = index
+	button.BackgroundColor3 = Color3.fromRGB(34, 43, 61)
+	button.Text = question
+	button.TextColor3 = Color3.new(1, 1, 1)
+	button.TextSize = 14
+	button.TextWrapped = true
+	button.Font = Enum.Font.GothamMedium
+	button.Parent = questionList
+	rounded(button, 9)
+	button.Activated:Connect(function()
+		if not gameStarted then return end
+		actionEvent:FireServer("QUESTION", question)
+		questionStatus.Text = "You asked: " .. question .. " (waiting for answer)"
+	end)
+end
+
 local guessBox = Instance.new("TextBox")
 guessBox.Size = UDim2.fromScale(0.38, 0.095)
-guessBox.Position = UDim2.fromScale(0.27, 0.27)
+guessBox.Position = UDim2.fromScale(0.27, 0.46)
 guessBox.BackgroundColor3 = Color3.fromRGB(15, 20, 28)
 guessBox.BackgroundTransparency = 0.18
 guessBox.TextColor3 = Color3.new(1, 1, 1)
@@ -231,7 +285,7 @@ outline(guessBox)
 
 local guessStatus = Instance.new("TextLabel")
 guessStatus.Size = UDim2.fromScale(0.38, 0.04)
-guessStatus.Position = UDim2.fromScale(0.27, 0.37)
+guessStatus.Position = UDim2.fromScale(0.27, 0.56)
 guessStatus.BackgroundTransparency = 1
 guessStatus.TextColor3 = Color3.fromRGB(220, 220, 220)
 guessStatus.Text = ""
@@ -239,33 +293,84 @@ guessStatus.TextScaled = true
 guessStatus.Font = Enum.Font.Gotham
 guessStatus.Parent = gameFrame
 
-local yesButton = Instance.new("TextButton")
-yesButton.Size = UDim2.fromScale(0.23, 0.16)
-yesButton.Position = UDim2.fromScale(0.14, 0.69)
-yesButton.BackgroundColor3 = Color3.fromRGB(15, 20, 28)
-yesButton.BackgroundTransparency = 0.18
-yesButton.Text = "✓ YES"
-yesButton.TextColor3 = Color3.new(1, 1, 1)
-yesButton.TextScaled = true
-yesButton.Font = Enum.Font.GothamBold
-yesButton.Parent = gameFrame
+local incomingQuestion = nil
 
-rounded(yesButton, 20)
-outline(yesButton)
+local incomingQuestionLabel = Instance.new("TextLabel")
+incomingQuestionLabel.Name = "IncomingQuestion"
+incomingQuestionLabel.Size = UDim2.fromScale(0.54, 0.074)
+incomingQuestionLabel.Position = UDim2.fromScale(0.16, 0.65)
+incomingQuestionLabel.BackgroundTransparency = 1
+incomingQuestionLabel.Text = "Waiting for opponent's question..."
+incomingQuestionLabel.TextColor3 = Color3.new(1, 1, 1)
+incomingQuestionLabel.TextSize = 18
+incomingQuestionLabel.TextWrapped = true
+incomingQuestionLabel.Font = Enum.Font.GothamBold
+incomingQuestionLabel.Parent = gameFrame
 
-local noButton = Instance.new("TextButton")
-noButton.Size = UDim2.fromScale(0.23, 0.16)
-noButton.Position = UDim2.fromScale(0.43, 0.69)
-noButton.BackgroundColor3 = Color3.fromRGB(15, 20, 28)
-noButton.BackgroundTransparency = 0.18
-noButton.Text = "✕ NO"
-noButton.TextColor3 = Color3.new(1, 1, 1)
-noButton.TextScaled = true
-noButton.Font = Enum.Font.GothamBold
-noButton.Parent = gameFrame
+local answerBox = Instance.new("TextBox")
+answerBox.Name = "AnswerBox"
+answerBox.Size = UDim2.fromScale(0.36, 0.083)
+answerBox.Position = UDim2.fromScale(0.16, 0.73)
+answerBox.BackgroundColor3 = Color3.fromRGB(15, 20, 28)
+answerBox.BackgroundTransparency = 0.18
+answerBox.TextColor3 = Color3.new(1, 1, 1)
+answerBox.PlaceholderColor3 = Color3.fromRGB(180, 180, 185)
+answerBox.PlaceholderText = "Type your answer..."
+answerBox.Text = ""
+answerBox.Font = Enum.Font.GothamMedium
+answerBox.TextScaled = true
+answerBox.ClearTextOnFocus = false
+answerBox.Parent = gameFrame
+rounded(answerBox, 14)
+outline(answerBox)
 
-rounded(noButton, 20)
-outline(noButton)
+local sendAnswerButton = Instance.new("TextButton")
+sendAnswerButton.Name = "SendAnswerButton"
+sendAnswerButton.Size = UDim2.fromScale(0.16, 0.083)
+sendAnswerButton.Position = UDim2.fromScale(0.54, 0.73)
+sendAnswerButton.BackgroundColor3 = Color3.fromRGB(34, 43, 61)
+sendAnswerButton.Text = "SEND ANSWER"
+sendAnswerButton.TextColor3 = Color3.new(1, 1, 1)
+sendAnswerButton.TextScaled = true
+sendAnswerButton.Font = Enum.Font.GothamBold
+sendAnswerButton.Parent = gameFrame
+rounded(sendAnswerButton, 14)
+outline(sendAnswerButton)
+
+local answerStatus = Instance.new("TextLabel")
+answerStatus.Name = "AnswerStatus"
+answerStatus.Size = UDim2.fromScale(0.54, 0.05)
+answerStatus.Position = UDim2.fromScale(0.16, 0.83)
+answerStatus.BackgroundTransparency = 1
+answerStatus.TextColor3 = Color3.fromRGB(220, 220, 220)
+answerStatus.Text = ""
+answerStatus.TextSize = 16
+answerStatus.TextWrapped = true
+answerStatus.Font = Enum.Font.Gotham
+answerStatus.Parent = gameFrame
+
+local function submitAnswer()
+	if not gameStarted then return end
+	if not incomingQuestion then
+		answerStatus.Text = "Wait until the opponent asks a question."
+		return
+	end
+	local answer = answerBox.Text:match("^%s*(.-)%s*$")
+	if not answer or answer == "" then
+		answerStatus.Text = "Type an answer first."
+		return
+	end
+	actionEvent:FireServer("ANSWER", answer)
+	answerBox.Text = ""
+	answerStatus.Text = "Sending answer..."
+end
+
+sendAnswerButton.Activated:Connect(submitAnswer)
+answerBox.FocusLost:Connect(function(enterPressed)
+	if enterPressed then
+		submitAnswer()
+	end
+end)
 
 local cash = Instance.new("TextLabel")
 cash.Size = UDim2.fromScale(0.20, 0.065)
@@ -337,21 +442,7 @@ resultText.Parent = gui
 rounded(resultText, 20)
 outline(resultText)
 
-questionBox.FocusLost:Connect(function()
-	if questionBox.Text == "" then
-		return
-	end
 
-	actionEvent:FireServer(
-		"QUESTION",
-		questionBox.Text
-	)
-
-	questionStatus.Text =
-		"You asked: " .. questionBox.Text
-
-	questionBox.Text = ""
-end)
 
 guessBox.FocusLost:Connect(function()
 	if guessBox.Text == "" then
@@ -369,25 +460,7 @@ guessBox.FocusLost:Connect(function()
 	guessBox.Text = ""
 end)
 
-yesButton.MouseButton1Click:Connect(function()
-	actionEvent:FireServer(
-		"ANSWER",
-		"YES"
-	)
 
-	questionStatus.Text =
-		"You answered YES"
-end)
-
-noButton.MouseButton1Click:Connect(function()
-	actionEvent:FireServer(
-		"ANSWER",
-		"NO"
-	)
-
-	questionStatus.Text =
-		"You answered NO"
-end)
 
 local function setupCharacter(character)
 
@@ -607,6 +680,11 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 
 		questionStatus.Text = ""
 		guessStatus.Text = ""
+		answerStatus.Text = ""
+		answerBox.Text = ""
+		guessBox.Text = ""
+		incomingQuestion = nil
+		incomingQuestionLabel.Text = "Waiting for opponent's question..."
 
 		freezeCamera(value)
 
@@ -646,15 +724,24 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 
 	elseif status == "OPPONENT_QUESTION" then
 
-		questionStatus.Text =
-			"Opponent asked: "
-			.. tostring(value)
+		incomingQuestion = tostring(value)
+		incomingQuestionLabel.Text = "Opponent asks: " .. incomingQuestion
+		answerStatus.Text = "Type your answer below."
+		answerBox.Text = ""
+
+	elseif status == "ANSWER_SENT" then
+
+		incomingQuestion = nil
+		incomingQuestionLabel.Text = "Waiting for opponent's question..."
+		answerStatus.Text = "Answer sent!"
+
+	elseif status == "ANSWER_ERROR" then
+
+		answerStatus.Text = tostring(value)
 
 	elseif status == "OPPONENT_ANSWER" then
 
-		questionStatus.Text =
-			"Opponent answered: "
-			.. tostring(value)
+		questionStatus.Text = "Opponent answered: " .. tostring(value)
 
 	elseif status == "OPPONENT_GUESS" then
 
@@ -708,51 +795,50 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 	end
 
 end)
-
 -- Vorhandene Geldwerte und das Inventar der Kollegin mit der Anzeige verbinden.
 task.spawn(function()
-    local shopEvent = ReplicatedStorage:WaitForChild("ShopEvent")
-    local leaderstats = player:WaitForChild("leaderstats")
-    local cashValue = leaderstats:WaitForChild("Cash")
-    local inventory = player:WaitForChild("Inventory")
-    local equipped = player:WaitForChild("EquippedChair")
+	local shopEvent = ReplicatedStorage:WaitForChild("ShopEvent")
+	local leaderstats = player:WaitForChild("leaderstats")
+	local cashValue = leaderstats:WaitForChild("Cash")
+	local inventory = player:WaitForChild("Inventory")
+	local equipped = player:WaitForChild("EquippedChair")
 
-    local function updateShop()
-        cash.Text = "CHF: " .. cashValue.Value
-        shopCash.Text = "CHF: " .. cashValue.Value
-        for _, item in ipairs(SHOP_CHAIRS) do
-            local button = shopButtons[item.Id]
-            local owned = item.Id == "Default" or inventory:FindFirstChild(item.Id)
-            local actionText
-            if equipped.Value == item.Id then
-                actionText = "Ausgewaehlt"
-            elseif owned then
-                actionText = "Auswaehlen (kostenlos)"
-            elseif cashValue.Value >= item.Price then
-                actionText = "Kaufen"
-            else
-                actionText = "Zu wenig CHF"
-            end
-            local priceText = item.Id == "Default" and "Originalfarben" or (item.Price .. " CHF")
-            button.Text = item.Name .. "\n" .. priceText .. "\n" .. actionText
-        end
-    end
+	local function updateShop()
+		cash.Text = "CHF: " .. cashValue.Value
+		shopCash.Text = "CHF: " .. cashValue.Value
+		for _, item in ipairs(SHOP_CHAIRS) do
+			local button = shopButtons[item.Id]
+			local owned = item.Id == "Default" or inventory:FindFirstChild(item.Id)
+			local actionText
+			if equipped.Value == item.Id then
+				actionText = "Ausgewaehlt"
+			elseif owned then
+				actionText = "Auswaehlen (kostenlos)"
+			elseif cashValue.Value >= item.Price then
+				actionText = "Kaufen"
+			else
+				actionText = "Zu wenig CHF"
+			end
+			local priceText = item.Id == "Default" and "Originalfarben" or (item.Price .. " CHF")
+			button.Text = item.Name .. "\n" .. priceText .. "\n" .. actionText
+		end
+	end
 
-    shopEvent.OnClientEvent:Connect(function(status, message)
-        if status ~= "OK" and status ~= "ERROR" then return end
-        shopMessage.Text = tostring(message)
-        shopMessage.TextColor3 = status == "ERROR"
-            and Color3.fromRGB(255, 145, 145) or Color3.fromRGB(140, 255, 175)
-    end)
-    for _, item in ipairs(SHOP_CHAIRS) do
-        shopButtons[item.Id].Activated:Connect(function()
-            -- Der Server bestimmt Preis, Guthaben und Besitz.
-            shopEvent:FireServer("BUY", item.Id)
-        end)
-    end
-    cashValue.Changed:Connect(updateShop)
-    inventory.ChildAdded:Connect(updateShop)
-    inventory.ChildRemoved:Connect(updateShop)
-    equipped.Changed:Connect(updateShop)
-    updateShop()
+	shopEvent.OnClientEvent:Connect(function(status, message)
+		if status ~= "OK" and status ~= "ERROR" then return end
+		shopMessage.Text = tostring(message)
+		shopMessage.TextColor3 = status == "ERROR"
+			and Color3.fromRGB(255, 145, 145) or Color3.fromRGB(140, 255, 175)
+	end)
+	for _, item in ipairs(SHOP_CHAIRS) do
+		shopButtons[item.Id].Activated:Connect(function()
+			-- Der Server bestimmt Preis, Guthaben und Besitz.
+			shopEvent:FireServer("BUY", item.Id)
+		end)
+	end
+	cashValue.Changed:Connect(updateShop)
+	inventory.ChildAdded:Connect(updateShop)
+	inventory.ChildRemoved:Connect(updateShop)
+	equipped.Changed:Connect(updateShop)
+	updateShop()
 end)

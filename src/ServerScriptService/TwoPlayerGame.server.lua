@@ -24,125 +24,118 @@ if not shopEvent then
 	shopEvent.Name = "ShopEvent"
 	shopEvent.Parent = ReplicatedStorage
 end
-
-
 -- Vorhandene Item-IDs und Preise der Kollegin bleiben erhalten.
 local SHOP_ITEMS = {
-    ["Default"] = {Name = "Standard", Price = 0},
-    ["Item 1"] = {Name = "Rot", Price = 100, Color = Color3.fromRGB(255, 80, 80)},
-    ["Item 2"] = {Name = "Blau", Price = 250, Color = Color3.fromRGB(80, 150, 255)},
-    ["Item 3"] = {Name = "Gruen", Price = 150, Color = Color3.fromRGB(65, 195, 110)},
-    ["Item 4"] = {Name = "Violett", Price = 350, Color = Color3.fromRGB(165, 90, 225)},
-    ["Item 5"] = {Name = "Gold", Price = 500, Color = Color3.fromRGB(245, 195, 55)},
+	["Default"] = {Name = "Standard", Price = 0},
+	["Item 1"] = {Name = "Rot", Price = 100, Color = Color3.fromRGB(255, 80, 80)},
+	["Item 2"] = {Name = "Blau", Price = 250, Color = Color3.fromRGB(80, 150, 255)},
+	["Item 3"] = {Name = "Gruen", Price = 150, Color = Color3.fromRGB(65, 195, 110)},
+	["Item 4"] = {Name = "Violett", Price = 350, Color = Color3.fromRGB(165, 90, 225)},
+	["Item 5"] = {Name = "Gold", Price = 500, Color = Color3.fromRGB(245, 195, 55)},
 }
-
 -- Nur Farben aendern: keine Seats ersetzen, verschieben oder neu erzeugen.
 local originalChairColors = setmetatable({}, {__mode = "k"})
 local initializedPlayers = {}
 local lastShopRequest = {}
 
 local function applyChairSkin(player, chairModel)
-    if not chairModel or not chairModel.Name:match("^Chair") then return end
-    local equipped = player and player:FindFirstChild("EquippedChair")
-    local item = equipped and SHOP_ITEMS[equipped.Value]
-    local inventory = player and player:FindFirstChild("Inventory")
-    local owned = equipped and (equipped.Value == "Default"
-        or (inventory and inventory:FindFirstChild(equipped.Value)))
-    local color = owned and item and item.Color
+	if not chairModel or not chairModel.Name:match("^Chair") then return end
+	local equipped = player and player:FindFirstChild("EquippedChair")
+	local item = equipped and SHOP_ITEMS[equipped.Value]
+	local inventory = player and player:FindFirstChild("Inventory")
+	local owned = equipped and (equipped.Value == "Default"
+		or (inventory and inventory:FindFirstChild(equipped.Value)))
+	local color = owned and item and item.Color
 
-    for _, part in ipairs(chairModel:GetDescendants()) do
-        if part:IsA("BasePart") and not part:GetAttribute("KeepShopColor") then
-            if originalChairColors[part] == nil then
-                originalChairColors[part] = part.Color
-            end
-            part.Color = color or originalChairColors[part]
-        end
-    end
+	for _, part in ipairs(chairModel:GetDescendants()) do
+		if part:IsA("BasePart") and not part:GetAttribute("KeepShopColor") then
+			if originalChairColors[part] == nil then
+				originalChairColors[part] = part.Color
+			end
+			part.Color = color or originalChairColors[part]
+		end
+	end
 end
 
 local function updateSeatedChair(player)
-    local character = player.Character
-    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-    local seat = humanoid and humanoid.SeatPart
-    if seat and seat:IsA("Seat") then
-        applyChairSkin(player, seat.Parent)
-    end
+	local character = player.Character
+	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	local seat = humanoid and humanoid.SeatPart
+	if seat and seat:IsA("Seat") then
+		applyChairSkin(player, seat.Parent)
+	end
 end
-
 -- Vorhandene Werte weiterverwenden; bei Initialisierung kein Geld zuruecksetzen.
 local function setupShopPlayer(player)
-    if initializedPlayers[player] then return end
-    initializedPlayers[player] = true
-    local leaderstats = player:FindFirstChild("leaderstats")
-    if not leaderstats then
-        leaderstats = Instance.new("Folder")
-        leaderstats.Name = "leaderstats"
-        leaderstats.Parent = player
-    end
-    if not leaderstats:FindFirstChild("Cash") then
-        local cash = Instance.new("IntValue")
-        cash.Name = "Cash"
-        cash.Value = 0
-        cash.Parent = leaderstats
-    end
-    if not player:FindFirstChild("Inventory") then
-        local inventory = Instance.new("Folder")
-        inventory.Name = "Inventory"
-        inventory.Parent = player
-    end
-    local equipped = player:FindFirstChild("EquippedChair")
-    if not equipped then
-        equipped = Instance.new("StringValue")
-        equipped.Name = "EquippedChair"
-        equipped.Value = "Default"
-        equipped.Parent = player
-    end
-    equipped.Changed:Connect(function() updateSeatedChair(player) end)
-    updateSeatedChair(player)
+	if initializedPlayers[player] then return end
+	initializedPlayers[player] = true
+	local leaderstats = player:FindFirstChild("leaderstats")
+	if not leaderstats then
+		leaderstats = Instance.new("Folder")
+		leaderstats.Name = "leaderstats"
+		leaderstats.Parent = player
+	end
+	if not leaderstats:FindFirstChild("Cash") then
+		local cash = Instance.new("IntValue")
+		cash.Name = "Cash"
+		cash.Value = 0
+		cash.Parent = leaderstats
+	end
+	if not player:FindFirstChild("Inventory") then
+		local inventory = Instance.new("Folder")
+		inventory.Name = "Inventory"
+		inventory.Parent = player
+	end
+	local equipped = player:FindFirstChild("EquippedChair")
+	if not equipped then
+		equipped = Instance.new("StringValue")
+		equipped.Name = "EquippedChair"
+		equipped.Value = "Default"
+		equipped.Parent = player
+	end
+	equipped.Changed:Connect(function() updateSeatedChair(player) end)
+	updateSeatedChair(player)
 end
 Players.PlayerAdded:Connect(setupShopPlayer)
 for _, player in ipairs(Players:GetPlayers()) do setupShopPlayer(player) end
 Players.PlayerRemoving:Connect(function(player)
-    initializedPlayers[player] = nil
-    lastShopRequest[player] = nil
+	initializedPlayers[player] = nil
+	lastShopRequest[player] = nil
 end)
-
 -- Den vorhandenen ShopEvent benutzen; kein zweites Geldsystem.
 shopEvent.OnServerEvent:Connect(function(player, action, itemName)
-    if action ~= "BUY" or typeof(itemName) ~= "string" then return end
-    local item = SHOP_ITEMS[itemName]
-    if not item then return end
-    local now = os.clock()
-    if lastShopRequest[player] and now - lastShopRequest[player] < 0.2 then return end
-    lastShopRequest[player] = now
+	if action ~= "BUY" or typeof(itemName) ~= "string" then return end
+	local item = SHOP_ITEMS[itemName]
+	if not item then return end
+	local now = os.clock()
+	if lastShopRequest[player] and now - lastShopRequest[player] < 0.2 then return end
+	lastShopRequest[player] = now
 
-    local stats = player:FindFirstChild("leaderstats")
-    local cash = stats and stats:FindFirstChild("Cash")
-    local inventory = player:FindFirstChild("Inventory")
-    local equipped = player:FindFirstChild("EquippedChair")
-    if not cash or not inventory or not equipped then return end
-
-    -- Besitz zuerst pruefen: Auswahl gekaufter Farben ist immer kostenlos.
-    if itemName == "Default" or inventory:FindFirstChild(itemName) then
-        equipped.Value = itemName
-        updateSeatedChair(player)
-        shopEvent:FireClient(player, "OK", item.Name .. " ausgewaehlt.")
-        return
-    end
-    if cash.Value < item.Price then
-        shopEvent:FireClient(player, "ERROR", "Dir fehlen " .. (item.Price - cash.Value) .. " CHF.")
-        return
-    end
-
-    -- Kein Wait zwischen Guthabenpruefung und Abzug.
-    cash.Value = cash.Value - item.Price
-    local ownedItem = Instance.new("StringValue")
-    ownedItem.Name = itemName
-    ownedItem.Value = itemName
-    ownedItem.Parent = inventory
-    equipped.Value = itemName
-    updateSeatedChair(player)
-    shopEvent:FireClient(player, "OK", item.Name .. " gekauft und ausgewaehlt.")
+	local stats = player:FindFirstChild("leaderstats")
+	local cash = stats and stats:FindFirstChild("Cash")
+	local inventory = player:FindFirstChild("Inventory")
+	local equipped = player:FindFirstChild("EquippedChair")
+	if not cash or not inventory or not equipped then return end
+	-- Besitz zuerst pruefen: Auswahl gekaufter Farben ist immer kostenlos.
+	if itemName == "Default" or inventory:FindFirstChild(itemName) then
+		equipped.Value = itemName
+		updateSeatedChair(player)
+		shopEvent:FireClient(player, "OK", item.Name .. " ausgewaehlt.")
+		return
+	end
+	if cash.Value < item.Price then
+		shopEvent:FireClient(player, "ERROR", "Dir fehlen " .. (item.Price - cash.Value) .. " CHF.")
+		return
+	end
+	-- Kein Wait zwischen Guthabenpruefung und Abzug.
+	cash.Value = cash.Value - item.Price
+	local ownedItem = Instance.new("StringValue")
+	ownedItem.Name = itemName
+	ownedItem.Value = itemName
+	ownedItem.Parent = inventory
+	equipped.Value = itemName
+	updateSeatedChair(player)
+	shopEvent:FireClient(player, "OK", item.Name .. " gekauft und ausgewaehlt.")
 end)
 
 local footballPlayers = {
@@ -546,16 +539,15 @@ for _, object in ipairs(workspace:GetDescendants()) do
 	end
 
 end
-
 -- Farben unabhaengig vom Rundenzustand aktualisieren, auch beim Aufstehen.
 for _, seat in ipairs(seats) do
-    local function refreshColor()
-        local humanoid = seat.Occupant
-        local seatedPlayer = humanoid and Players:GetPlayerFromCharacter(humanoid.Parent)
-        applyChairSkin(seatedPlayer, seat.Parent)
-    end
-    seat:GetPropertyChangedSignal("Occupant"):Connect(refreshColor)
-    refreshColor()
+	local function refreshColor()
+		local humanoid = seat.Occupant
+		local seatedPlayer = humanoid and Players:GetPlayerFromCharacter(humanoid.Parent)
+		applyChairSkin(seatedPlayer, seat.Parent)
+	end
+	seat:GetPropertyChangedSignal("Occupant"):Connect(refreshColor)
+	refreshColor()
 end
 
 local pairs = {}
@@ -610,6 +602,7 @@ for _, seat1 in ipairs(seats) do
 end
 
 local activeGames = {}
+local pendingQuestions = {}
 
 local function randomPlayerPair()
 
@@ -899,6 +892,8 @@ local function finishGame(
 		pair.humanoid2
 	)
 
+	pendingQuestions[pair.player1] = nil
+	pendingQuestions[pair.player2] = nil
 	activeGames[pair.player1] = nil
 	activeGames[pair.player2] = nil
 
@@ -1019,6 +1014,9 @@ local function setupPair(pair)
 				activeGames[player2] =
 					pair
 
+				pendingQuestions[player1] = nil
+				pendingQuestions[player2] = nil
+
 				lockPlayer(
 					pair,
 					humanoid1,
@@ -1030,7 +1028,6 @@ local function setupPair(pair)
 					humanoid2,
 					seat2
 				)
-
 				-- gekaufte Stuhl-Skins anwenden
 				applyChairSkin(player1, seat1.Parent)
 				applyChairSkin(player2, seat2.Parent)
@@ -1099,36 +1096,46 @@ actionEvent.OnServerEvent:Connect(
 		end
 
 		if action == "QUESTION" then
-
-			local filtered =
-				filterText(
-					value,
-					player,
-					opponent
-				)
-
-			if filtered then
-
-				chairEvent:FireClient(
-					opponent,
-					"OPPONENT_QUESTION",
-					filtered
-				)
-
-			end
-
-		elseif action == "ANSWER" then
-
-			if value ~= "YES"
-				and value ~= "NO" then
+			if typeof(value) ~= "string" or value:match("^%s*$") then
 				return
 			end
 
-			chairEvent:FireClient(
-				opponent,
-				"OPPONENT_ANSWER",
-				value
-			)
+			local filtered = filterText(value, player, opponent)
+			if not filtered then
+				return
+			end
+
+			pendingQuestions[opponent] = (pendingQuestions[opponent] or 0) + 1
+			chairEvent:FireClient(opponent, "OPPONENT_QUESTION", filtered)
+
+		elseif action == "ANSWER" then
+			if typeof(value) ~= "string" or value:match("^%s*$") then
+				return
+			end
+
+			local questionNumber = pendingQuestions[player]
+			if not questionNumber then
+				chairEvent:FireClient(player, "ANSWER_ERROR", "No question to answer yet.")
+				return
+			end
+
+			local filtered = filterText(value, player, opponent)
+			if not filtered then
+				chairEvent:FireClient(player, "ANSWER_ERROR", "Your answer could not be sent.")
+				return
+			end
+
+			if not pair.started or pair.finished or activeGames[player] ~= pair then
+				return
+			end
+			if pendingQuestions[player] ~= questionNumber then
+				chairEvent:FireClient(player, "ANSWER_ERROR", "A newer question arrived. Please answer that one.")
+				return
+			end
+
+			pendingQuestions[player] = nil
+			chairEvent:FireClient(opponent, "OPPONENT_ANSWER", filtered)
+			chairEvent:FireClient(player, "ANSWER_SENT")
 
 		elseif action == "GUESS" then
 
