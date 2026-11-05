@@ -68,7 +68,7 @@ Ich habe den bestehenden Geld- und Shopcode von Maja erweitert und die Stuhlfarb
 - [x] Programmieren, dass man mit dem Geld neue Stühle kaufen kann
 - [x] Dafür sorgen, dass gekaufte Stühle später auch benutzt werden können
 
-Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusammen mit Nena habe ich zuerst programmiert, dass der Gewinner nach einer Runde automatisch 50 CHF bekommt. Danach habe ich den Shop gemacht, damit man sich mit diesem Geld neue Stühle kaufen kann. Zum Schluss habe ich noch dafür gesorgt, dass die Käufe gespeichert werden – man behält die gekauften Stühle also und kann sie später jederzeit wieder kostenlos ausrüsten.
+Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusammen mit Nena habe ich zuerst programmiert, dass der Gewinner nach einer Runde automatisch 50 CHF bekommt. Danach habe ich den Shop gemacht, damit man sich mit diesem Geld neue Stühle kaufen kann. Zum Schluss habe ich noch dafür gesorgt, dass die Käufe gespeichert werden, man behält die gekauften Stühle also und kann sie später jederzeit wieder kostenlos ausrüsten.
 
 
 **Mina**
