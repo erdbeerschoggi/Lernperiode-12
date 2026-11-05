@@ -90,8 +90,8 @@ Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusamm
 
 **Maja**
 - [ ] Alles auf eine Sprache einstellen (Alles nur auf English)
-- [ ] Den CHF button bearbeiten, sodass der Geldbetrag klar ist
 - [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
+- [ ] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
 
 **Mina**
 - [ ] Alles auf eine Sprache einstellen (Alles nur auf English)
