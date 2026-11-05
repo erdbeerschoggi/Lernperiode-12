@@ -70,7 +70,6 @@ Ich habe den bestehenden Geld- und Shopcode von Maja erweitert und die Stuhlfarb
 
 Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusammen mit Nena habe ich zuerst programmiert, dass der Gewinner nach einer Runde automatisch 50 CHF bekommt. Danach habe ich den Shop gemacht, damit man sich mit diesem Geld neue Stühle kaufen kann. Zum Schluss habe ich noch dafür gesorgt, dass die Käufe gespeichert werden, man behält die gekauften Stühle also und kann sie später jederzeit wieder kostenlos ausrüsten.
 
-
 **Mina**
 - [ ] Das bisherige Fragensystem überarbeiten und vorgefertigte Fragen einbauen
 - [ ] Die Ja- und Nein-Buttons entfernen und stattdessen ein Textfeld für Antworten machen
@@ -80,3 +79,26 @@ Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusamm
 - [ ] Vorgefertigte Fragen erstellen und ins Spiel einbauen
 - [ ] Die Antworten zwischen den beiden Spielern über das Textfeld anzeigen
 - [ ] Zusammen mit Mina das neue Fragensystem testen und verbessern
+
+
+## 12.11
+
+**Nena**
+- [ ] Austellung von den Stühlen erstellen, sodass man sieht wie die stühle aussehen vor dem einkaufen
+- [ ] Designs von Stühlen ausbauen
+- [ ] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
+
+**Maja**
+- [ ] Alles auf eine Sprache einstellen (Alles nur auf English)
+- [ ] Den CHF button bearbeiten, sodass der Geldbetrag klar ist
+- [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
+
+**Mina**
+- [ ] Alles auf eine Sprache einstellen (Alles nur auf English)
+- [ ] Designs von Stühlen ausbauen
+- [ ] Mehr Fragen hinzufügen beim Fussball Spieler raten
+
+**Joshua**
+- [ ] Fragen anpassen zu den Informationen die von den Fussball Spielern vorhanden sind
+- [ ] Die funktion von einem "rematch" einbauen
+- [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
