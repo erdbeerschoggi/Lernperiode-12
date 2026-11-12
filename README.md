@@ -84,9 +84,11 @@ Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusamm
 ## 12.11
 
 **Nena**
-- [ ] Austellung von den Stühlen erstellen, sodass man sieht wie die stühle aussehen vor dem einkaufen
+- [x] Austellung von den Stühlen erstellen, sodass man sieht wie die stühle aussehen vor dem einkaufen
 - [ ] Designs von Stühlen ausbauen
 - [ ] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
+
+Wir haben den Shop um eine drehbare 3D-Vorschau erweitert, damit man die Stühle vor dem Kauf ansehen kann. Die Vorschau ist nur im Shop sichtbar
 
 **Maja**
 - [x] Alles auf eine Sprache einstellen (Alles nur auf English)
