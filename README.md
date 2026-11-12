@@ -102,3 +102,6 @@ Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusamm
 - [ ] Fragen anpassen zu den Informationen die von den Fussball Spielern vorhanden sind
 - [ ] Die funktion von einem "rematch" einbauen
 - [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
+
+## 19.11
+Code in mehrere Dateien vorbereiten
