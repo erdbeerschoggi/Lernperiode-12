@@ -87,63 +87,63 @@ local footballPlayers = {
 		UCL = 5,
 		WorldCups = 0,
 		Euros = 1,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 5
 	},
 
 	{
 		Name = "Lionel Messi",
 		Age = 39,
-		Nationality = "Argentinien",
+		Nationality = "Argentina",
 		Club = "Inter Miami",
 		Number = 10,
 		LeagueTitles = 13,
 		UCL = 4,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 8
 	},
 
 	{
 		Name = "Kylian Mbappe",
 		Age = 27,
-		Nationality = "Frankreich",
+		Nationality = "France",
 		Club = "Real Madrid",
 		Number = 10,
 		LeagueTitles = 7,
 		UCL = 0,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Erling Haaland",
 		Age = 26,
-		Nationality = "Norwegen",
+		Nationality = "Norway",
 		Club = "Manchester City",
 		Number = 9,
 		LeagueTitles = 4,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Lamine Yamal",
 		Age = 19,
-		Nationality = "Spanien",
+		Nationality = "Spain",
 		Club = "Barcelona",
 		Number = 10,
 		LeagueTitles = 3,
 		UCL = 0,
 		WorldCups = 1,
 		Euros = 1,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 0
 	},
 
@@ -157,105 +157,105 @@ local footballPlayers = {
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Zentrales Mittelfeld",
+		Position = "Central Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Michael Olise",
 		Age = 24,
-		Nationality = "Frankreich",
+		Nationality = "France",
 		Club = "Bayern München",
 		Number = 17,
 		LeagueTitles = 2,
 		UCL = 0,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Offensives Mittelfeld",
+		Position = "Offensive Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Robert Lewandowski",
 		Age = 38,
-		Nationality = "Polen",
+		Nationality = "Poland",
 		Club = "Chicago Fire",
 		Number = 9,
 		LeagueTitles = 14,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Neymar Jr.",
 		Age = 34,
-		Nationality = "Brasilien",
+		Nationality = "Brazil",
 		Club = "Santos FC",
 		Number = 10,
 		LeagueTitles = 8,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Jamal Musiala",
 		Age = 24,
-		Nationality = "Deutschland",
+		Nationality = "Germany",
 		Club = "Bayern München",
 		Number = 10,
 		LeagueTitles = 6,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Offensives Mittelfeld",
+		Position = "Offensive Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Vinicius jr",
 		Age = 26,
-		Nationality = "Brasilien",
+		Nationality = "Brazil",
 		Club = "Real Madrid",
 		Number = 7,
 		LeagueTitles = 2,
 		UCL = 2,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Luka Modric",
 		Age = 41,
-		Nationality = "Kroatien",
+		Nationality = "Croatia",
 		Club = "Ac Milan",
 		Number = 14,
 		LeagueTitles = 7,
 		UCL = 6,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Zentrales Mittelfeld",
+		Position = "Central Midfield",
 		BallonDor = 1
 	},
 
 	{
 		Name = "Kevin de Bruyne",
 		Age = 35,
-		Nationality = "Belgien",
+		Nationality = "Belgium",
 		Club = "SSC Neapel",
 		Number = 11,
 		LeagueTitles = 7,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Zentrales Mittelfeld",
+		Position = "Central Midfield",
 		BallonDor = 0
 	},
 
@@ -276,84 +276,84 @@ local footballPlayers = {
 	{
 		Name = "Manuel Neuer",
 		Age = 40,
-		Nationality = "Deutschland",
+		Nationality = "Germany",
 		Club = "Bayern München",
 		Number = 1,
 		LeagueTitles = 13,
 		UCL = 2,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Torhüter",
+		Position = "Goalkeeper",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Thomas Müller",
 		Age = 37,
-		Nationality = "Deutschland",
+		Nationality = "Germany",
 		Club = "Vancouver Whitecaps",
 		Number = 13,
 		LeagueTitles = 12,
 		UCL = 2,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Offensives Mittelfeld",
+		Position = "Offensive Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Mohamed Salah",
 		Age = 34,
-		Nationality = "Ägypten",
+		Nationality = "Egypt",
 		Club = "Trabzonspor",
 		Number = 11,
 		LeagueTitles = 4,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Karim Benzema",
 		Age = 38,
-		Nationality = "Frankreich",
+		Nationality = "France",
 		Club = "Al-Hilal",
 		Number = 9,
 		LeagueTitles = 9,
 		UCL = 5,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 1
 	},
 
 	{
 		Name = "Xherdan Shaqiri",
 		Age = 35,
-		Nationality = "Schweiz",
+		Nationality = "Switzerland",
 		Club = "Fc Basel",
 		Number = 10,
 		LeagueTitles = 6,
 		UCL = 2,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Offensives Mittelfeld",
+		Position = "Offensive Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Ousmane Dembélé",
 		Age = 29,
-		Nationality = "Frankreich",
+		Nationality = "France",
 		Club = "PSG",
 		Number = 10,
 		LeagueTitles = 4,
 		UCL = 1,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Stürmer/Flügel",
+		Position = "striker/winger",
 		BallonDor = 0
 	}
 }
