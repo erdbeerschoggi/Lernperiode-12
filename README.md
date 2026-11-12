@@ -103,9 +103,11 @@ Für das dezentral a. Paket habe ich mit hilfe von Mina alles auf eine Sprache g
 - [ ] Mehr Fragen hinzufügen beim Fussball Spieler raten
 
 **Joshua**
-- [ ] Fragen anpassen zu den Informationen die von den Fussball Spielern vorhanden sind
+- [X] Fragen anpassen zu den Informationen die von den Fussball Spielern vorhanden sind
 - [ ] Die funktion von einem "rematch" einbauen
 - [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
+
+Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert, sodass sie besser zu unseren Spielerdaten passen.
 
 ## 19.11
 Code in mehrere Dateien verteilen um merge konlfikte zu vermeiden
