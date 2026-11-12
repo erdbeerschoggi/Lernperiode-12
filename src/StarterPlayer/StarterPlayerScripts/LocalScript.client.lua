@@ -100,12 +100,12 @@ shopCash.Parent = shopFrame
 
 -- Farbvarianten fuer den bestehenden ShopEvent.
 local SHOP_CHAIRS = {
-    {Id = "Default", Name = "Standard", Price = 0, Color = Color3.fromRGB(115, 120, 130)},
-    {Id = "Item 1", Name = "Rot", Price = 100, Color = Color3.fromRGB(255, 80, 80)},
-    {Id = "Item 2", Name = "Blau", Price = 250, Color = Color3.fromRGB(80, 150, 255)},
-    {Id = "Item 3", Name = "Gruen", Price = 150, Color = Color3.fromRGB(65, 195, 110)},
-    {Id = "Item 4", Name = "Violett", Price = 350, Color = Color3.fromRGB(165, 90, 225)},
-    {Id = "Item 5", Name = "Gold", Price = 500, Color = Color3.fromRGB(245, 195, 55)},
+    {Id = "Default", Name = "standard", Price = 0, Color = Color3.fromRGB(115, 120, 130)},
+    {Id = "Item 1", Name = "red", Price = 100, Color = Color3.fromRGB(255, 80, 80)},
+    {Id = "Item 2", Name = "blue", Price = 250, Color = Color3.fromRGB(80, 150, 255)},
+    {Id = "Item 3", Name = "green", Price = 150, Color = Color3.fromRGB(65, 195, 110)},
+    {Id = "Item 4", Name = "purple", Price = 350, Color = Color3.fromRGB(165, 90, 225)},
+    {Id = "Item 5", Name = "gold", Price = 500, Color = Color3.fromRGB(245, 195, 55)},
 }
 local shopButtons = {}
 
@@ -114,7 +114,7 @@ shopMessage.Name = "ShopMessage"
 shopMessage.Size = UDim2.fromScale(0.9, 0.1)
 shopMessage.Position = UDim2.fromScale(0.05, 0.27)
 shopMessage.BackgroundTransparency = 1
-shopMessage.Text = "Farbe kaufen oder eine gekaufte Farbe auswaehlen."
+shopMessage.Text = "Buy or select a color you already own."
 shopMessage.TextColor3 = Color3.fromRGB(230, 235, 245)
 shopMessage.TextWrapped = true
 shopMessage.TextSize = 15
@@ -145,7 +145,7 @@ for index, item in ipairs(SHOP_CHAIRS) do
     button.Name = "ChairButton_" .. index
     button.LayoutOrder = index
     button.BackgroundColor3 = item.Color
-    button.Text = item.Name .. "\n" .. item.Price .. " CHF\nLaedt ..."
+    button.Text = item.Name .. "\n" .. item.Price .. " CHF\nLoading ..."
     button.TextColor3 = Color3.fromRGB(10, 15, 25)
     button.TextSize = 19
     button.TextWrapped = true
@@ -725,15 +725,15 @@ task.spawn(function()
             local owned = item.Id == "Default" or inventory:FindFirstChild(item.Id)
             local actionText
             if equipped.Value == item.Id then
-                actionText = "Ausgewaehlt"
+                actionText = "selected"
             elseif owned then
-                actionText = "Auswaehlen (kostenlos)"
+                actionText = "Select (free)"
             elseif cashValue.Value >= item.Price then
-                actionText = "Kaufen"
+                actionText = "Buy"
             else
-                actionText = "Zu wenig CHF"
+                actionText = "Not enough CHF"
             end
-            local priceText = item.Id == "Default" and "Originalfarben" or (item.Price .. " CHF")
+            local priceText = item.Id == "Default" and "Original colors" or (item.Price .. " CHF")
             button.Text = item.Name .. "\n" .. priceText .. "\n" .. actionText
         end
     end

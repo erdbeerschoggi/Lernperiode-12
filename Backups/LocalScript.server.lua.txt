@@ -675,8 +675,6 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 
 	end
 
-<<<<<<< HEAD:Backups/LocalScript.server.lua.txt
-=======
 end)
 
 -- Shop-System 
@@ -705,5 +703,4 @@ task.spawn(function()
 	
 	
 	cashValue.Changed:Connect(updateCash)
->>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe:src/StarterPlayer/StarterPlayerScripts/LocalScript.server.lua
 end)
