@@ -1,0 +1,41 @@
+{
+  "name": "Lernperiode-12",
+  "tree": {
+    "$className": "DataModel",
+    "$ignoreUnknownInstances": true,
+    "ReplicatedStorage": {
+      "$ignoreUnknownInstances": true,
+      "Shared": {
+        "$path": "src/shared",
+        "$ignoreUnknownInstances": true
+      }
+    },
+    "ServerScriptService": {
+      "$ignoreUnknownInstances": true,
+      "Server": {
+        "$path": "src/server"
+      },
+      "TwoPlayerGame": {
+        "$path": "ShopErweiterung/TwoPlayerGame.ShopBasis.server.lua"
+      },
+      "ShopErweiterung": {
+        "$path": "ShopErweiterung/ShopExtension.server.lua"
+      }
+    },
+    "StarterPlayer": {
+      "$ignoreUnknownInstances": true,
+      "StarterPlayerScripts": {
+        "$ignoreUnknownInstances": true,
+        "Client": {
+          "$path": "src/client"
+        },
+        "LocalScript": {
+          "$path": "src/StarterPlayer/StarterPlayerScripts/LocalScript.client.lua"
+        },
+        "ShopErweiterung": {
+          "$path": "ShopErweiterung/ShopExtension.client.lua"
+        }
+      }
+    }
+  }
+}
