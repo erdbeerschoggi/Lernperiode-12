@@ -26,6 +26,7 @@ if not shopEvent then
 end
 
 
+<<<<<<< HEAD
 -- Vorhandene Item-IDs und Preise der Kollegin bleiben erhalten.
 local SHOP_ITEMS = {
     ["Default"] = {Name = "Standard", Price = 0},
@@ -143,6 +144,56 @@ shopEvent.OnServerEvent:Connect(function(player, action, itemName)
     equipped.Value = itemName
     updateSeatedChair(player)
     shopEvent:FireClient(player, "OK", item.Name .. " gekauft und ausgewaehlt.")
+=======
+-- Shop Items definieren 
+local SHOP_ITEMS = {
+	["Item 1"] = {Price = 100, Color = Color3.fromRGB(255, 80, 80)},  
+	["Item 2"] = {Price = 250, Color = Color3.fromRGB(80, 150, 255)}  
+}
+
+-- Geld und Inventar für Spieler initialisieren
+Players.PlayerAdded:Connect(function(player)
+	local leaderstats = Instance.new("Folder")
+	leaderstats.Name = "leaderstats"
+	leaderstats.Parent = player
+
+	local cash = Instance.new("IntValue")
+	cash.Name = "Cash"
+	cash.Value = 0 
+	cash.Parent = leaderstats
+
+	local inventory = Instance.new("Folder")
+	inventory.Name = "Inventory"
+	inventory.Parent = player
+
+	local equippedChair = Instance.new("StringValue")
+	equippedChair.Name = "EquippedChair"
+	equippedChair.Value = "Default" 
+	equippedChair.Parent = player
+end)
+
+-- Verarbeitet Kaufanfragen aus dem Shop
+shopEvent.OnServerEvent:Connect(function(player, action, itemName)
+	if action == "BUY" then
+		local item = SHOP_ITEMS[itemName]
+		if item then
+			
+			if player.Inventory:FindFirstChild(itemName) then
+				player.EquippedChair.Value = itemName
+				
+			elseif player.leaderstats.Cash.Value >= item.Price then
+				player.leaderstats.Cash.Value -= item.Price
+				
+				local ownedItem = Instance.new("StringValue")
+				ownedItem.Name = itemName
+				ownedItem.Parent = player.Inventory
+
+				player.EquippedChair.Value = itemName
+			end
+			
+		end
+	end
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 end)
 
 local footballPlayers = {
@@ -156,63 +207,99 @@ local footballPlayers = {
 		UCL = 5,
 		WorldCups = 0,
 		Euros = 1,
+<<<<<<< HEAD
 		Position = "Stürmer",
+=======
+		Position = "striker",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 5
 	},
 
 	{
 		Name = "Lionel Messi",
 		Age = 39,
+<<<<<<< HEAD
 		Nationality = "Argentinien",
+=======
+		Nationality = "Argentina",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Inter Miami",
 		Number = 10,
 		LeagueTitles = 13,
 		UCL = 4,
 		WorldCups = 1,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Flügel",
+=======
+		Position = "winger",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 8
 	},
 
 	{
 		Name = "Kylian Mbappe",
 		Age = 27,
+<<<<<<< HEAD
 		Nationality = "Frankreich",
+=======
+		Nationality = "France",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Real Madrid",
 		Number = 10,
 		LeagueTitles = 7,
 		UCL = 0,
 		WorldCups = 1,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Stürmer",
+=======
+		Position = "striker",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Erling Haaland",
 		Age = 26,
+<<<<<<< HEAD
 		Nationality = "Norwegen",
+=======
+		Nationality = "Norway",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Manchester City",
 		Number = 9,
 		LeagueTitles = 4,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Stürmer",
+=======
+		Position = "striker",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Lamine Yamal",
 		Age = 19,
+<<<<<<< HEAD
 		Nationality = "Spanien",
+=======
+		Nationality = "Spain",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Barcelona",
 		Number = 10,
 		LeagueTitles = 3,
 		UCL = 0,
 		WorldCups = 1,
 		Euros = 1,
+<<<<<<< HEAD
 		Position = "Flügel",
+=======
+		Position = "winger",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
@@ -226,105 +313,165 @@ local footballPlayers = {
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Zentrales Mittelfeld",
+=======
+		Position = "Central Midfield",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Michael Olise",
 		Age = 24,
+<<<<<<< HEAD
 		Nationality = "Frankreich",
+=======
+		Nationality = "France",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Bayern München",
 		Number = 17,
 		LeagueTitles = 2,
 		UCL = 0,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Offensives Mittelfeld",
+=======
+		Position = "Offensive Midfield",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Robert Lewandowski",
 		Age = 38,
+<<<<<<< HEAD
 		Nationality = "Polen",
+=======
+		Nationality = "Poland",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Chicago Fire",
 		Number = 9,
 		LeagueTitles = 14,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Stürmer",
+=======
+		Position = "striker",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Neymar Jr.",
 		Age = 34,
+<<<<<<< HEAD
 		Nationality = "Brasilien",
+=======
+		Nationality = "Brazil",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Santos FC",
 		Number = 10,
 		LeagueTitles = 8,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Flügel",
+=======
+		Position = "winger",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Jamal Musiala",
 		Age = 24,
+<<<<<<< HEAD
 		Nationality = "Deutschland",
+=======
+		Nationality = "Germany",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Bayern München",
 		Number = 10,
 		LeagueTitles = 6,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Offensives Mittelfeld",
+=======
+		Position = "Offensive Midfield",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Vinicius jr",
 		Age = 26,
+<<<<<<< HEAD
 		Nationality = "Brasilien",
+=======
+		Nationality = "Brazil",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Real Madrid",
 		Number = 7,
 		LeagueTitles = 2,
 		UCL = 2,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Flügel",
+=======
+		Position = "winger",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Luka Modric",
 		Age = 41,
+<<<<<<< HEAD
 		Nationality = "Kroatien",
+=======
+		Nationality = "Croatia",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Ac Milan",
 		Number = 14,
 		LeagueTitles = 7,
 		UCL = 6,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Zentrales Mittelfeld",
+=======
+		Position = "Central Midfield",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 1
 	},
 
 	{
 		Name = "Kevin de Bruyne",
 		Age = 35,
+<<<<<<< HEAD
 		Nationality = "Belgien",
+=======
+		Nationality = "Belgium",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "SSC Neapel",
 		Number = 11,
 		LeagueTitles = 7,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Zentrales Mittelfeld",
+=======
+		Position = "Central Midfield",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
@@ -345,84 +492,132 @@ local footballPlayers = {
 	{
 		Name = "Manuel Neuer",
 		Age = 40,
+<<<<<<< HEAD
 		Nationality = "Deutschland",
+=======
+		Nationality = "Germany",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Bayern München",
 		Number = 1,
 		LeagueTitles = 13,
 		UCL = 2,
 		WorldCups = 1,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Torhüter",
+=======
+		Position = "Goalkeeper",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Thomas Müller",
 		Age = 37,
+<<<<<<< HEAD
 		Nationality = "Deutschland",
+=======
+		Nationality = "Germany",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Vancouver Whitecaps",
 		Number = 13,
 		LeagueTitles = 12,
 		UCL = 2,
 		WorldCups = 1,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Offensives Mittelfeld",
+=======
+		Position = "Offensive Midfield",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Mohamed Salah",
 		Age = 34,
+<<<<<<< HEAD
 		Nationality = "Ägypten",
+=======
+		Nationality = "Egypt",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Trabzonspor",
 		Number = 11,
 		LeagueTitles = 4,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Flügel",
+=======
+		Position = "winger",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Karim Benzema",
 		Age = 38,
+<<<<<<< HEAD
 		Nationality = "Frankreich",
+=======
+		Nationality = "France",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Al-Hilal",
 		Number = 9,
 		LeagueTitles = 9,
 		UCL = 5,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Stürmer",
+=======
+		Position = "striker",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 1
 	},
 
 	{
 		Name = "Xherdan Shaqiri",
 		Age = 35,
+<<<<<<< HEAD
 		Nationality = "Schweiz",
+=======
+		Nationality = "Switzerland",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "Fc Basel",
 		Number = 10,
 		LeagueTitles = 6,
 		UCL = 2,
 		WorldCups = 0,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Offensives Mittelfeld",
+=======
+		Position = "Offensive Midfield",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	},
 
 	{
 		Name = "Ousmane Dembélé",
 		Age = 29,
+<<<<<<< HEAD
 		Nationality = "Frankreich",
+=======
+		Nationality = "France",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		Club = "PSG",
 		Number = 10,
 		LeagueTitles = 4,
 		UCL = 1,
 		WorldCups = 1,
 		Euros = 0,
+<<<<<<< HEAD
 		Position = "Stürmer/Flügel",
+=======
+		Position = "striker/winger",
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 		BallonDor = 0
 	}
 }
@@ -867,7 +1062,11 @@ local function finishGame(
 
 	-- 50 CHF an den Gewinner geben
 	if winner:FindFirstChild("leaderstats") and winner.leaderstats:FindFirstChild("Cash") then
+<<<<<<< HEAD
 		winner.leaderstats.Cash.Value = winner.leaderstats.Cash.Value + 50
+=======
+		winner.leaderstats.Cash.Value += 50
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 	end
 
 
@@ -921,6 +1120,22 @@ local function finishGame(
 end
 
 
+<<<<<<< HEAD
+=======
+-- Stühle anpassen, wenn ein Spieler einen Skin aus dem Shop gekauft hat
+local function applyChairSkin(player, chairModel)
+	local equipped = player:FindFirstChild("EquippedChair")
+	if equipped and SHOP_ITEMS[equipped.Value] then
+		local newColor = SHOP_ITEMS[equipped.Value].Color
+		for _, part in ipairs(chairModel:GetDescendants()) do
+			if part:IsA("BasePart") then
+				part.Color = newColor
+			end
+		end
+	end
+end
+
+>>>>>>> a05cb1d7026c9673928c11c034cd82a6520c66fe
 local function setupPair(pair)
 
 	local seat1 = pair.seat1
