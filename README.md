@@ -89,9 +89,11 @@ Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusamm
 - [ ] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
 
 **Maja**
-- [ ] Alles auf eine Sprache einstellen (Alles nur auf English)
+- [x] Alles auf eine Sprache einstellen (Alles nur auf English)
 - [ ] Designs von Stühlen ausbauen
 - [ ] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
+
+Für das dezentral a. Paket habe ich mit hilfe von Mina alles auf eine Sprache gewechselt, und zwar auf Englisch. Dann haben ich und Nena zusammen gemerkt, dass Merge-Konflikte entstehen, da wir alle nur an 3 Dateien arbeiten. Durch diese Merge-Konflikte haben wir gemerkt, dass es sinnvoll wäre, den Code auf verschiedene Dateien zu verteilen, um diese Merge-Konflikte zu vermeiden. Dann habe ich noch währenddessen mit Nena uns ein wenig Gedanken gemacht, wie wir die Designs der Stühle ausbauen möchten.
 
 **Mina**
 - [ ] Alles auf eine Sprache einstellen (Alles nur auf English)
@@ -104,4 +106,4 @@ Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusamm
 - [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
 
 ## 19.11
-Code in mehrere Dateien vorbereiten
+Code in mehrere Dateien verteilen um merge konlfikte zu vermeiden
