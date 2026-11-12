@@ -109,3 +109,4 @@ Für das dezentral a. Paket habe ich mit hilfe von Mina alles auf eine Sprache g
 
 ## 19.11
 Code in mehrere Dateien verteilen um merge konlfikte zu vermeiden
+Neue objekte als stuhl -> sitz funktion??
