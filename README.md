@@ -90,12 +90,12 @@ Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusamm
 
 **Maja**
 - [ ] Alles auf eine Sprache einstellen (Alles nur auf English)
-- [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
+- [ ] Designs von Stühlen ausbauen
 - [ ] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
 
 **Mina**
 - [ ] Alles auf eine Sprache einstellen (Alles nur auf English)
-- [ ] Designs von Stühlen ausbauen
+- [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
 - [ ] Mehr Fragen hinzufügen beim Fussball Spieler raten
 
 **Joshua**
