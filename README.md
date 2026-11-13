@@ -135,3 +135,6 @@ Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert
 - [ ] Mehr Fussball Spieler Daten hinzufügen
 - [ ] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
 - [ ] Fussball Spieler in Levels nach schwierigkeit einteilen.
+
+
+CUSTOM QUESTION FUNKTION
