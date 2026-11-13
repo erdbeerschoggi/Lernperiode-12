@@ -113,21 +113,21 @@ Für das dezentral a. Paket habe ich mit hilfe von Mina alles auf eine Sprache g
 
 Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert, sodass sie besser zu unseren Spielerdaten passen.
 
-## 19.11
+## 20.11
 **Nena**
 - [ ] Designs von Stühlen ausbauen
 - [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen), sodass man z.b. auf einem Fisch hocken kann.
-- [ ] 
+- [ ] Funktion einbauen wie man Geld vom Spieler zu Spieler übergeben kann (Wettfunktion)
   
 **Maja**
-- [ ] Code in mehrere Dateien verteilen, da sonst merge konflikte entstehen
+- [ ] Code in mehrere Dateien verteilen, da sonst merge konflikte entstehen 
 - [ ] Designs von Stühlen ausbauen
 - [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen), sodass man z.b. auf einem Fisch hocken kann.
 
 **Mina**
 - [ ] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
-- [ ] Wett funktion hinzufügen (Ein Spieler kann z.b. 10 CHF wetten dass er gewinnt
-- [ ]
+- [ ] Funktion einbauen dass Spieler Geld auf das Spiel wetten können.
+- [ ] Funktion einbauen zum entscheiden ob man überhaupt in der Runde wetten möchte
 
 **Joshua**
 - [ ] Mehr Fussball Spieler Daten hinzufügen
