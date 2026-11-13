@@ -445,7 +445,69 @@ resultText.Parent = gui
 rounded(resultText, 20)
 outline(resultText)
 
+local rematchFrame = Instance.new("Frame")
+rematchFrame.Name = "RematchFrame"
+rematchFrame.Size = UDim2.fromScale(0.3, 0.22)
+rematchFrame.Position = UDim2.fromScale(0.5, 0.68)
+rematchFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+rematchFrame.BackgroundColor3 = Color3.fromRGB(15, 20, 28)
+rematchFrame.BackgroundTransparency = 0.1
+rematchFrame.Visible = false
+rematchFrame.ZIndex = 40
+rematchFrame.Parent = gui
+rounded(rematchFrame, 18)
+outline(rematchFrame)
 
+local rematchTitle = Instance.new("TextLabel")
+rematchTitle.Size = UDim2.fromScale(0.9, 0.3)
+rematchTitle.Position = UDim2.fromScale(0.05, 0.08)
+rematchTitle.BackgroundTransparency = 1
+rematchTitle.Text = "PLAY AGAIN?"
+rematchTitle.TextColor3 = Color3.new(1, 1, 1)
+rematchTitle.TextScaled = true
+rematchTitle.Font = Enum.Font.GothamBold
+rematchTitle.ZIndex = 41
+rematchTitle.Parent = rematchFrame
+
+local rematchYes = Instance.new("TextButton")
+rematchYes.Size = UDim2.fromScale(0.43, 0.42)
+rematchYes.Position = UDim2.fromScale(0.05, 0.5)
+rematchYes.BackgroundColor3 = Color3.fromRGB(65, 195, 110)
+rematchYes.Text = "YES (0/2)"
+rematchYes.TextColor3 = Color3.fromRGB(10, 15, 25)
+rematchYes.TextScaled = true
+rematchYes.Font = Enum.Font.GothamBold
+rematchYes.ZIndex = 41
+rematchYes.Parent = rematchFrame
+rounded(rematchYes, 12)
+
+local rematchNo = Instance.new("TextButton")
+rematchNo.Size = UDim2.fromScale(0.43, 0.42)
+rematchNo.Position = UDim2.fromScale(0.52, 0.5)
+rematchNo.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+rematchNo.Text = "NO"
+rematchNo.TextColor3 = Color3.fromRGB(10, 15, 25)
+rematchNo.TextScaled = true
+rematchNo.Font = Enum.Font.GothamBold
+rematchNo.ZIndex = 41
+rematchNo.Parent = rematchFrame
+rounded(rematchNo, 12)
+
+local rematchVoted = false
+
+rematchYes.Activated:Connect(function()
+	if rematchVoted then return end
+	rematchVoted = true
+	rematchYes.BackgroundColor3 = Color3.fromRGB(40, 120, 70)
+	actionEvent:FireServer("REMATCH", true)
+end)
+
+rematchNo.Activated:Connect(function()
+	if rematchVoted then return end
+	rematchVoted = true
+	rematchFrame.Visible = false
+	actionEvent:FireServer("REMATCH", false)
+end)
 
 guessBox.FocusLost:Connect(function()
 	if guessBox.Text == "" then
@@ -671,7 +733,7 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 	elseif status == "START" then
 
 		gameStarted = true
-
+		rematchFrame.Visible = false
 		waitingText.Text =
 			"GAME STARTED!"
 
@@ -795,8 +857,26 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 		resultText.Visible =
 			false
 
-	end
+	elseif status == "REMATCH_PROMPT" then
 
+	rematchVoted = false
+	rematchYes.BackgroundColor3 = Color3.fromRGB(65, 195, 110)
+	rematchYes.Text = "YES (" .. tostring(value) .. "/2)"
+	rematchFrame.Visible = true
+
+	elseif status == "REMATCH_UPDATE" then
+
+	rematchYes.Text = "YES (" .. tostring(value) .. "/2)"
+
+	elseif status == "REMATCH_END" then
+
+	rematchFrame.Visible = false
+
+	resultText.Text = tostring(value)
+	resultText.Visible = true
+	task.wait(2)
+	resultText.Visible = false
+	end
 end)
 
 -- Connect the existing money values and the inventory to the display.
@@ -845,4 +925,5 @@ task.spawn(function()
 	inventory.ChildRemoved:Connect(updateShop)
 	equipped.Changed:Connect(updateShop)
 	updateShop()
+	
 end)
