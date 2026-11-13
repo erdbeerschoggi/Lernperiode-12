@@ -25,124 +25,123 @@ if not shopEvent then
 	shopEvent.Parent = ReplicatedStorage
 end
 
-
--- Vorhandene Item-IDs und Preise der Kollegin bleiben erhalten.
+-- Existing item IDs and prices are kept.
 local SHOP_ITEMS = {
-    ["Default"] = {Name = "Standard", Price = 0},
-    ["Item 1"] = {Name = "Rot", Price = 100, Color = Color3.fromRGB(255, 80, 80)},
-    ["Item 2"] = {Name = "Blau", Price = 250, Color = Color3.fromRGB(80, 150, 255)},
-    ["Item 3"] = {Name = "Gruen", Price = 150, Color = Color3.fromRGB(65, 195, 110)},
-    ["Item 4"] = {Name = "Violett", Price = 350, Color = Color3.fromRGB(165, 90, 225)},
-    ["Item 5"] = {Name = "Gold", Price = 500, Color = Color3.fromRGB(245, 195, 55)},
+	["Default"] = {Name = "standard", Price = 0},
+	["Item 1"] = {Name = "red", Price = 100, Color = Color3.fromRGB(255, 80, 80)},
+	["Item 2"] = {Name = "blue", Price = 250, Color = Color3.fromRGB(80, 150, 255)},
+	["Item 3"] = {Name = "green", Price = 150, Color = Color3.fromRGB(65, 195, 110)},
+	["Item 4"] = {Name = "purple", Price = 350, Color = Color3.fromRGB(165, 90, 225)},
+	["Item 5"] = {Name = "gold", Price = 500, Color = Color3.fromRGB(245, 195, 55)},
 }
 
--- Nur Farben aendern: keine Seats ersetzen, verschieben oder neu erzeugen.
+-- Only change colors: do not replace, move or recreate seats.
 local originalChairColors = setmetatable({}, {__mode = "k"})
 local initializedPlayers = {}
 local lastShopRequest = {}
 
 local function applyChairSkin(player, chairModel)
-    if not chairModel or not chairModel.Name:match("^Chair") then return end
-    local equipped = player and player:FindFirstChild("EquippedChair")
-    local item = equipped and SHOP_ITEMS[equipped.Value]
-    local inventory = player and player:FindFirstChild("Inventory")
-    local owned = equipped and (equipped.Value == "Default"
-        or (inventory and inventory:FindFirstChild(equipped.Value)))
-    local color = owned and item and item.Color
+	if not chairModel or not chairModel.Name:match("^Chair") then return end
+	local equipped = player and player:FindFirstChild("EquippedChair")
+	local item = equipped and SHOP_ITEMS[equipped.Value]
+	local inventory = player and player:FindFirstChild("Inventory")
+	local owned = equipped and (equipped.Value == "Default"
+		or (inventory and inventory:FindFirstChild(equipped.Value)))
+	local color = owned and item and item.Color
 
-    for _, part in ipairs(chairModel:GetDescendants()) do
-        if part:IsA("BasePart") and not part:GetAttribute("KeepShopColor") then
-            if originalChairColors[part] == nil then
-                originalChairColors[part] = part.Color
-            end
-            part.Color = color or originalChairColors[part]
-        end
-    end
+	for _, part in ipairs(chairModel:GetDescendants()) do
+		if part:IsA("BasePart") and not part:GetAttribute("KeepShopColor") then
+			if originalChairColors[part] == nil then
+				originalChairColors[part] = part.Color
+			end
+			part.Color = color or originalChairColors[part]
+		end
+	end
 end
 
 local function updateSeatedChair(player)
-    local character = player.Character
-    local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-    local seat = humanoid and humanoid.SeatPart
-    if seat and seat:IsA("Seat") then
-        applyChairSkin(player, seat.Parent)
-    end
+	local character = player.Character
+	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	local seat = humanoid and humanoid.SeatPart
+	if seat and seat:IsA("Seat") then
+		applyChairSkin(player, seat.Parent)
+	end
 end
 
--- Vorhandene Werte weiterverwenden; bei Initialisierung kein Geld zuruecksetzen.
+-- Reuse existing values; never reset money on initialization.
 local function setupShopPlayer(player)
-    if initializedPlayers[player] then return end
-    initializedPlayers[player] = true
-    local leaderstats = player:FindFirstChild("leaderstats")
-    if not leaderstats then
-        leaderstats = Instance.new("Folder")
-        leaderstats.Name = "leaderstats"
-        leaderstats.Parent = player
-    end
-    if not leaderstats:FindFirstChild("Cash") then
-        local cash = Instance.new("IntValue")
-        cash.Name = "Cash"
-        cash.Value = 0
-        cash.Parent = leaderstats
-    end
-    if not player:FindFirstChild("Inventory") then
-        local inventory = Instance.new("Folder")
-        inventory.Name = "Inventory"
-        inventory.Parent = player
-    end
-    local equipped = player:FindFirstChild("EquippedChair")
-    if not equipped then
-        equipped = Instance.new("StringValue")
-        equipped.Name = "EquippedChair"
-        equipped.Value = "Default"
-        equipped.Parent = player
-    end
-    equipped.Changed:Connect(function() updateSeatedChair(player) end)
-    updateSeatedChair(player)
+	if initializedPlayers[player] then return end
+	initializedPlayers[player] = true
+	local leaderstats = player:FindFirstChild("leaderstats")
+	if not leaderstats then
+		leaderstats = Instance.new("Folder")
+		leaderstats.Name = "leaderstats"
+		leaderstats.Parent = player
+	end
+	if not leaderstats:FindFirstChild("Cash") then
+		local cash = Instance.new("IntValue")
+		cash.Name = "Cash"
+		cash.Value = 0
+		cash.Parent = leaderstats
+	end
+	if not player:FindFirstChild("Inventory") then
+		local inventory = Instance.new("Folder")
+		inventory.Name = "Inventory"
+		inventory.Parent = player
+	end
+	local equipped = player:FindFirstChild("EquippedChair")
+	if not equipped then
+		equipped = Instance.new("StringValue")
+		equipped.Name = "EquippedChair"
+		equipped.Value = "Default"
+		equipped.Parent = player
+	end
+	equipped.Changed:Connect(function() updateSeatedChair(player) end)
+	updateSeatedChair(player)
 end
 Players.PlayerAdded:Connect(setupShopPlayer)
 for _, player in ipairs(Players:GetPlayers()) do setupShopPlayer(player) end
 Players.PlayerRemoving:Connect(function(player)
-    initializedPlayers[player] = nil
-    lastShopRequest[player] = nil
+	initializedPlayers[player] = nil
+	lastShopRequest[player] = nil
 end)
 
--- Den vorhandenen ShopEvent benutzen; kein zweites Geldsystem.
+-- Use the existing ShopEvent; no second money system.
 shopEvent.OnServerEvent:Connect(function(player, action, itemName)
-    if action ~= "BUY" or typeof(itemName) ~= "string" then return end
-    local item = SHOP_ITEMS[itemName]
-    if not item then return end
-    local now = os.clock()
-    if lastShopRequest[player] and now - lastShopRequest[player] < 0.2 then return end
-    lastShopRequest[player] = now
+	if action ~= "BUY" or typeof(itemName) ~= "string" then return end
+	local item = SHOP_ITEMS[itemName]
+	if not item then return end
+	local now = os.clock()
+	if lastShopRequest[player] and now - lastShopRequest[player] < 0.2 then return end
+	lastShopRequest[player] = now
 
-    local stats = player:FindFirstChild("leaderstats")
-    local cash = stats and stats:FindFirstChild("Cash")
-    local inventory = player:FindFirstChild("Inventory")
-    local equipped = player:FindFirstChild("EquippedChair")
-    if not cash or not inventory or not equipped then return end
+	local stats = player:FindFirstChild("leaderstats")
+	local cash = stats and stats:FindFirstChild("Cash")
+	local inventory = player:FindFirstChild("Inventory")
+	local equipped = player:FindFirstChild("EquippedChair")
+	if not cash or not inventory or not equipped then return end
 
-    -- Besitz zuerst pruefen: Auswahl gekaufter Farben ist immer kostenlos.
-    if itemName == "Default" or inventory:FindFirstChild(itemName) then
-        equipped.Value = itemName
-        updateSeatedChair(player)
-        shopEvent:FireClient(player, "OK", item.Name .. " ausgewaehlt.")
-        return
-    end
-    if cash.Value < item.Price then
-        shopEvent:FireClient(player, "ERROR", "Dir fehlen " .. (item.Price - cash.Value) .. " CHF.")
-        return
-    end
+	-- Check ownership first: selecting an owned color is always free.
+	if itemName == "Default" or inventory:FindFirstChild(itemName) then
+		equipped.Value = itemName
+		updateSeatedChair(player)
+		shopEvent:FireClient(player, "OK", item.Name .. " selected.")
+		return
+	end
+	if cash.Value < item.Price then
+		shopEvent:FireClient(player, "ERROR", "You need " .. (item.Price - cash.Value) .. " more CHF.")
+		return
+	end
 
-    -- Kein Wait zwischen Guthabenpruefung und Abzug.
-    cash.Value = cash.Value - item.Price
-    local ownedItem = Instance.new("StringValue")
-    ownedItem.Name = itemName
-    ownedItem.Value = itemName
-    ownedItem.Parent = inventory
-    equipped.Value = itemName
-    updateSeatedChair(player)
-    shopEvent:FireClient(player, "OK", item.Name .. " gekauft und ausgewaehlt.")
+	-- No wait between the balance check and the deduction.
+	cash.Value = cash.Value - item.Price
+	local ownedItem = Instance.new("StringValue")
+	ownedItem.Name = itemName
+	ownedItem.Value = itemName
+	ownedItem.Parent = inventory
+	equipped.Value = itemName
+	updateSeatedChair(player)
+	shopEvent:FireClient(player, "OK", item.Name .. " purchased and selected.")
 end)
 
 local footballPlayers = {
@@ -156,63 +155,63 @@ local footballPlayers = {
 		UCL = 5,
 		WorldCups = 0,
 		Euros = 1,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 5
 	},
 
 	{
 		Name = "Lionel Messi",
 		Age = 39,
-		Nationality = "Argentinien",
+		Nationality = "Argentina",
 		Club = "Inter Miami",
 		Number = 10,
 		LeagueTitles = 13,
 		UCL = 4,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 8
 	},
 
 	{
 		Name = "Kylian Mbappe",
 		Age = 27,
-		Nationality = "Frankreich",
+		Nationality = "France",
 		Club = "Real Madrid",
 		Number = 10,
 		LeagueTitles = 7,
 		UCL = 0,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Erling Haaland",
 		Age = 26,
-		Nationality = "Norwegen",
+		Nationality = "Norway",
 		Club = "Manchester City",
 		Number = 9,
 		LeagueTitles = 4,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Lamine Yamal",
 		Age = 19,
-		Nationality = "Spanien",
+		Nationality = "Spain",
 		Club = "Barcelona",
 		Number = 10,
 		LeagueTitles = 3,
 		UCL = 0,
 		WorldCups = 1,
 		Euros = 1,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 0
 	},
 
@@ -226,105 +225,105 @@ local footballPlayers = {
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Zentrales Mittelfeld",
+		Position = "Central Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Michael Olise",
 		Age = 24,
-		Nationality = "Frankreich",
+		Nationality = "France",
 		Club = "Bayern München",
 		Number = 17,
 		LeagueTitles = 2,
 		UCL = 0,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Offensives Mittelfeld",
+		Position = "Offensive Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Robert Lewandowski",
 		Age = 38,
-		Nationality = "Polen",
+		Nationality = "Poland",
 		Club = "Chicago Fire",
 		Number = 9,
 		LeagueTitles = 14,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Neymar Jr.",
 		Age = 34,
-		Nationality = "Brasilien",
+		Nationality = "Brazil",
 		Club = "Santos FC",
 		Number = 10,
 		LeagueTitles = 8,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Jamal Musiala",
 		Age = 24,
-		Nationality = "Deutschland",
+		Nationality = "Germany",
 		Club = "Bayern München",
 		Number = 10,
 		LeagueTitles = 6,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Offensives Mittelfeld",
+		Position = "Offensive Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Vinicius jr",
 		Age = 26,
-		Nationality = "Brasilien",
+		Nationality = "Brazil",
 		Club = "Real Madrid",
 		Number = 7,
 		LeagueTitles = 2,
 		UCL = 2,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Luka Modric",
 		Age = 41,
-		Nationality = "Kroatien",
+		Nationality = "Croatia",
 		Club = "Ac Milan",
 		Number = 14,
 		LeagueTitles = 7,
 		UCL = 6,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Zentrales Mittelfeld",
+		Position = "Central Midfield",
 		BallonDor = 1
 	},
 
 	{
 		Name = "Kevin de Bruyne",
 		Age = 35,
-		Nationality = "Belgien",
+		Nationality = "Belgium",
 		Club = "SSC Neapel",
 		Number = 11,
 		LeagueTitles = 7,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Zentrales Mittelfeld",
+		Position = "Central Midfield",
 		BallonDor = 0
 	},
 
@@ -338,91 +337,91 @@ local footballPlayers = {
 		UCL = 0,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "?",
+		Position = "Striker",
 		BallonDor = 1
 	},
 
 	{
 		Name = "Manuel Neuer",
 		Age = 40,
-		Nationality = "Deutschland",
+		Nationality = "Germany",
 		Club = "Bayern München",
 		Number = 1,
 		LeagueTitles = 13,
 		UCL = 2,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Torhüter",
+		Position = "Goalkeeper",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Thomas Müller",
 		Age = 37,
-		Nationality = "Deutschland",
+		Nationality = "Germany",
 		Club = "Vancouver Whitecaps",
 		Number = 13,
 		LeagueTitles = 12,
 		UCL = 2,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Offensives Mittelfeld",
+		Position = "Offensive Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Mohamed Salah",
 		Age = 34,
-		Nationality = "Ägypten",
+		Nationality = "Egypt",
 		Club = "Trabzonspor",
 		Number = 11,
 		LeagueTitles = 4,
 		UCL = 1,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Flügel",
+		Position = "winger",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Karim Benzema",
 		Age = 38,
-		Nationality = "Frankreich",
+		Nationality = "France",
 		Club = "Al-Hilal",
 		Number = 9,
 		LeagueTitles = 9,
 		UCL = 5,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Stürmer",
+		Position = "striker",
 		BallonDor = 1
 	},
 
 	{
 		Name = "Xherdan Shaqiri",
 		Age = 35,
-		Nationality = "Schweiz",
+		Nationality = "Switzerland",
 		Club = "Fc Basel",
 		Number = 10,
 		LeagueTitles = 6,
 		UCL = 2,
 		WorldCups = 0,
 		Euros = 0,
-		Position = "Offensives Mittelfeld",
+		Position = "Offensive Midfield",
 		BallonDor = 0
 	},
 
 	{
 		Name = "Ousmane Dembélé",
 		Age = 29,
-		Nationality = "Frankreich",
+		Nationality = "France",
 		Club = "PSG",
 		Number = 10,
 		LeagueTitles = 4,
 		UCL = 1,
 		WorldCups = 1,
 		Euros = 0,
-		Position = "Stürmer/Flügel",
+		Position = "striker/winger",
 		BallonDor = 0
 	}
 }
@@ -547,15 +546,15 @@ for _, object in ipairs(workspace:GetDescendants()) do
 
 end
 
--- Farben unabhaengig vom Rundenzustand aktualisieren, auch beim Aufstehen.
+-- Update colors independent of the round state, also when standing up.
 for _, seat in ipairs(seats) do
-    local function refreshColor()
-        local humanoid = seat.Occupant
-        local seatedPlayer = humanoid and Players:GetPlayerFromCharacter(humanoid.Parent)
-        applyChairSkin(seatedPlayer, seat.Parent)
-    end
-    seat:GetPropertyChangedSignal("Occupant"):Connect(refreshColor)
-    refreshColor()
+	local function refreshColor()
+		local humanoid = seat.Occupant
+		local seatedPlayer = humanoid and Players:GetPlayerFromCharacter(humanoid.Parent)
+		applyChairSkin(seatedPlayer, seat.Parent)
+	end
+	seat:GetPropertyChangedSignal("Occupant"):Connect(refreshColor)
+	refreshColor()
 end
 
 local pairs = {}
@@ -610,6 +609,7 @@ for _, seat1 in ipairs(seats) do
 end
 
 local activeGames = {}
+local pendingQuestions = {}
 
 local function randomPlayerPair()
 
@@ -865,9 +865,9 @@ local function finishGame(
 
 	pair.finished = true
 
-	-- 50 CHF an den Gewinner geben
+	-- Give 50 CHF to the winner
 	if winner:FindFirstChild("leaderstats") and winner.leaderstats:FindFirstChild("Cash") then
-		winner.leaderstats.Cash.Value = winner.leaderstats.Cash.Value + 50
+		winner.leaderstats.Cash.Value += 50
 	end
 
 
@@ -899,6 +899,8 @@ local function finishGame(
 		pair.humanoid2
 	)
 
+	pendingQuestions[pair.player1] = nil
+	pendingQuestions[pair.player2] = nil
 	activeGames[pair.player1] = nil
 	activeGames[pair.player2] = nil
 
@@ -1019,6 +1021,9 @@ local function setupPair(pair)
 				activeGames[player2] =
 					pair
 
+				pendingQuestions[player1] = nil
+				pendingQuestions[player2] = nil
+
 				lockPlayer(
 					pair,
 					humanoid1,
@@ -1031,7 +1036,7 @@ local function setupPair(pair)
 					seat2
 				)
 
-				-- gekaufte Stuhl-Skins anwenden
+				-- Apply purchased chair skins
 				applyChairSkin(player1, seat1.Parent)
 				applyChairSkin(player2, seat2.Parent)
 
@@ -1099,36 +1104,46 @@ actionEvent.OnServerEvent:Connect(
 		end
 
 		if action == "QUESTION" then
-
-			local filtered =
-				filterText(
-					value,
-					player,
-					opponent
-				)
-
-			if filtered then
-
-				chairEvent:FireClient(
-					opponent,
-					"OPPONENT_QUESTION",
-					filtered
-				)
-
-			end
-
-		elseif action == "ANSWER" then
-
-			if value ~= "YES"
-				and value ~= "NO" then
+			if typeof(value) ~= "string" or value:match("^%s*$") then
 				return
 			end
 
-			chairEvent:FireClient(
-				opponent,
-				"OPPONENT_ANSWER",
-				value
-			)
+			local filtered = filterText(value, player, opponent)
+			if not filtered then
+				return
+			end
+
+			pendingQuestions[opponent] = (pendingQuestions[opponent] or 0) + 1
+			chairEvent:FireClient(opponent, "OPPONENT_QUESTION", filtered)
+
+		elseif action == "ANSWER" then
+			if typeof(value) ~= "string" or value:match("^%s*$") then
+				return
+			end
+
+			local questionNumber = pendingQuestions[player]
+			if not questionNumber then
+				chairEvent:FireClient(player, "ANSWER_ERROR", "No question to answer yet.")
+				return
+			end
+
+			local filtered = filterText(value, player, opponent)
+			if not filtered then
+				chairEvent:FireClient(player, "ANSWER_ERROR", "Your answer could not be sent.")
+				return
+			end
+
+			if not pair.started or pair.finished or activeGames[player] ~= pair then
+				return
+			end
+			if pendingQuestions[player] ~= questionNumber then
+				chairEvent:FireClient(player, "ANSWER_ERROR", "A newer question arrived. Please answer that one.")
+				return
+			end
+
+			pendingQuestions[player] = nil
+			chairEvent:FireClient(opponent, "OPPONENT_ANSWER", filtered)
+			chairEvent:FireClient(player, "ANSWER_SENT")
 
 		elseif action == "GUESS" then
 

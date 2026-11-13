@@ -676,3 +676,31 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 	end
 
 end)
+
+-- Shop-System 
+local shopEvent = ReplicatedStorage:WaitForChild("ShopEvent")
+
+item1.MouseButton1Click:Connect(function()
+	shopEvent:FireServer("BUY", "Item 1")
+end)
+
+item2.MouseButton1Click:Connect(function()
+	shopEvent:FireServer("BUY", "Item 2")
+end)
+
+-- Automatische Geld-Aktualisierung im UI
+task.spawn(function()
+	local leaderstats = player:WaitForChild("leaderstats")
+	local cashValue = leaderstats:WaitForChild("Cash")
+	
+	local function updateCash()
+		cash.Text = "Cash: $" .. cashValue.Value
+		shopCash.Text = "Cash: $" .. cashValue.Value
+	end
+	
+	
+	updateCash()
+	
+	
+	cashValue.Changed:Connect(updateCash)
+end)
