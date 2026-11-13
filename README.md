@@ -114,5 +114,22 @@ Für das dezentral a. Paket habe ich mit hilfe von Mina alles auf eine Sprache g
 Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert, sodass sie besser zu unseren Spielerdaten passen.
 
 ## 19.11
-Code in mehrere Dateien verteilen um merge konlfikte zu vermeiden
-Neue objekte als stuhl -> sitz funktion??
+**Nena**
+- [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen)
+- [ ]
+- [ ]
+  
+**Maja**
+- [ ] Code in mehrere Dateien verteilen, da sonst merge konlflikte entstehen
+- [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen)
+- [ ]
+
+**Mina**
+- [ ] 
+- [ ]
+- [ ]
+
+**Joshua**
+- [ ]
+- [ ]
+- [ ]
