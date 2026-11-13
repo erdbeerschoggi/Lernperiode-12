@@ -90,14 +90,14 @@ Ich habe zusammen mit Mina am neuen Fragensystem gearbeitet. Wir haben die vorge
 **Nena**
 - [x] Austellung von den Stühlen erstellen, sodass man sieht wie die stühle aussehen vor dem einkaufen
 - [ ] Designs von Stühlen ausbauen
-- [ ] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
+- [x] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
 
 Wir haben den Shop um eine drehbare 3D-Vorschau erweitert, damit man die Stühle vor dem Kauf ansehen kann. Die Vorschau ist nur im Shop sichtbar
 
 **Maja**
 - [x] Alles auf eine Sprache einstellen (Alles nur auf English)
 - [ ] Designs von Stühlen ausbauen
-- [ ] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
+- [x] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
 
 Für das dezentral a. Paket habe ich mit hilfe von Mina alles auf eine Sprache gewechselt, und zwar auf Englisch. Dann haben ich und Nena zusammen gemerkt, dass Merge-Konflikte entstehen, da wir alle nur an 3 Dateien arbeiten. Durch diese Merge-Konflikte haben wir gemerkt, dass es sinnvoll wäre, den Code auf verschiedene Dateien zu verteilen, um diese Merge-Konflikte zu vermeiden. Dann habe ich noch währenddessen mit Nena uns ein wenig Gedanken gemacht, wie wir die Designs der Stühle ausbauen möchten.
 
@@ -115,21 +115,21 @@ Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert
 
 ## 19.11
 **Nena**
-- [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen)
-- [ ]
-- [ ]
+- [ ] Designs von Stühlen ausbauen
+- [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen), sodass man z.b. auf einem Fisch hocken kann.
+- [ ] 
   
 **Maja**
-- [ ] Code in mehrere Dateien verteilen, da sonst merge konlflikte entstehen
-- [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen)
-- [ ]
+- [ ] Code in mehrere Dateien verteilen, da sonst merge konflikte entstehen
+- [ ] Designs von Stühlen ausbauen
+- [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen), sodass man z.b. auf einem Fisch hocken kann.
 
 **Mina**
-- [ ] 
-- [ ]
+- [ ] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
+- [ ] Wett funktion hinzufügen (Ein Spieler kann z.b. 10 CHF wetten dass er gewinnt
 - [ ]
 
 **Joshua**
-- [ ]
-- [ ]
-- [ ]
+- [ ] Mehr Fussball Spieler Daten hinzufügen
+- [ ] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
+- [ ] Fussball Spieler in Levels nach schwierigkeit einteilen.
