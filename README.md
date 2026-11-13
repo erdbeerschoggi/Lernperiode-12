@@ -100,6 +100,7 @@ Wir haben den Shop um eine drehbare 3D-Vorschau erweitert, damit man die Stühle
 - [x] Andere Gegenstände in unseren Shop hinzufügen (Skins, Accessories,....)
 
 Für das dezentral a. Paket habe ich mit hilfe von Mina alles auf eine Sprache gewechselt, und zwar auf Englisch. Dann haben ich und Nena zusammen gemerkt, dass Merge-Konflikte entstehen, da wir alle nur an 3 Dateien arbeiten. Durch diese Merge-Konflikte haben wir gemerkt, dass es sinnvoll wäre, den Code auf verschiedene Dateien zu verteilen, um diese Merge-Konflikte zu vermeiden. Dann habe ich noch währenddessen mit Nena uns ein wenig Gedanken gemacht, wie wir die Designs der Stühle ausbauen möchten.
+Dann habe ich mit Nena andere Gegenstände in unser Shop hinzugefügt (z.B. eine Krone). Heute konnten wir nicht so gut vorankommen, da durch unsere Branch aufteilung und einen Force push wir Code "verloren" haben und es dauerte eine Weile bis wir diesen Code wieder vorhanden hatten.
 
 **Mina**
 - [x] Alles auf eine Sprache einstellen (Alles nur auf English)
