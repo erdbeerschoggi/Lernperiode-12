@@ -75,10 +75,14 @@ Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusamm
 - [ ] Die Ja- und Nein-Buttons entfernen und stattdessen ein Textfeld für Antworten machen
 - [ ] Das Spiel an das neue Frage- und Antwortsystem anpassen
 
+Ich habe das bisherige Fragensystem überarbeitet und vorgefertigte Fragen eingebaut, die man während dem Spiel auswählen kann. Ausserdem habe ich die Ja- und Nein-Buttons entfernt und durch ein Textfeld ersetzt, damit man eigene Antworten schreiben kann. Danach habe ich den Spielablauf an das neue System angepasst.
+
 **Joshua**
 - [ ] Vorgefertigte Fragen erstellen und ins Spiel einbauen
 - [ ] Die Antworten zwischen den beiden Spielern über das Textfeld anzeigen
 - [ ] Zusammen mit Mina das neue Fragensystem testen und verbessern
+
+Ich habe zusammen mit Mina am neuen Fragensystem gearbeitet. Wir haben die vorgefertigten Fragen eingebaut und dafür gesorgt, dass die Antworten beim anderen Spieler angezeigt werden. Danach haben wir das neue System nochmals überprüft und angepasst.
 
 
 ## 12.11
@@ -98,7 +102,7 @@ Wir haben den Shop um eine drehbare 3D-Vorschau erweitert, damit man die Stühle
 Für das dezentral a. Paket habe ich mit hilfe von Mina alles auf eine Sprache gewechselt, und zwar auf Englisch. Dann haben ich und Nena zusammen gemerkt, dass Merge-Konflikte entstehen, da wir alle nur an 3 Dateien arbeiten. Durch diese Merge-Konflikte haben wir gemerkt, dass es sinnvoll wäre, den Code auf verschiedene Dateien zu verteilen, um diese Merge-Konflikte zu vermeiden. Dann habe ich noch währenddessen mit Nena uns ein wenig Gedanken gemacht, wie wir die Designs der Stühle ausbauen möchten.
 
 **Mina**
-- [ ] Alles auf eine Sprache einstellen (Alles nur auf English)
+- [x] Alles auf eine Sprache einstellen (Alles nur auf English)
 - [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
 - [ ] Mehr Fragen hinzufügen beim Fussball Spieler raten
 
