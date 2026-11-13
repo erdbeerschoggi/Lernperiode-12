@@ -1,5 +1,6 @@
 # Lernperiode-12
-Beschreibung des Projekts wäre gut!!!
+In diesem Projekt entwickeln wir ein interaktives Rätselspiel auf Roblox, bei dem die Spieler herausfinden müssen, welchen berühmten Fußballspieler sie sind. Das Spiel beginnt auf einer zentralen Plattform, die mit verschiedenen Tischen und Stühlen ausgestattet ist. Sobald sich zwei Personen an einem Tisch gegenübersitzen, startet die Runde automatisch.
+Die Besonderheit der Spielmechanik ist dass jeder nur die Fußballer-Identität seines Gegners sieht, kennt aber seine eigene nicht. Über ein Menü mit vorgefertigten Fragen kann man sein Gegenüber ausfragen, um durch das Ausschlussverfahren die eigene Identität zu erraten. Wer zuerst richtig liegt, gewinnt die Runde und erhält als Belohnung In-Game-Geld. Mit diesem Verdienst können im integrierten Shop anschließend neue Stuhldesigns und weitere Gegenstände freigeschaltet werden.
 
 # Rollen Aufteilung
 - CEO: Mina
