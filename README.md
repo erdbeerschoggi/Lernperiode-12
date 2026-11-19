@@ -122,7 +122,7 @@ Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert
 - [ ] Tutorial einbauen: Eine kurze Anleitung zu Spielstart, Fragen und Vermutungen erstellen. Spieler sollen sie über einen Hilfe-Button öffnen und wieder schliessen können.
   
 **Maja**
-- [ ]Shop-Code aufteilen: Die Shop-Oberfläche, Kaufverarbeitung und Artikeldaten in getrennten Dateien organisieren. Dadurch könnt ihr Änderungen leichter unabhängig voneinander bearbeiten.
+- [ ] Shop-Code aufteilen: Die Shop-Oberfläche, Kaufverarbeitung und Artikeldaten in getrennten Dateien organisieren. Dadurch könnt ihr Änderungen leichter unabhängig voneinander bearbeiten.
 - [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden.
 - [ ] Einen Fisch als Sitzobjekt erstellen: Ein Fischmodell mit einer Sitzfunktion ergänzen. Prüfen, ob sich Spieler darauf setzen und wieder aufstehen können.
 
