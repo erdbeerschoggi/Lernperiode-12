@@ -137,4 +137,4 @@ Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert
 - [ ] Fussball Spieler in Levels nach schwierigkeit einteilen.
 
 
-CUSTOM QUESTION FUNKTION
+CUSTOM QUESTION FUNKTION, UI AUSBESSERN DA VIELE SCHWIERIGKEITEN HATTEN BEIM GEBRAUCH UNSERER APP, TUTORIAL EINBAUEN???
