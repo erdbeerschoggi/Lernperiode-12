@@ -117,14 +117,14 @@ Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert
 
 ## 20.11
 **Nena**
-- [ ] Designs von Stühlen ausbauen
-- [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen), sodass man z.b. auf einem Fisch hocken kann.
-- [ ] Funktion einbauen wie man Geld vom Spieler zu Spieler übergeben kann (Wettfunktion)
+- [ ] Eigene Fragen senden: Ein Eingabefeld mit einem Senden-Button ergänzen. Die Frage soll dem Mitspieler angezeigt werden und mit Ja oder Nein beantwortet werden können.
+- [ ] Benutzeroberfläche verbessern: Buttons, Beschriftungen und Eingabefelder übersichtlicher gestalten. Dabei die Schwierigkeiten berücksichtigen, die beim Ausprobieren des Spiels aufgetreten sind.
+- [ ] Tutorial einbauen: Eine kurze Anleitung zu Spielstart, Fragen und Vermutungen erstellen. Spieler sollen sie über einen Hilfe-Button öffnen und wieder schliessen können.
   
 **Maja**
-- [ ] Code in mehrere Dateien verteilen, da sonst merge konflikte entstehen 
-- [ ] Designs von Stühlen ausbauen
-- [ ] Andere Objekte als Stuhl erstellen (Sitz funktion hinzufügen), sodass man z.b. auf einem Fisch hocken kann.
+- [ ]Shop-Code aufteilen: Die Shop-Oberfläche, Kaufverarbeitung und Artikeldaten in getrennten Dateien organisieren. Dadurch könnt ihr Änderungen leichter unabhängig voneinander bearbeiten.
+- [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden.
+- [ ] Einen Fisch als Sitzobjekt erstellen: Ein Fischmodell mit einer Sitzfunktion ergänzen. Prüfen, ob sich Spieler darauf setzen und wieder aufstehen können.
 
 **Mina**
 - [ ] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
