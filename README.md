@@ -132,7 +132,7 @@ Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert
 - [ ] Funktion einbauen zum entscheiden ob man überhaupt in der Runde wetten möchte
 
 **Joshua**
-- [ ] Mehr Fussball Spieler Daten hinzufügen
+- [X] Mehr Fussball Spieler Daten hinzufügen
 - [ ] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
 - [ ] Fussball Spieler in Levels nach schwierigkeit einteilen.
 
