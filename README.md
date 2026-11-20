@@ -142,3 +142,27 @@ Für das  dezentral a. Paket habe ich die eine riesie datei mit der spiellogik, 
 
 
 CUSTOM QUESTION FUNKTION, UI AUSBESSERN DA VIELE SCHWIERIGKEITEN HATTEN BEIM GEBRAUCH UNSERER APP, TUTORIAL EINBAUEN???
+
+
+## 27.11
+**Nena**
+- [ ] 
+- [ ] 
+- [ ] 
+
+
+**Maja**
+- [ ] Dem Fisch stuhl die funktion zum spiel starten hinzuzufügen
+- [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden.
+- [ ] 
+
+
+**Mina**
+- [ ]
+- [ ] 
+- [ ] 
+
+**Joshua**
+- [ ] 
+- [ ] 
+- [ ] 
