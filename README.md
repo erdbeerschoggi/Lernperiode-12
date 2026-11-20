@@ -143,8 +143,6 @@ Für das  dezentral a. Paket habe ich die eine riesie datei mit der spiellogik, 
 Für das dezentral a. Arbeitspaket habe ich mir 40 neue Fussballer mit Daten herausgesucht, dass man verschiedene Schwierigkeitstufen im Spiel einbauen kann. Danach habe ich alle 60 Fussballer in die 3 verschiedene Schwierigkeitsstufen (Easy, Intermediate und Hard) eingeteilt, dass es jetzt überall 20 Fussballer gibt. Zum Schluss habe ich die Schwierigkeitsstufen ins Spiel hinzugefügt. Wenn man jetzt eine Runde startet, kann man die Schwierigkeit der Runde auswählen und beide Spieler bekommen einen Fussballer aus der ausgewählet schwierigkeit zugelost.
 
 
-CUSTOM QUESTION FUNKTION, UI AUSBESSERN DA VIELE SCHWIERIGKEITEN HATTEN BEIM GEBRAUCH UNSERER APP, TUTORIAL EINBAUEN???
-
 
 ## 27.11
 **Nena**
