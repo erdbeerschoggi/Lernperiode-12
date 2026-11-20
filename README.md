@@ -72,16 +72,16 @@ Ich habe den bestehenden Geld- und Shopcode von Maja erweitert und die Stuhlfarb
 Heute habe ich das Geld- und Shop-System für unser Spiel fertiggestellt. Zusammen mit Nena habe ich zuerst programmiert, dass der Gewinner nach einer Runde automatisch 50 CHF bekommt. Danach habe ich den Shop gemacht, damit man sich mit diesem Geld neue Stühle kaufen kann. Zum Schluss habe ich noch dafür gesorgt, dass die Käufe gespeichert werden, man behält die gekauften Stühle also und kann sie später jederzeit wieder kostenlos ausrüsten.
 
 **Mina**
-- [ ] Das bisherige Fragensystem überarbeiten und vorgefertigte Fragen einbauen
-- [ ] Die Ja- und Nein-Buttons entfernen und stattdessen ein Textfeld für Antworten machen
-- [ ] Das Spiel an das neue Frage- und Antwortsystem anpassen
+- [x] Das bisherige Fragensystem überarbeiten und vorgefertigte Fragen einbauen
+- [x] Die Ja- und Nein-Buttons entfernen und stattdessen ein Textfeld für Antworten machen
+- [x] Das Spiel an das neue Frage- und Antwortsystem anpassen
 
 Ich habe das bisherige Fragensystem überarbeitet und vorgefertigte Fragen eingebaut, die man während dem Spiel auswählen kann. Ausserdem habe ich die Ja- und Nein-Buttons entfernt und durch ein Textfeld ersetzt, damit man eigene Antworten schreiben kann. Danach habe ich den Spielablauf an das neue System angepasst.
 
 **Joshua**
-- [ ] Vorgefertigte Fragen erstellen und ins Spiel einbauen
-- [ ] Die Antworten zwischen den beiden Spielern über das Textfeld anzeigen
-- [ ] Zusammen mit Mina das neue Fragensystem testen und verbessern
+- [x] Vorgefertigte Fragen erstellen und ins Spiel einbauen
+- [x] Die Antworten zwischen den beiden Spielern über das Textfeld anzeigen
+- [x] Zusammen mit Mina das neue Fragensystem testen und verbessern
 
 Ich habe zusammen mit Mina am neuen Fragensystem gearbeitet. Wir haben die vorgefertigten Fragen eingebaut und dafür gesorgt, dass die Antworten beim anderen Spieler angezeigt werden. Danach haben wir das neue System nochmals überprüft und angepasst.
 
@@ -108,12 +108,14 @@ Dann habe ich mit Nena andere Gegenstände in unser Shop hinzugefügt (z.B. eine
 - [x] Nach anderen kleinen Problemen suchen, die man verbessern sollte
 - [x] Mehr Fragen hinzufügen beim Fussball Spieler raten
 
+Ich habe zusammen mit Maja dafür gesorgt, dass das ganze Spiel auf Englisch eingestellt ist. Danach habe ich nach kleineren Problemen gesucht, die man noch verbessern könnte. Ausserdem habe ich weitere vorgefertigte Fragen zum Fussballspieler-Raten hinzugefügt, damit die Spieler mehr Auswahl haben.
+
 **Joshua**
 - [X] Fragen anpassen zu den Informationen die von den Fussball Spielern vorhanden sind
 - [x] Die funktion von einem "rematch" einbauen
 - [x] Nach anderen kleinen Problemen suchen, die man verbessern sollte
 
-Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert, sodass sie besser zu unseren Spielerdaten passen.
+Ich habe die vorgefertigten Fragen überarbeitet und erweitert, sodass sie besser zu unseren Fussballspielerdaten passen. Ausserdem habe ich eine Rematch-Funktion eingebaut, bei der beide Spieler nach einer Runde entscheiden können, ob sie nochmals gegeneinander spielen möchten. Danach habe ich noch nach kleineren Problemen gesucht und Verbesserungen vorgenommen.
 
 ## 20.11
 **Nena**
