@@ -720,9 +720,250 @@ local function restoreCamera()
 
 end
 
+-- ===== NEU: SCHWIERIGKEITS-AUSWAHL (UI) =====
+local DIFFICULTY_OPTIONS = {
+	{Id = "easy", Text = "EASY", Color = Color3.fromRGB(65, 195, 110)},
+	{Id = "intermediate", Text = "INTERMEDIATE", Color = Color3.fromRGB(245, 195, 55)},
+	{Id = "hard", Text = "HARD", Color = Color3.fromRGB(255, 80, 80)},
+}
+
+local difficultyFrame = Instance.new("Frame")
+difficultyFrame.Name = "DifficultyFrame"
+difficultyFrame.Size = UDim2.fromScale(0.46, 0.42)
+difficultyFrame.Position = UDim2.fromScale(0.5, 0.5)
+difficultyFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+difficultyFrame.BackgroundColor3 = Color3.fromRGB(15, 20, 28)
+difficultyFrame.BackgroundTransparency = 0.1
+difficultyFrame.Visible = false
+difficultyFrame.ZIndex = 50
+difficultyFrame.Parent = gui
+rounded(difficultyFrame, 20)
+outline(difficultyFrame)
+
+local difficultyTitle = Instance.new("TextLabel")
+difficultyTitle.Size = UDim2.fromScale(0.9, 0.16)
+difficultyTitle.Position = UDim2.fromScale(0.05, 0.04)
+difficultyTitle.BackgroundTransparency = 1
+difficultyTitle.Text = "CHOOSE DIFFICULTY"
+difficultyTitle.TextColor3 = Color3.new(1, 1, 1)
+difficultyTitle.TextScaled = true
+difficultyTitle.Font = Enum.Font.GothamBold
+difficultyTitle.ZIndex = 51
+difficultyTitle.Parent = difficultyFrame
+
+local difficultyStatus = Instance.new("TextLabel")
+difficultyStatus.Size = UDim2.fromScale(0.9, 0.2)
+difficultyStatus.Position = UDim2.fromScale(0.05, 0.76)
+difficultyStatus.BackgroundTransparency = 1
+difficultyStatus.Text = "Pick a difficulty."
+difficultyStatus.TextColor3 = Color3.fromRGB(220, 220, 220)
+difficultyStatus.TextSize = 17
+difficultyStatus.TextWrapped = true
+difficultyStatus.Font = Enum.Font.GothamMedium
+difficultyStatus.ZIndex = 51
+difficultyStatus.Parent = difficultyFrame
+
+local difficultyButtons = {}
+
+for index, option in ipairs(DIFFICULTY_OPTIONS) do
+	local button = Instance.new("TextButton")
+	button.Name = "Difficulty_" .. option.Id
+	button.Size = UDim2.fromScale(0.29, 0.46)
+	button.Position = UDim2.fromScale(0.04 + (index - 1) * 0.325, 0.25)
+	button.BackgroundColor3 = option.Color
+	button.Text = option.Text
+	button.TextColor3 = Color3.fromRGB(10, 15, 25)
+	button.TextScaled = true
+	button.TextWrapped = true
+	button.Font = Enum.Font.GothamBold
+	button.ZIndex = 51
+	button.Parent = difficultyFrame
+	rounded(button, 12)
+
+	local stroke = Instance.new("UIStroke")
+	stroke.Color = Color3.new(1, 1, 1)
+	stroke.Thickness = 0
+	stroke.Parent = button
+
+	difficultyButtons[option.Id] = {Button = button, Stroke = stroke, Text = option.Text}
+
+	button.Activated:Connect(function()
+		-- Der Server entscheidet, ob die Wahl gueltig ist.
+		actionEvent:FireServer("DIFFICULTY", option.Id)
+	end)
+end
+
+local function updateDifficultyUI(data)
+	for id, entry in pairs(difficultyButtons) do
+		local tags = {}
+		if data.mine == id then table.insert(tags, "You") end
+		if data.opponent == id then table.insert(tags, "Opponent") end
+
+		if #tags > 0 then
+			entry.Button.Text = entry.Text .. "\n(" .. table.concat(tags, " + ") .. ")"
+		else
+			entry.Button.Text = entry.Text
+		end
+		entry.Stroke.Thickness = (data.mine == id) and 4 or 0
+	end
+
+	local timeLeft = tostring(data.timeLeft or 0)
+
+	if not data.mine and not data.opponent then
+		difficultyStatus.Text = "Pick a difficulty. (" .. timeLeft .. "s)"
+	elseif data.mine and data.opponent and data.mine == data.opponent then
+		difficultyStatus.Text = "You both chose the same difficulty!"
+	elseif data.mine and not data.opponent then
+		difficultyStatus.Text = "Waiting for your opponent... (" .. timeLeft .. "s)"
+	else
+		difficultyStatus.Text = "Agree on one difficulty! If not, one of the choices is picked randomly. ("
+			.. timeLeft .. "s)"
+	end
+end
+
+-- Freiwilliger Bonus nach der Schwierigkeitswahl.
+local bonusFrame = Instance.new("Frame")
+bonusFrame.Name = "BonusFrame"
+bonusFrame.Size = UDim2.fromScale(0.46, 0.40)
+bonusFrame.Position = UDim2.fromScale(0.5, 0.5)
+bonusFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+bonusFrame.BackgroundColor3 = Color3.fromRGB(15, 20, 28)
+bonusFrame.BackgroundTransparency = 0.1
+bonusFrame.Visible = false
+bonusFrame.ZIndex = 52
+bonusFrame.Parent = gui
+rounded(bonusFrame, 20)
+outline(bonusFrame)
+
+local bonusTitle = Instance.new("TextLabel")
+bonusTitle.Size = UDim2.fromScale(0.9, 0.16)
+bonusTitle.Position = UDim2.fromScale(0.05, 0.05)
+bonusTitle.BackgroundTransparency = 1
+bonusTitle.Text = "OPTIONAL BONUS ROUND"
+bonusTitle.TextColor3 = Color3.new(1, 1, 1)
+bonusTitle.TextScaled = true
+bonusTitle.Font = Enum.Font.GothamBold
+bonusTitle.ZIndex = 53
+bonusTitle.Parent = bonusFrame
+
+local bonusDescription = Instance.new("TextLabel")
+bonusDescription.Size = UDim2.fromScale(0.9, 0.2)
+bonusDescription.Position = UDim2.fromScale(0.05, 0.23)
+bonusDescription.BackgroundTransparency = 1
+bonusDescription.Text = "If BOTH choose YES, the winner gets +25 CHF. No stakes or losses."
+bonusDescription.TextColor3 = Color3.fromRGB(220, 225, 235)
+bonusDescription.TextSize = 16
+bonusDescription.TextWrapped = true
+bonusDescription.Font = Enum.Font.GothamMedium
+bonusDescription.ZIndex = 53
+bonusDescription.Parent = bonusFrame
+
+local bonusYes = Instance.new("TextButton")
+bonusYes.Name = "BonusYes"
+bonusYes.Size = UDim2.fromScale(0.42, 0.22)
+bonusYes.Position = UDim2.fromScale(0.05, 0.49)
+bonusYes.BackgroundColor3 = Color3.fromRGB(65, 195, 110)
+bonusYes.Text = "YES"
+bonusYes.TextColor3 = Color3.fromRGB(10, 15, 25)
+bonusYes.TextScaled = true
+bonusYes.Font = Enum.Font.GothamBold
+bonusYes.ZIndex = 53
+bonusYes.Parent = bonusFrame
+rounded(bonusYes, 12)
+
+local bonusNo = Instance.new("TextButton")
+bonusNo.Name = "BonusNo"
+bonusNo.Size = UDim2.fromScale(0.42, 0.22)
+bonusNo.Position = UDim2.fromScale(0.53, 0.49)
+bonusNo.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+bonusNo.Text = "NO"
+bonusNo.TextColor3 = Color3.fromRGB(10, 15, 25)
+bonusNo.TextScaled = true
+bonusNo.Font = Enum.Font.GothamBold
+bonusNo.ZIndex = 53
+bonusNo.Parent = bonusFrame
+rounded(bonusNo, 12)
+
+local bonusStatus = Instance.new("TextLabel")
+bonusStatus.Size = UDim2.fromScale(0.9, 0.19)
+bonusStatus.Position = UDim2.fromScale(0.05, 0.76)
+bonusStatus.BackgroundTransparency = 1
+bonusStatus.Text = "Choose YES or NO."
+bonusStatus.TextColor3 = Color3.fromRGB(220, 225, 235)
+bonusStatus.TextSize = 16
+bonusStatus.TextWrapped = true
+bonusStatus.Font = Enum.Font.GothamMedium
+bonusStatus.ZIndex = 53
+bonusStatus.Parent = bonusFrame
+
+local bonusVoted = false
+local function sendBonusVote(vote)
+	if bonusVoted or not bonusFrame.Visible then return end
+	bonusVoted = true
+	bonusStatus.Text = vote and "You chose YES. Waiting for opponent..." or "You chose NO."
+	actionEvent:FireServer("BONUS_VOTE", vote)
+end
+bonusYes.Activated:Connect(function() sendBonusVote(true) end)
+bonusNo.Activated:Connect(function() sendBonusVote(false) end)
+
 chairEvent.OnClientEvent:Connect(function(status, value)
 
-	if status == "WAITING" then
+	if status == "DIFFICULTY_PROMPT" then
+
+		bonusFrame.Visible = false
+		-- value = Name des Gegners
+		gameStarted = false
+		rematchFrame.Visible = false
+		waitingText.Visible = false
+		resultText.Visible = false
+		gameFrame.Visible = false
+
+		freezeCamera(value) -- gibt auch die Maus frei, damit man klicken kann
+
+		updateDifficultyUI({timeLeft = 30})
+		difficultyFrame.Visible = true
+
+	elseif status == "DIFFICULTY_UPDATE" then
+
+		updateDifficultyUI(value)
+
+	elseif status == "DIFFICULTY_FINAL" then
+
+		for id, entry in pairs(difficultyButtons) do
+			entry.Stroke.Thickness = (id == value) and 4 or 0
+		end
+		difficultyStatus.Text = "Difficulty: " .. string.upper(tostring(value))
+
+	elseif status == "BONUS_PROMPT" then
+
+		difficultyFrame.Visible = false
+		bonusVoted = false
+		bonusStatus.Text = "Choose YES or NO. (" .. tostring(value) .. "s)"
+		bonusFrame.Visible = true
+
+	elseif status == "BONUS_UPDATE" then
+
+		if bonusFrame.Visible and not bonusVoted then
+			bonusStatus.Text = "Choose YES or NO. (" .. tostring(value.timeLeft) .. "s)"
+		end
+
+	elseif status == "BONUS_RESULT" then
+
+		bonusStatus.Text = value and "BONUS ON! Winner receives +25 CHF."
+			or "BONUS OFF. Normal rewards only."
+		bonusVoted = true
+
+	elseif status == "SELECT_CANCEL" then
+
+		bonusFrame.Visible = false
+		difficultyFrame.Visible = false
+		restoreCamera()
+		resultText.Text = tostring(value)
+		resultText.Visible = true
+		task.wait(2)
+		resultText.Visible = false
+
+	elseif status == "WAITING" then
 
 		waitingText.Text =
 			"Waiting for Player 2..."
@@ -733,6 +974,8 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 	elseif status == "START" then
 
 		gameStarted = true
+		bonusFrame.Visible = false
+		difficultyFrame.Visible = false -- NEU
 		rematchFrame.Visible = false
 		waitingText.Text =
 			"GAME STARTED!"
@@ -821,6 +1064,7 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 
 	elseif status == "WIN" then
 
+		bonusFrame.Visible = false
 		gameFrame.Visible =
 			false
 
@@ -840,6 +1084,7 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 
 	elseif status == "LOSE" then
 
+		bonusFrame.Visible = false
 		gameFrame.Visible =
 			false
 
@@ -859,23 +1104,23 @@ chairEvent.OnClientEvent:Connect(function(status, value)
 
 	elseif status == "REMATCH_PROMPT" then
 
-	rematchVoted = false
-	rematchYes.BackgroundColor3 = Color3.fromRGB(65, 195, 110)
-	rematchYes.Text = "YES (" .. tostring(value) .. "/2)"
-	rematchFrame.Visible = true
+		rematchVoted = false
+		rematchYes.BackgroundColor3 = Color3.fromRGB(65, 195, 110)
+		rematchYes.Text = "YES (" .. tostring(value) .. "/2)"
+		rematchFrame.Visible = true
 
 	elseif status == "REMATCH_UPDATE" then
 
-	rematchYes.Text = "YES (" .. tostring(value) .. "/2)"
+		rematchYes.Text = "YES (" .. tostring(value) .. "/2)"
 
 	elseif status == "REMATCH_END" then
 
-	rematchFrame.Visible = false
+		rematchFrame.Visible = false
 
-	resultText.Text = tostring(value)
-	resultText.Visible = true
-	task.wait(2)
-	resultText.Visible = false
+		resultText.Text = tostring(value)
+		resultText.Visible = true
+		task.wait(2)
+		resultText.Visible = false
 	end
 end)
 
@@ -925,5 +1170,5 @@ task.spawn(function()
 	inventory.ChildRemoved:Connect(updateShop)
 	equipped.Changed:Connect(updateShop)
 	updateShop()
-	
+
 end)

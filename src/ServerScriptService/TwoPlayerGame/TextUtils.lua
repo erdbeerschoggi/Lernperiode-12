@@ -8,18 +8,24 @@ local function normalize(text)
 	text =
 		tostring(text or "")
 
-	text = text:gsub("Ä", "a")
-	text = text:gsub("ä", "a")
-	text = text:gsub("Ö", "o")
-	text = text:gsub("ö", "o")
-	text = text:gsub("Ü", "u")
-	text = text:gsub("ü", "u")
-	text = text:gsub("É", "e")
-	text = text:gsub("é", "e")
-	text = text:gsub("È", "e")
-	text = text:gsub("è", "e")
-	text = text:gsub("Á", "a")
-	text = text:gsub("á", "a")
+	-- NEU: Akzente entfernen, damit z.B. "martinez", "leao" oder "calhanoglu" erkannt werden
+	local replacements = {
+		{"Ä", "a"}, {"ä", "a"}, {"Ö", "o"}, {"ö", "o"}, {"Ü", "u"}, {"ü", "u"},
+		{"É", "e"}, {"é", "e"}, {"È", "e"}, {"è", "e"}, {"Ê", "e"}, {"ê", "e"},
+		{"Á", "a"}, {"á", "a"}, {"À", "a"}, {"à", "a"}, {"Ã", "a"}, {"ã", "a"}, {"Â", "a"}, {"â", "a"},
+		{"Í", "i"}, {"í", "i"}, {"Ï", "i"}, {"ï", "i"}, {"İ", "i"}, {"ı", "i"},
+		{"Ó", "o"}, {"ó", "o"}, {"Ò", "o"}, {"ò", "o"}, {"Ô", "o"}, {"ô", "o"},
+		{"Ú", "u"}, {"ú", "u"},
+		{"Ñ", "n"}, {"ñ", "n"},
+		{"Ç", "c"}, {"ç", "c"},
+		{"Ğ", "g"}, {"ğ", "g"},
+		{"Ş", "s"}, {"ş", "s"},
+		{"%-", " "},
+	}
+
+	for _, pair in ipairs(replacements) do
+		text = string.gsub(text, pair[1], pair[2])
+	end
 
 	text =
 		string.lower(text)

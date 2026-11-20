@@ -116,13 +116,17 @@ local function getOwnFootballPlayer(player)
 
 end
 
-local function beginRound(pair, player1, player2, humanoid1, humanoid2)
+-- NEU: difficulty ("easy" / "intermediate" / "hard") kommt aus startSelection
+local function beginRound(pair, player1, player2, humanoid1, humanoid2, difficulty)
 
-	local football1, football2 = randomPlayerPair()
+	local football1, football2 = randomPlayerPair(difficulty)
 
 	pair.started = true
 	pair.finished = false
 	pair.rematchOpen = false
+	pair.selecting = false
+	pair.bonusSelecting = false
+	pair.difficulty = difficulty
 
 	pair.player1 = player1
 	pair.player2 = player2
@@ -137,8 +141,7 @@ local function beginRound(pair, player1, player2, humanoid1, humanoid2)
 	pendingQuestions[player1] = nil
 	pendingQuestions[player2] = nil
 
-	lockPlayer(pair, humanoid1, pair.seat1)
-	lockPlayer(pair, humanoid2, pair.seat2)
+	-- (lockPlayer wird jetzt schon in startSelection aufgerufen)
 
 	applyChairSkin(player1, pair.seat1.Parent)
 	applyChairSkin(player2, pair.seat2.Parent)
@@ -148,6 +151,223 @@ local function beginRound(pair, player1, player2, humanoid1, humanoid2)
 
 	chairEvent:FireClient(player1, "PLAYER_DATA", football2)
 	chairEvent:FireClient(player2, "PLAYER_DATA", football1)
+
+end
+
+-- ===== NEU: SCHWIERIGKEITS-AUSWAHL =====
+local SELECT_TIME = 10      -- Sekunden, die der andere nach der ersten Wahl hat
+local NO_CHOICE_TIME = 30   -- Wenn niemand waehlt: nach so vielen Sekunden zufaellige Stufe
+
+local function sendSelectionUpdate(pair, deadline)
+
+	local timeLeft = math.max(0, math.ceil(deadline - os.clock()))
+
+	for _, p in ipairs({pair.player1, pair.player2}) do
+		if p.Parent then
+			local opponent = (p == pair.player1) and pair.player2 or pair.player1
+			chairEvent:FireClient(p, "DIFFICULTY_UPDATE", {
+				mine = pair.choices[p],
+				opponent = pair.choices[opponent],
+				timeLeft = timeLeft,
+			})
+		end
+	end
+
+end
+
+local function abortSelection(pair, p1, p2, h1, h2)
+
+	pair.finished = true   -- beendet die lockPlayer-Schleifen
+	pair.selecting = false
+	pair.bonusSelecting = false
+	pair.bonusMode = false
+	pair.bonusVotes = nil
+
+	for _, p in ipairs({p1, p2}) do
+		if p.Parent then
+			chairEvent:FireClient(p, "SELECT_CANCEL", "Opponent left.")
+		end
+	end
+
+	unlockPlayer(pair, h1)
+	unlockPlayer(pair, h2)
+
+	activeGames[p1] = nil
+	activeGames[p2] = nil
+
+	task.wait(1)
+
+	pair.started = false
+	pair.finished = false
+	pair.rematchOpen = false
+	pair.player1 = nil
+	pair.player2 = nil
+	pair.humanoid1 = nil
+	pair.humanoid2 = nil
+	pair.playerData1 = nil
+	pair.playerData2 = nil
+	pair.choices = nil
+	pair.choiceDeadline = nil
+	pair.oldSettings = {}
+
+end
+
+-- Freiwilliger Bonus-Modus: kein Einsatz, kein Abzug, bei beidseitigem YES +25 CHF fuer den Sieger.
+local BONUS_TIME = 15
+local BONUS_REWARD = 25
+
+local function startBonusSelection(pair, player1, player2, humanoid1, humanoid2)
+	pair.bonusSelecting = true
+	pair.bonusMode = false
+	pair.bonusVotes = {}
+
+	chairEvent:FireClient(player1, "BONUS_PROMPT", BONUS_TIME)
+	chairEvent:FireClient(player2, "BONUS_PROMPT", BONUS_TIME)
+
+	local deadline = os.clock() + BONUS_TIME
+	local lastSecond = -1
+
+	while os.clock() < deadline do
+		if not player1.Parent or not player2.Parent
+			or not humanoid1.Parent or not humanoid2.Parent then
+			abortSelection(pair, player1, player2, humanoid1, humanoid2)
+			return false
+		end
+
+		local vote1 = pair.bonusVotes[player1]
+		local vote2 = pair.bonusVotes[player2]
+		if vote1 == false or vote2 == false or (vote1 == true and vote2 == true) then
+			break
+		end
+
+		local secondsLeft = math.max(0, math.ceil(deadline - os.clock()))
+		if secondsLeft ~= lastSecond then
+			lastSecond = secondsLeft
+			for _, p in ipairs({player1, player2}) do
+				local other = (p == player1) and player2 or player1
+				chairEvent:FireClient(p, "BONUS_UPDATE", {
+					mine = pair.bonusVotes[p],
+					opponent = pair.bonusVotes[other],
+					timeLeft = secondsLeft,
+				})
+			end
+		end
+		task.wait(0.2)
+	end
+
+	if not player1.Parent or not player2.Parent
+		or not humanoid1.Parent or not humanoid2.Parent then
+		abortSelection(pair, player1, player2, humanoid1, humanoid2)
+		return false
+	end
+
+	pair.bonusMode = pair.bonusVotes[player1] == true and pair.bonusVotes[player2] == true
+	chairEvent:FireClient(player1, "BONUS_RESULT", pair.bonusMode)
+	chairEvent:FireClient(player2, "BONUS_RESULT", pair.bonusMode)
+	task.wait(1.2)
+	if not player1.Parent or not player2.Parent
+		or not humanoid1.Parent or not humanoid2.Parent then
+		abortSelection(pair, player1, player2, humanoid1, humanoid2)
+		return false
+	end
+	return true
+end
+
+-- Beide Spieler waehlen eine Schwierigkeit. Sobald einer waehlt, laufen 10 Sekunden.
+-- Beide koennen beliebig oft wechseln. Gleiche Wahl -> sofort Start.
+-- Zeit um -> eine der beiden Wahlen wird zufaellig genommen.
+local function startSelection(pair, player1, player2, humanoid1, humanoid2)
+
+	pair.started = true
+	pair.finished = false
+	pair.rematchOpen = false
+	pair.selecting = true
+	pair.bonusSelecting = false
+	pair.bonusMode = false
+	pair.bonusVotes = nil
+	pair.choices = {}
+	pair.choiceDeadline = nil
+
+	pair.player1 = player1
+	pair.player2 = player2
+	pair.humanoid1 = humanoid1
+	pair.humanoid2 = humanoid2
+
+	activeGames[player1] = pair
+	activeGames[player2] = pair
+
+	pendingQuestions[player1] = nil
+	pendingQuestions[player2] = nil
+
+	lockPlayer(pair, humanoid1, pair.seat1)
+	lockPlayer(pair, humanoid2, pair.seat2)
+
+	chairEvent:FireClient(player1, "DIFFICULTY_PROMPT", player2.Name)
+	chairEvent:FireClient(player2, "DIFFICULTY_PROMPT", player1.Name)
+
+	local startTime = os.clock()
+	local lastSent = 0
+	local chosen = nil
+
+	while true do
+
+		if not player1.Parent or not player2.Parent
+			or not humanoid1.Parent or not humanoid2.Parent then
+			abortSelection(pair, player1, player2, humanoid1, humanoid2)
+			return
+		end
+
+		local c1 = pair.choices[player1]
+		local c2 = pair.choices[player2]
+
+		-- Beide haben das Gleiche gewaehlt -> fertig
+		if c1 and c1 == c2 then
+			chosen = c1
+			break
+		end
+
+		local deadline = pair.choiceDeadline or (startTime + NO_CHOICE_TIME)
+
+		-- Zeit abgelaufen
+		if os.clock() >= deadline then
+			if c1 and c2 then
+				chosen = (math.random(1, 2) == 1) and c1 or c2
+			else
+				chosen = c1 or c2
+					or FootballPlayers.difficulties[math.random(1, #FootballPlayers.difficulties)]
+			end
+			break
+		end
+
+		-- ca. 1x pro Sekunde den Countdown an die Clients schicken
+		if os.clock() - lastSent >= 1 then
+			lastSent = os.clock()
+			sendSelectionUpdate(pair, deadline)
+		end
+
+		task.wait(0.1)
+
+	end
+
+	pair.selecting = false
+	pair.bonusSelecting = true
+
+	chairEvent:FireClient(player1, "DIFFICULTY_FINAL", chosen)
+	chairEvent:FireClient(player2, "DIFFICULTY_FINAL", chosen)
+
+	task.wait(1.5)
+
+	if not player1.Parent or not player2.Parent
+		or not humanoid1.Parent or not humanoid2.Parent then
+		abortSelection(pair, player1, player2, humanoid1, humanoid2)
+		return
+	end
+
+	if not startBonusSelection(pair, player1, player2, humanoid1, humanoid2) then
+		return
+	end
+
+	beginRound(pair, player1, player2, humanoid1, humanoid2, chosen)
 
 end
 
@@ -164,6 +384,9 @@ local function finishGame(pair, winner, loser)
 	-- Give 50 CHF to the winner
 	if winner:FindFirstChild("leaderstats") and winner.leaderstats:FindFirstChild("Cash") then
 		winner.leaderstats.Cash.Value += 50
+		if pair.bonusMode then
+			winner.leaderstats.Cash.Value += BONUS_REWARD
+		end
 	end
 
 	chairEvent:FireClient(winner, "WIN",
@@ -217,7 +440,7 @@ local function finishGame(pair, winner, loser)
 
 	if result == "REMATCH" then
 		task.wait(0.5)
-		beginRound(pair, p1, p2, h1, h2)
+		startSelection(pair, p1, p2, h1, h2) -- NEU: bei jeder Runde (auch Rematch) neu waehlen
 		return
 	end
 
@@ -249,6 +472,9 @@ local function finishGame(pair, winner, loser)
 	pair.finished = false
 	pair.rematchOpen = false
 	pair.votes = nil
+	pair.bonusSelecting = false
+	pair.bonusMode = false
+	pair.bonusVotes = nil
 
 	pair.player1 = nil
 	pair.player2 = nil
@@ -329,7 +555,7 @@ local function setupPair(pair)
 				)
 
 			if player1 and player2 then
-				beginRound(pair, player1, player2, humanoid1, humanoid2)
+				startSelection(pair, player1, player2, humanoid1, humanoid2) -- NEU
 			end
 
 		end
@@ -390,6 +616,37 @@ function GameService.start()
 				getOpponent(player)
 
 			if not opponent then
+				return
+			end
+
+			-- ===== NEU: Schwierigkeit waehlen =====
+			if action == "DIFFICULTY" then
+				if not pair.selecting then return end
+				if typeof(value) ~= "string" or not FootballPlayers.isValidDifficulty(value) then
+					return
+				end
+
+				pair.choices[player] = value
+
+				-- Beim ersten Klick startet der 10-Sekunden-Timer (wird nicht neu gestartet)
+				if not pair.choiceDeadline then
+					pair.choiceDeadline = os.clock() + SELECT_TIME
+				end
+
+				sendSelectionUpdate(pair, pair.choiceDeadline)
+				return
+			end
+
+			-- Spieler entscheiden freiwillig, ob die Runde einen Bonus haben soll.
+			if action == "BONUS_VOTE" then
+				if not pair.bonusSelecting or typeof(value) ~= "boolean" then return end
+				if not pair.bonusVotes or pair.bonusVotes[player] ~= nil then return end
+				pair.bonusVotes[player] = value
+				return
+			end
+
+			-- Waehrend der Auswahl sind Fragen/Antworten/Raten gesperrt
+			if pair.selecting or pair.bonusSelecting then
 				return
 			end
 
