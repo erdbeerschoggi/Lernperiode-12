@@ -120,10 +120,10 @@ Ich habe die vorgefertigten Fragen überarbeitet und erweitert, sodass sie besse
 ## 20.11
 **Nena**
 - [x] Eigene Fragen senden: Ein Eingabefeld mit einem Senden-Button ergänzen. Die Frage soll dem Mitspieler angezeigt werden und mit Ja oder Nein beantwortet werden können.
-- [ ] Benutzeroberfläche verbessern: Buttons, Beschriftungen und Eingabefelder übersichtlicher gestalten. Dabei die Schwierigkeiten berücksichtigen, die beim Ausprobieren des Spiels aufgetreten sind.
-- [ ] Tutorial einbauen: Eine kurze Anleitung zu Spielstart, Fragen und Vermutungen erstellen. Spieler sollen sie über einen Hilfe-Button öffnen und wieder schliessen können.
+- [x] Benutzeroberfläche verbessern: Buttons, Beschriftungen und Eingabefelder übersichtlicher gestalten. Dabei die Schwierigkeiten berücksichtigen, die beim Ausprobieren des Spiels aufgetreten sind.
+- [x] Tutorial einbauen: Eine kurze Anleitung zu Spielstart, Fragen und Vermutungen erstellen. Spieler sollen sie über einen Hilfe-Button öffnen und wieder schliessen können.
 
-dezentral: Man kann im Spiel jetzt auch seine eigenen Fragen schreiben. Die vorgefertigten Fragen bleiben noch bestehen.
+Ich habe ein Eingabefeld für eigene Fragen mit einem Senden-Button eingebaut. Der Mitspieler kann die Fragen mit Ja oder Nein beantworten. Ausserdem habe ich die Benutzeroberfläche übersichtlicher gemacht und eine kurze Spielanleitung ergänzt, die man über einen Hilfe-Button öffnen und schliessen kann.
 
 **Maja**
 - [x] Shop-Code aufteilen: Die Shop-Oberfläche, Kaufverarbeitung und Artikeldaten in getrennten Dateien organisieren. Dadurch könnt ihr Änderungen leichter unabhängig voneinander bearbeiten.
