@@ -16,7 +16,7 @@
         "$path": "src/server"
       },
       "TwoPlayerGame": {
-        "$path": "src/ServerScriptService/TwoPlayerGame.server.lua"
+        "$path": "src/ServerScriptService/TwoPlayerGame"
       }
     },
     "StarterPlayer": {
