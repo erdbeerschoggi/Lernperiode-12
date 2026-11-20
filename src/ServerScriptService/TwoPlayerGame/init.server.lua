@@ -1,4 +1,4 @@
--- Einstiegspunkt des Servers. 
+
 require(script.Remotes)
 
 require(script.ShopService).start()
