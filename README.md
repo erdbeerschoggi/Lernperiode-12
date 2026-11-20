@@ -105,13 +105,13 @@ Dann habe ich mit Nena andere Gegenstände in unser Shop hinzugefügt (z.B. eine
 
 **Mina**
 - [x] Alles auf eine Sprache einstellen (Alles nur auf English)
-- [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
-- [ ] Mehr Fragen hinzufügen beim Fussball Spieler raten
+- [x] Nach anderen kleinen Problemen suchen, die man verbessern sollte
+- [x] Mehr Fragen hinzufügen beim Fussball Spieler raten
 
 **Joshua**
 - [X] Fragen anpassen zu den Informationen die von den Fussball Spielern vorhanden sind
-- [ ] Die funktion von einem "rematch" einbauen
-- [ ] Nach anderen kleinen Problemen suchen, die man verbessern sollte
+- [x] Die funktion von einem "rematch" einbauen
+- [x] Nach anderen kleinen Problemen suchen, die man verbessern sollte
 
 Ich habe die neuen, vorgefertigten Platzhalterfragen überarbeitet und erweitert, sodass sie besser zu unseren Spielerdaten passen.
 
@@ -131,9 +131,11 @@ dezentral: Man kann im Spiel jetzt auch seine eigenen Fragen schreiben. Die vorg
 Für das  dezentral a. Paket habe ich die eine riesie datei mit der spiellogik, stuhllogik etc. in kleiner dateien aufgeteilt um merge konflikte zu vermeiden und um das ganze übersichtlicher zu gestalten. Dann habe ich mehrere optionen ausprobiert um einen fishstuhl zu erstellen. Zuerst habe ich selbst einen fisch gebaut mit mehrern teilen doch das sah nicht so gut aus und dann bin ich auf die idee gekommen einen vorgefertigten fisch einzubauen mit der sitzfunkion. Was jetzt noch jedoch fehlt ist dass das spiel startet wenn beide auf den fischen sitzen.
 
 **Mina**
-- [ ] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
-- [ ] Funktion einbauen dass Spieler Geld auf das Spiel wetten können.
-- [ ] Funktion einbauen zum entscheiden ob man überhaupt in der Runde wetten möchte
+- [x] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
+- [x] Funktion einbauen dass Spieler Geld auf das Spiel wetten können.
+- [x] Funktion einbauen zum entscheiden ob man überhaupt in der Runde wetten möchte
+
+Ich habe zusammen mit Joshua die verschiedenen Schwierigkeitsstufen ins Spiel eingebaut. Danach habe ich einen freiwilligen Bonus-Modus hinzugefügt. Nach der Schwierigkeitsauswahl erscheint jetzt ein Fenster, in dem beide Spieler entscheiden können, ob sie mit Bonus spielen möchten. Wenn beide Ja auswählen, bekommt der Gewinner zusätzlich 25 CHF, also insgesamt 75 CHF. Wenn einer Nein auswählt, läuft das Spiel normal weiter und der Gewinner erhält wie bisher 50 CHF. Das Ganze funktioniert auch bei einem Rematch, da man vor jeder neuen Runde wieder entscheiden kann.
 
 **Joshua**
 - [X] Mehr Fussball Spieler Daten hinzufügen
