@@ -126,9 +126,9 @@ dezentral: Man kann im Spiel jetzt auch seine eigenen Fragen schreiben. Die vorg
 **Maja**
 - [x] Shop-Code aufteilen: Die Shop-Oberfläche, Kaufverarbeitung und Artikeldaten in getrennten Dateien organisieren. Dadurch könnt ihr Änderungen leichter unabhängig voneinander bearbeiten.
 - [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden.
-- [ ] Einen Fisch als Sitzobjekt erstellen: Ein Fischmodell mit einer Sitzfunktion ergänzen. Prüfen, ob sich Spieler darauf setzen und wieder aufstehen können.
+- [x] Einen Fisch als Sitzobjekt erstellen: Ein Fischmodell mit einer Sitzfunktion ergänzen. Prüfen, ob sich Spieler darauf setzen und wieder aufstehen können.
 
-Für das  dezentral a. Paket habe ich die eine riesie datei mit der spiellogik, stuhllogik etc. in kleiner dateien aufgeteilt um merge konflikte zu vermeiden und um das ganze übersichtlicher zu gestalten.
+Für das  dezentral a. Paket habe ich die eine riesie datei mit der spiellogik, stuhllogik etc. in kleiner dateien aufgeteilt um merge konflikte zu vermeiden und um das ganze übersichtlicher zu gestalten. Dann habe ich mehrere optionen ausprobiert um einen fishstuhl zu erstellen. Zuerst habe ich selbst einen fisch gebaut mit mehrern teilen doch das sah nicht so gut aus und dann bin ich auf die idee gekommen einen vorgefertigten fisch einzubauen mit der sitzfunkion. Was jetzt noch jedoch fehlt ist dass das spiel startet wenn beide auf den fischen sitzen.
 
 **Mina**
 - [ ] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
