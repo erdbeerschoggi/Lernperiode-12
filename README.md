@@ -148,15 +148,15 @@ CUSTOM QUESTION FUNKTION, UI AUSBESSERN DA VIELE SCHWIERIGKEITEN HATTEN BEIM GEB
 
 ## 27.11
 **Nena**
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ] Weniger Text in der Spiel Tabelle haben, sodass es weider übersichtlicher ist.
+- [ ] Eingaben und ausgaben der Spieler besser verteilen, sodass die Spieler es nachvolziehen können.
+- [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden. Z.b. wir haben schon einen Fisch als Stuhl, dann kann man weitere "komische" Stühle hinzufügen.
 
 
 **Maja**
 - [ ] Dem Fisch stuhl die funktion zum spiel starten hinzuzufügen
-- [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden.
-- [ ] 
+- [ ] Entscheiden ob der Fischstuhl gekauft werden soll oder überall steht. Nach der Entscheidung das ausgewählte umsetzen.
+- [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden. Z.b. wir haben schon einen Fisch als Stuhl, dann kann man weitere "komische" Stühle hinzufügen.
 
 
 **Mina**
