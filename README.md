@@ -130,7 +130,7 @@ Ich habe ein Eingabefeld für eigene Fragen mit einem Senden-Button eingebaut. D
 - [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden.
 - [x] Einen Fisch als Sitzobjekt erstellen: Ein Fischmodell mit einer Sitzfunktion ergänzen. Prüfen, ob sich Spieler darauf setzen und wieder aufstehen können.
 
-Für das  dezentral a. Paket habe ich die eine riesie datei mit der spiellogik, stuhllogik etc. in kleiner dateien aufgeteilt um merge konflikte zu vermeiden und um das ganze übersichtlicher zu gestalten. Dann habe ich mehrere optionen ausprobiert um einen fishstuhl zu erstellen. Zuerst habe ich selbst einen fisch gebaut mit mehrern teilen doch das sah nicht so gut aus und dann bin ich auf die idee gekommen einen vorgefertigten fisch einzubauen mit der sitzfunkion. Was jetzt noch jedoch fehlt ist dass das spiel startet wenn beide auf den fischen sitzen.
+Für das  dezentral a. Paket habe ich die eine riesie datei mit der spiellogik, stuhllogik etc. in kleiner dateien aufgeteilt um merge konflikte zu vermeiden und um das ganze übersichtlicher zu gestalten. Dann habe ich mehrere optionen ausprobiert um einen fishstuhl zu erstellen. Deshalb baute ich einen Fisch Stuhl aus einzelnen Teilen zusammen. Ich erstellte zwei von diesen Fisch stuhlen mit einer Sitzfunktion damit man das Spiel auf den Fischen durchspielen kann.
 
 **Mina**
 - [x] Levels beim Spiel hinzufügen (easy, intermediate, difficult,...)
@@ -156,10 +156,11 @@ Für das dezentral a. Arbeitspaket habe ich mir 40 neue Fussballer mit Daten her
 
 
 **Maja**
-- [ ] Dem Fisch stuhl die funktion zum spiel starten hinzuzufügen
+- [x] Dem Fisch stuhl die funktion zum spiel starten hinzuzufügen und den Fisch stuhl verschönern.
 - [ ] Entscheiden ob der Fischstuhl gekauft werden soll oder überall steht. Nach der Entscheidung das ausgewählte umsetzen.
 - [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden. Z.b. wir haben schon einen Fisch als Stuhl, dann kann man weitere "komische" Stühle hinzufügen.
 
+Letztes mal habe ich einen Fisch aus einzelnen Teilen gebaut, doch ich habe während dem dezentral a. paket bemerkt das es einfacher wäre einen vorgefertigten Fisch zu benutzen, den dieser schöner aussieht und praktischer ist. Danach platzierte ich diese Fische und fügte ihnen die Sitzfunktion dazu und machte sie zu einem model damit man darauf auch das Spiel spielen kann.
 
 **Mina**
 - [x] Geldsystem so anpassen, dass die Spieler ihr Geld behalten, wenn sie das Spiel verlassen und später wieder beitreten.
