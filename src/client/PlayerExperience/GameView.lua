@@ -119,26 +119,6 @@ function View.create(playerGui, questions)
         button.TextSize=14
         table.insert(self.presetButtons,{button=button,text=text})
     end
-    local function layout()
-        local narrow=scroll.AbsoluteSize.X<650
-        columns.FillDirection=narrow and Enum.FillDirection.Vertical or Enum.FillDirection.Horizontal
-        left.Size=narrow and UDim2.new(1,0,0,0) or UDim2.new(.62,-6,0,0)
-        right.Size=narrow and UDim2.new(1,0,0,0) or UDim2.new(.38,-6,0,0)
-        local compact=self.gui.AbsoluteSize.X<800
-        self.main.Size=compact and UDim2.fromScale(.96,.76) or UDim2.fromScale(.78,.76)
-        self.main.Position=compact and UDim2.fromScale(.5,.58) or UDim2.fromScale(.59,.58)
-        local small=left.AbsoluteSize.X<410
-        self.questionStatus.Position=small and UDim2.fromOffset(12,182) or UDim2.fromOffset(180,128)
-        self.questionStatus.Size=small and UDim2.new(1,-24,0,52) or UDim2.new(1,-192,0,56)
-        ask.Size=UDim2.new(1,0,0,small and 244 or 192)
-        self.guessStatus.Position=small and UDim2.fromOffset(12,150) or UDim2.fromOffset(180,94)
-        self.guessStatus.Size=small and UDim2.new(1,-24,0,52) or UDim2.new(1,-192,0,56)
-        guess.Size=UDim2.new(1,0,0,small and 210 or 160)
-    end
-    scroll:GetPropertyChangedSignal("AbsoluteSize"):Connect(layout)
-    left:GetPropertyChangedSignal("AbsoluteSize"):Connect(layout)
-    self.gui:GetPropertyChangedSignal("AbsoluteSize"):Connect(layout)
-    task.defer(layout)
     function self:render(state)
         self.subtitle.Text="Opponent: "..state.opponent.." | Scroll for more"
         self.incoming.Text=state.incoming~="" and ('"'..state.incoming..'"') or "Waiting for a question ..."
@@ -159,6 +139,7 @@ function View.create(playerGui, questions)
             self.info.Text=table.concat(lines,"\n")
         else self.info.Text="Waiting for player info ..." end
     end
+    require(script.Parent.CompactLayout).apply(self, W)
     return self
 end
 return View

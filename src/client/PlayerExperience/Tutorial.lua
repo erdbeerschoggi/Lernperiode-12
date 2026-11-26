@@ -2,11 +2,11 @@ local W = require(script.Parent.Widgets)
 local Tutorial = {}
 local steps = {
     {"1  FIND A GAME", "Sit on a game seat at a table. The round begins when a second player sits opposite you.\n\nWhile you wait, you can open the shop or read this guide."},
-    {"2  KNOW WHICH PLAYER IS WHICH", "You need to guess YOUR hidden football player.\n\nThe player info shown on screen belongs to your OPPONENT. Use that information to answer their questions. It does not reveal your own answer."},
-    {"3  ASK YOUR OWN QUESTION", "Write a short question that can be answered with YES or NO.\n\nFor example: Do I play in England?\n\nUse SEND QUESTION or press Enter. You can also use a QUICK QUESTION from the existing list. Clicking outside a text field does not send it. Wait for your opponent's answer."},
-    {"4  ANSWER YOUR OPPONENT", "Your opponent's latest question appears in the ANSWER YOUR OPPONENT section.\n\nCheck their player info and choose YES or NO. You can still type a free-text answer and use SEND ANSWER. Wait for the server confirmation; the buttons become available again for the next question."},
-    {"5  MAKE YOUR GUESS", "When you think you know your hidden player, enter the player's name in GUESS YOUR HIDDEN PLAYER.\n\nUse SUBMIT GUESS or press Enter. A wrong guess lets you keep playing. The first correct guess wins the round."},
-    {"6  FIND HELP AND THE SHOP", "Scroll inside the game panel to reach every control, especially on a small screen.\n\nSHOP opens the existing shop and its preview/accessories.\n\nOpen HOW TO PLAY whenever you need this guide. Close it with X or Escape. After a round, use the existing PLAY AGAIN? panel for a rematch. Reading this guide does not pause the round."},
+    {"2  KNOW WHICH PLAYER IS WHICH", "You need to guess YOUR hidden football player.\n\nThe facts under PLAYER INFO belong to your OPPONENT. Use that information to answer their questions. It does not reveal your own answer."},
+    {"3  ASK YOUR OWN QUESTION", "Write a short question that can be answered with YES or NO.\n\nFor example: Do I play in England?\n\nOpen ASK, write your question and use SEND or Enter. QUICK QUESTIONS opens the existing list. Clicking outside a text field does not send it. Wait for your opponent's answer."},
+    {"4  ANSWER YOUR OPPONENT", "Open ANSWER when its tab shows an exclamation mark. Your opponent's latest question appears there.\n\nCheck their player info and choose YES or NO. TYPE opens a free-text answer field. Use SEND or Enter to submit it. Wait for the server confirmation; the buttons become available again for the next question."},
+    {"5  MAKE YOUR GUESS", "When you think you know your hidden player, open GUESS and enter the player's name.\n\nUse GUESS or press Enter. A wrong guess lets you keep playing. The first correct guess wins the round."},
+    {"6  FIND HELP AND THE SHOP", "ASK, ANSWER and GUESS switch the controls at the bottom. Scroll there if needed. PLAYER INFO opens all opponent facts; X closes them.\n\nSHOP opens the existing shop and its preview/accessories.\n\nOpen HELP whenever you need this guide. Close it with X or Escape. After a round, use the existing PLAY AGAIN? panel for a rematch. Reading this guide does not pause the round."},
 }
 function Tutorial.create(playerGui)
     local self = {index=1}
