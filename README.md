@@ -150,10 +150,10 @@ Für das dezentral a. Arbeitspaket habe ich mir 40 neue Fussballer mit Daten her
 
 ## 27.11
 **Nena**
-- [ ] Weniger Text in der Spiel Tabelle haben, sodass es weider übersichtlicher ist.
+- [x] Weniger Text in der Spiel Tabelle haben, sodass es weider übersichtlicher ist.
 - [ ] Eingaben und ausgaben der Spieler besser verteilen, sodass die Spieler es nachvolziehen können.
 - [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden. Z.b. wir haben schon einen Fisch als Stuhl, dann kann man weitere "komische" Stühle hinzufügen.
-
+Ich habe das User Interface schöner und ansprechbarer gemacht das es mahr nach einem spiel aussieht.
 
 **Maja**
 - [x] Dem Fisch stuhl die funktion zum spiel starten hinzuzufügen und den Fisch stuhl verschönern.
