@@ -162,11 +162,11 @@ Für das dezentral a. Arbeitspaket habe ich mir 40 neue Fussballer mit Daten her
 
 
 **Mina**
-- [ ] Geldsystem so anpassen, dass die Spieler ihr Geld behalten, wenn sie das Spiel verlassen und später wieder beitreten.
+- [x] Geldsystem so anpassen, dass die Spieler ihr Geld behalten, wenn sie das Spiel verlassen und später wieder beitreten.
 - [ ] Fragensystem überarbeiten, sodass die beiden Spieler abwechselnd Fragen stellen müssen und nicht gleichzeitig fragen können.
 - [ ] Die Anzeige der Antworten verbessern, damit man deutlicher sieht, wenn der Gegner eine Frage beantwortet hat.
 
 **Joshua**
-- [ ] Eine Anzeige einbauen, die zeigt, welcher Spieler gerade an der Reihe ist, zum Beispiel «Your Turn» und «Opponent's Turn».
+- [x] Eine Anzeige einbauen, die zeigt, welcher Spieler gerade an der Reihe ist, zum Beispiel «Your Turn» und «Opponent's Turn».
 - [ ] Die gestellten Fragen und Antworten übersichtlicher anzeigen, damit man erkennt, welche Antwort zu welcher Frage gehört.
 - [ ] Das überarbeitete Fragensystem und die Speicherfunktion zusammen mit Mina testen und mögliche Fehler beheben.
