@@ -164,9 +164,11 @@ Ich habe das User Interface schöner und ansprechbarer gemacht das es mehr nach 
 Letztes mal habe ich einen Fisch aus einzelnen Teilen gebaut, doch ich habe während dem dezentral a. paket bemerkt das es einfacher wäre einen vorgefertigten Fisch zu benutzen, den dieser schöner aussieht und praktischer ist. Danach platzierte ich diese Fische und fügte ihnen die Sitzfunktion dazu und machte sie zu einem model damit man darauf auch das Spiel spielen kann.
 
 **Mina**
-- [x] Geldsystem so anpassen, dass die Spieler ihr Geld behalten, wenn sie das Spiel verlassen und später wieder beitreten.
-- [ ] Fragensystem überarbeiten, sodass die beiden Spieler abwechselnd Fragen stellen müssen und nicht gleichzeitig fragen können.
-- [ ] Die Anzeige der Antworten verbessern, damit man deutlicher sieht, wenn der Gegner eine Frage beantwortet hat.
+- [ ] Geldsystem so anpassen, dass die Spieler ihr Geld behalten, wenn sie das Spiel verlassen und später wieder beitreten.
+- [x] Fragensystem überarbeiten, sodass die beiden Spieler abwechselnd Fragen stellen müssen und nicht gleichzeitig fragen können.
+- [x] Die Anzeige der Antworten verbessern, damit man deutlicher sieht, wenn der Gegner eine Frage beantwortet hat.
+
+Heute habe ich die Anzeige beim Fragen und Antworten verbessert. Man kann jetzt besser erkennen, wer gerade an der Reihe ist und welche Antwort der Gegner gegeben hat. Ausserdem habe ich die Fragen und Antworten übersichtlicher dargestellt. Danach habe ich versucht, das Geldsystem so anzupassen, dass das Geld auch nach dem Verlassen des Spiels gespeichert bleibt. Das hat leider noch nicht funktioniert, weshalb ich es nochmals anschauen muss.
 
 **Joshua**
 - [x] Eine Anzeige einbauen, die zeigt, welcher Spieler gerade an der Reihe ist, zum Beispiel «Your Turn» und «Opponent's Turn».
@@ -174,3 +176,12 @@ Letztes mal habe ich einen Fisch aus einzelnen Teilen gebaut, doch ich habe wäh
 - [ ] Das überarbeitete Fragensystem und die Speicherfunktion zusammen mit Mina testen und mögliche Fehler beheben.
 
 ## 04.12.
+
+## Nächste Woche
+
+**Mina**
+- [ ] Herausfinden, warum das Geld beim Verlassen des Spiels nicht richtig gespeichert wird.
+- [ ] Das Geldsystem mit dem DataStoreService von Roblox verbinden.
+- [ ] Dafür sorgen, dass das Guthaben eines Spielers beim Verlassen gespeichert wird.
+- [ ] Eine Funktion einbauen, die das gespeicherte Geld beim erneuten Beitreten wieder lädt.
+- [ ] Das Geldsystem testen und mögliche Fehler beim Speichern und Laden beheben.
