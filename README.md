@@ -172,7 +172,7 @@ Heute habe ich die Anzeige beim Fragen und Antworten verbessert. Man kann jetzt 
 
 **Joshua**
 - [x] Eine Anzeige einbauen, die zeigt, welcher Spieler gerade an der Reihe ist, zum Beispiel «Your Turn» und «Opponent's Turn».
-- [ ] Die gestellten Fragen und Antworten übersichtlicher anzeigen, damit man erkennt, welche Antwort zu welcher Frage gehört.
+- [x] Die gestellten Fragen und Antworten übersichtlicher anzeigen, damit man erkennt, welche Antwort zu welcher Frage gehört.
 - [ ] Das überarbeitete Fragensystem und die Speicherfunktion zusammen mit Mina testen und mögliche Fehler beheben.
 
 ## 04.12.
@@ -185,13 +185,12 @@ Heute habe ich die Anzeige beim Fragen und Antworten verbessert. Man kann jetzt 
 - [ ] Spielernamen als Übersicht anzeigen: Alle möglichen Fussballspieler mit ihrem Namen anzeigen.
 - [ ] Spieler ausschliessen können: Namen durch Anklicken durchstreichen und durch erneutes Anklicken wieder aktivieren. Bei einer neuen Runde werden alle Markierungen zurückgesetzt.
 
-
 **Maja**
 - [ ] Den Ballstühlen die Sitzfunktion hinzufügen (dezentral a.)
 - [ ] Den Ballstühlen die Funktion hinzufügen das spiel zu starten
 - [ ] Die Ballstühle auch auf die andere Seite mit den Tischen hinzufügen
 - [ ] Eine Wand zwischen normalen Stühlen und den Fussball Stühlen erstellen damit man erst mit den Fussball Stühlen spielen kann wenn man einen genauen Geld betrag hat.
-- [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden. Z.b. wir haben schon einen Ball als Stuhl, dann kann man weitere "komische" Stühle hinzufügen.
+- [ ] Easter eggs hinzufügen
 
 **Mina**
 - [ ] Herausfinden, warum das Geld beim Verlassen des Spiels nicht richtig gespeichert wird.
@@ -204,4 +203,5 @@ Heute habe ich die Anzeige beim Fragen und Antworten verbessert. Man kann jetzt 
 - [ ] Den Ballstühlen die Sitzfunktion hinzufügen (dezentral a.)
 - [ ] Eine Wand zwischen normalen Stühlen und den Fussball Stühlen erstellen damit man erst mit den Fussball Stühlen spielen kann wenn man einen genauen Geld betrag hat.
 - [ ] Map zum Stadion wechseln
-- [ ] 
+- [ ] Gestaltung der Map anpassen. Mehr in Richtung Fussball
+- [ ] Easter eggs hinzufügen
