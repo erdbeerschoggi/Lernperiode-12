@@ -151,10 +151,10 @@ Für das dezentral a. Arbeitspaket habe ich mir 40 neue Fussballer mit Daten her
 ## 27.11
 **Nena**
 - [x] Weniger Text in der Spiel Tabelle haben, sodass es weider übersichtlicher ist.
-- [ ] Eingaben und ausgaben der Spieler besser verteilen, sodass die Spieler es nachvolziehen können.
-- [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden. Z.b. wir haben schon einen Fisch als Stuhl, dann kann man weitere "komische" Stühle hinzufügen.
+- [x] Eingaben und ausgaben der Spieler besser verteilen, sodass die Spieler es nachvolziehen können.
+- [x] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden. Z.b. wir haben schon einen Fisch als Stuhl, dann kann man weitere "komische" Stühle hinzufügen.
 
-Ich habe das User Interface schöner und ansprechbarer gemacht das es mehr nach einem spiel aussieht.
+Ich habe das User Interface schöner und ansprechbarer gemacht das es mehr nach einem spiel aussieht. Ebenfalls habe ich jetzt turns hinzugefügt damit man genau weiss wer dran ist. Es ersccheint auch nur das auf dem Bildschirm was man wirklich braucht. Wenn man dran ist kommen die Felder zum Fragen eingeben und wenn man gefragt wird kommt nur das feld zum Antworten. Es wurden neue Stühle hinzugefügt.
 
 **Maja**
 - [x] Dem Fisch stuhl die funktion zum spiel starten hinzuzufügen und den Fisch stuhl verschönern.
@@ -172,3 +172,5 @@ Letztes mal habe ich einen Fisch aus einzelnen Teilen gebaut, doch ich habe wäh
 - [x] Eine Anzeige einbauen, die zeigt, welcher Spieler gerade an der Reihe ist, zum Beispiel «Your Turn» und «Opponent's Turn».
 - [ ] Die gestellten Fragen und Antworten übersichtlicher anzeigen, damit man erkennt, welche Antwort zu welcher Frage gehört.
 - [ ] Das überarbeitete Fragensystem und die Speicherfunktion zusammen mit Mina testen und mögliche Fehler beheben.
+
+## 04.12.
