@@ -11,6 +11,9 @@ function Protocol.new()
     return {
         active=false,opponent="",incoming="",answered=false,answerPending=false,
         questionRevision=0,pendingRevision=0,rematchOpen=false,
+        turnId=0,mode="WAIT",canAsk=false,canAnswer=false,turnMessage="Connecting...",
+        questionPending=false,guessPending=false,submittedQuestion="",lastQuestion="",
+        lastAnswer="",submittedGuess="",
         questionStatus="Write a question or choose a quick question.",
         answerStatus="Your opponent's question will appear here.",
         guessStatus="Use the answers to work out your hidden player's name.",
@@ -23,8 +26,10 @@ function Protocol.receive(state,status,value)
         state.data=nil
         state.active=true
         state.opponent=type(value)=="string" and value or "Opponent"
-    elseif status=="WIN" or status=="LOSE" then
+    elseif status=="WIN" or status=="LOSE" or status=="SELECT_CANCEL" then
         state.active=false
+        state.canAsk=false
+        state.canAnswer=false
         state.incoming=""
         state.answerPending=false
         state.answered=false
@@ -36,7 +41,35 @@ function Protocol.receive(state,status,value)
         state.rematchOpen=false
     elseif status=="WAITING" then
         state.active=false
+    elseif status=="TURN_STATE" and type(value)=="table" then
+        if type(value.id)~="number" or value.id<state.turnId then return false end
+        -- A server sync also recovers an addon that loaded just after START.
+        state.active=true
+        state.rematchOpen=false
+        state.turnId=value.id
+        state.mode=value.mode
+        state.canAsk=value.canAsk==true
+        state.canAnswer=value.canAnswer==true
+        state.turnMessage=value.message or ""
+        state.opponent=value.opponent or state.opponent
+        local incoming=value.question or ""
+        if incoming~=state.incoming then
+            state.incoming=incoming
+            state.questionRevision=state.questionRevision+1
+            state.answered=false
+        end
     elseif not state.active then return false
+    elseif status=="QUESTION_SENT" then
+        state.questionPending=false
+        state.lastQuestion=state.submittedQuestion
+        state.lastAnswer=""
+        state.questionStatus="Question sent. Waiting for an answer."
+    elseif status=="QUESTION_ERROR" and type(value)=="string" then
+        state.questionPending=false
+        state.questionStatus=value
+    elseif status=="GUESS_ERROR" and type(value)=="string" then
+        state.guessPending=false
+        state.guessStatus=value
     elseif status=="PLAYER_DATA" and type(value)=="table" then
         state.data=value
     elseif status=="OPPONENT_QUESTION" and type(value)=="string" then
@@ -57,10 +90,12 @@ function Protocol.receive(state,status,value)
     elseif status=="OPPONENT_ANSWER" and type(value)=="string" then
         -- Keep free-text answers introduced by the team, not only YES/NO.
         state.questionStatus="Your opponent answered: "..value
+        state.lastAnswer=value
     elseif status=="OPPONENT_GUESS" and type(value)=="string" then
         state.guessStatus="Opponent's guess: "..value
     elseif status=="WRONG_GUESS" then
-        state.guessStatus="Not correct yet. Ask another question and try again."
+        state.guessPending=false
+        state.guessStatus="Wrong guess. Your opponent goes next."
     else return false end
     return true
 end

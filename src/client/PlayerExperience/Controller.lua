@@ -45,6 +45,7 @@ function Controller.start()
     local state=Protocol.new()
     state.active=refs.gameFrame.Visible
     local cooldown={QUESTION=0,GUESS=0}
+    local pendingRaw={}
     local connections={}
     local stopped=false
     local attached=Bridge.attach(refs,function()
@@ -57,23 +58,35 @@ function Controller.start()
         view.main.Visible=state.active and refs.gameFrame.Visible and not refs.shopFrame.Visible
         view.lobby.Visible=not state.active and not state.rematchOpen and not refs.shopFrame.Visible and not (refs.rematchFrame and refs.rematchFrame.Visible)
         view:render(state)
-        W.enabled(view.send,state.active and os.clock()>=cooldown.QUESTION)
-        W.enabled(view.submitGuess,state.active and os.clock()>=cooldown.GUESS)
+        W.enabled(view.send,state.active and state.canAsk and not state.questionPending and not state.guessPending and os.clock()>=cooldown.QUESTION)
+        W.enabled(view.submitGuess,state.active and state.canAsk and not state.questionPending and not state.guessPending and os.clock()>=cooldown.GUESS)
+        view.question.TextEditable=state.canAsk and not state.questionPending and not state.guessPending
+        view.guess.TextEditable=state.canAsk and not state.questionPending and not state.guessPending
+        W.enabled(view.yes,state.active and state.canAnswer and not state.answerPending)
+        W.enabled(view.no,state.active and state.canAnswer and not state.answerPending)
+        W.enabled(view.sendAnswer,state.active and state.canAnswer and not state.answerPending)
     end
     local function send(action,box)
         if stopped or not state.active or not view.main.Visible or tutorial.overlay.Visible then return end
+        if not state.canAsk or state.questionPending or state.guessPending then return end
         if os.clock()<cooldown[action] then return end
         local text,errorMessage=Protocol.validate(box.Text)
         local field=action=="QUESTION" and "questionStatus" or "guessStatus"
         if not text then state[field]=errorMessage refresh() return end
         cooldown[action]=os.clock()+1
-        -- Only this NEW input sends. Original hidden TextBoxes remain empty.
-        actionEvent:FireServer(action,text)
-        box.Text=""
+        pendingRaw[action]=box.Text
         if action=="QUESTION" then
-            state.questionStatus="Submitted: "..text.."\nWait for your opponent's answer."
-        else state.guessStatus="Guess submitted: "..text end
+            state.submittedQuestion=text
+            state.questionPending=true
+            state.questionStatus="Sending question..."
+        else
+            state.submittedGuess=text
+            state.guessPending=true
+            state.guessStatus="Sending guess..."
+        end
         refresh()
+        -- Keep the draft until the server acknowledges success. Show server errors.
+        actionEvent:FireServer(action,text,state.turnId)
         task.delay(1.05,refresh)
     end
     table.insert(connections,view.send.Activated:Connect(function() send("QUESTION",view.question) end))
@@ -87,14 +100,14 @@ function Controller.start()
     end))
     local function answer(value)
         if not state.active or not view.main.Visible or tutorial.overlay.Visible
-            or state.incoming=="" or state.answered or state.answerPending then return end
+            or not state.canAnswer or state.incoming=="" or state.answered or state.answerPending then return end
         local text,errorMessage=Protocol.validate(value)
         if not text then state.answerStatus=errorMessage refresh() return end
         state.answerPending=true
         state.pendingRevision=state.questionRevision
         state.answerStatus="Sending answer ..."
-        actionEvent:FireServer("ANSWER",text)
         refresh()
+        actionEvent:FireServer("ANSWER",text,state.turnId)
     end
     table.insert(connections,view.yes.Activated:Connect(function() answer("YES") end))
     table.insert(connections,view.no.Activated:Connect(function() answer("NO") end))
@@ -116,7 +129,13 @@ function Controller.start()
     end))
     table.insert(connections,chairEvent.OnClientEvent:Connect(function(status,value)
         if Protocol.receive(state,status,value) then
-            if status=="START" or status=="WIN" or status=="LOSE" then
+            if status=="QUESTION_SENT" and view.question.Text==pendingRaw.QUESTION then
+                view.question.Text=""
+            end
+            if status=="WRONG_GUESS" and view.guess.Text==pendingRaw.GUESS then
+                view.guess.Text=""
+            end
+            if status=="START" or status=="WIN" or status=="LOSE" or status=="SELECT_CANCEL" then
                 view.question.Text=""
                 view.guess.Text=""
                 view.answer.Text=""
@@ -151,6 +170,8 @@ function Controller.start()
     end
     table.insert(connections,view.gui.Destroying:Connect(cleanup))
     refresh()
+    -- Recover turn/data if this addon starts after the native round's START event.
+    actionEvent:FireServer("TURN_SYNC")
     return cleanup
 end
 return Controller

@@ -6,6 +6,7 @@ local ShopService = require(script.Parent.ShopService)
 local SeatService = require(script.Parent.SeatService)
 local FootballPlayers = require(script.Parent.FootballPlayers)
 local TextUtils = require(script.Parent.TextUtils)
+local TurnService = require(script.Parent.TurnService)
 
 local chairEvent = Remotes.Chair
 local actionEvent = Remotes.Action
@@ -152,6 +153,8 @@ local function beginRound(pair, player1, player2, humanoid1, humanoid2, difficul
 	chairEvent:FireClient(player1, "PLAYER_DATA", football2)
 	chairEvent:FireClient(player2, "PLAYER_DATA", football1)
 
+	TurnService.start(pair, chairEvent)
+
 end
 
 -- ===== NEU: SCHWIERIGKEITS-AUSWAHL =====
@@ -176,6 +179,10 @@ local function sendSelectionUpdate(pair, deadline)
 end
 
 local function abortSelection(pair, p1, p2, h1, h2)
+
+	TurnService.stop(pair)
+	pendingQuestions[p1] = nil
+	pendingQuestions[p2] = nil
 
 	pair.finished = true   -- beendet die lockPlayer-Schleifen
 	pair.selecting = false
@@ -380,6 +387,7 @@ local function finishGame(pair, winner, loser)
 	end
 
 	pair.finished = true
+	TurnService.stop(pair)
 
 	-- Give 50 CHF to the winner
 	if winner:FindFirstChild("leaderstats") and winner.leaderstats:FindFirstChild("Cash") then
@@ -573,6 +581,14 @@ local function setupPair(pair)
 end
 
 function GameService.start()
+    Players.PlayerRemoving:Connect(function(player)
+        local pair = activeGames[player]
+        if pair and pair.turn and not pair.finished then
+            task.spawn(function()
+                abortSelection(pair, pair.player1, pair.player2, pair.humanoid1, pair.humanoid2)
+            end)
+        end
+    end)
 	local pairList = SeatService.build()
 
 	for _, pair in ipairs(pairList) do
@@ -580,7 +596,7 @@ function GameService.start()
 	end
 
 	actionEvent.OnServerEvent:Connect(
-		function(player, action, value)
+		function(player, action, value, turnId)
 
 			if action == "REMATCH" then
 				local rematchPair = activeGames[player]
@@ -650,104 +666,58 @@ function GameService.start()
 				return
 			end
 
-			if action == "QUESTION" then
-				if typeof(value) ~= "string" or value:match("^%s*$") then
-					return
-				end
-
-				local filtered = filterText(value, player, opponent)
-				if not filtered then
-					return
-				end
-
-				pendingQuestions[opponent] = (pendingQuestions[opponent] or 0) + 1
-				chairEvent:FireClient(opponent, "OPPONENT_QUESTION", filtered)
-
-			elseif action == "ANSWER" then
-				if typeof(value) ~= "string" or value:match("^%s*$") then
-					return
-				end
-
-				local questionNumber = pendingQuestions[player]
-				if not questionNumber then
-					chairEvent:FireClient(player, "ANSWER_ERROR", "No question to answer yet.")
-					return
-				end
-
-				local filtered = filterText(value, player, opponent)
-				if not filtered then
-					chairEvent:FireClient(player, "ANSWER_ERROR", "Your answer could not be sent.")
-					return
-				end
-
-				if not pair.started or pair.finished or activeGames[player] ~= pair then
-					return
-				end
-				if pendingQuestions[player] ~= questionNumber then
-					chairEvent:FireClient(player, "ANSWER_ERROR", "A newer question arrived. Please answer that one.")
-					return
-				end
-
-				pendingQuestions[player] = nil
-				chairEvent:FireClient(opponent, "OPPONENT_ANSWER", filtered)
-				chairEvent:FireClient(player, "ANSWER_SENT")
-
-			elseif action == "GUESS" then
-
-				if typeof(value)
-					~= "string" then
-					return
-				end
-
-				local filtered =
-					filterText(
-						value,
-						player,
-						opponent
-					)
-
-				if filtered then
-
-					chairEvent:FireClient(
-						opponent,
-						"OPPONENT_GUESS",
-						filtered
-					)
-
-				end
-
-				local ownFootballPlayer =
-					getOwnFootballPlayer(
-						player
-					)
-
-				if ownFootballPlayer
-					and isCorrectGuess(
-						value,
-						ownFootballPlayer
-					)
-				then
-
-					task.spawn(function()
-
-						finishGame(
-							pair,
-							player,
-							opponent
-						)
-
-					end)
-
-				else
-
-					chairEvent:FireClient(
-						player,
-						"WRONG_GUESS"
-					)
-
-				end
-
-			end
+			if action == "TURN_SYNC" then
+                TurnService.sync(pair, chairEvent, player)
+                local data = pair.player1 == player and pair.playerData2 or pair.playerData1
+                if data then chairEvent:FireClient(player, "PLAYER_DATA", data) end
+                return
+            end
+            if action ~= "QUESTION" and action ~= "ANSWER" and action ~= "GUESS" then return end
+            local errorStatus = action .. "_ERROR"
+            if typeof(value) ~= "string" or value:match("^%s*$") or #value > 100 then
+                chairEvent:FireClient(player, errorStatus, "Enter between 1 and 100 bytes of text.")
+                return
+            end
+            local ticket = TurnService.claim(pair, player, action, turnId)
+            if not ticket then
+                chairEvent:FireClient(player, errorStatus, "Please wait for your turn.")
+                TurnService.sync(pair, chairEvent, player)
+                return
+            end
+            -- Lock before the yielding text filter: duplicate sends cannot race.
+            TurnService.sync(pair, chairEvent)
+            local filtered = filterText(value, player, opponent)
+            if not TurnService.current(pair, ticket) or activeGames[player] ~= pair
+                or not opponent.Parent then return end
+            if not filtered or filtered:match("^%s*$") then
+                chairEvent:FireClient(player, errorStatus,
+                    "Text could not be checked. Try again in a published test with real accounts.")
+                TurnService.retry(pair, ticket, action, chairEvent)
+                return
+            end
+            if action == "QUESTION" then
+                ticket.question = filtered
+                ticket.phase = "ANSWER"
+                pendingQuestions[opponent] = ticket.id
+                chairEvent:FireClient(player, "QUESTION_SENT")
+                chairEvent:FireClient(opponent, "OPPONENT_QUESTION", filtered)
+                TurnService.sync(pair, chairEvent)
+            elseif action == "ANSWER" then
+                pendingQuestions[player] = nil
+                chairEvent:FireClient(player, "ANSWER_SENT")
+                chairEvent:FireClient(opponent, "OPPONENT_ANSWER", filtered)
+                TurnService.advance(pair, chairEvent)
+            else
+                chairEvent:FireClient(opponent, "OPPONENT_GUESS", filtered)
+                local ownFootballPlayer = getOwnFootballPlayer(player)
+                if ownFootballPlayer and isCorrectGuess(value, ownFootballPlayer) then
+                    TurnService.stop(pair)
+                    task.spawn(function() finishGame(pair, player, opponent) end)
+                else
+                    chairEvent:FireClient(player, "WRONG_GUESS")
+                    TurnService.advance(pair, chairEvent)
+                end
+            end
 
 		end
 	)
