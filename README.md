@@ -158,10 +158,10 @@ Ich habe das User Interface schöner und ansprechbarer gemacht das es mehr nach 
 
 **Maja**
 - [x] Dem Fisch stuhl die funktion zum spiel starten hinzuzufügen und den Fisch stuhl verschönern.
-- [ ] Entscheiden ob der Fischstuhl gekauft werden soll oder überall steht. Nach der Entscheidung das ausgewählte umsetzen.
+- [x] Entscheiden ob der Fischstuhl gekauft werden soll oder überall steht. Nach der Entscheidung das ausgewählte umsetzen.
 - [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden. Z.b. wir haben schon einen Fisch als Stuhl, dann kann man weitere "komische" Stühle hinzufügen.
 
-Letztes mal habe ich einen Fisch aus einzelnen Teilen gebaut, doch ich habe während dem dezentral a. paket bemerkt das es einfacher wäre einen vorgefertigten Fisch zu benutzen, den dieser schöner aussieht und praktischer ist. Danach platzierte ich diese Fische und fügte ihnen die Sitzfunktion dazu und machte sie zu einem model damit man darauf auch das Spiel spielen kann.
+Letztes mal habe ich einen Fisch aus einzelnen Teilen gebaut, doch ich habe während dem dezentral a. paket bemerkt das es einfacher wäre einen vorgefertigten Fisch zu benutzen, den dieser schöner aussieht und praktischer ist. Danach platzierte ich diese Fische und fügte ihnen die Sitzfunktion dazu und machte sie zu einem model damit man darauf auch das Spiel spielen kann. Ich habe heute eigentlich an dem fischstuhl weiter arbeiten wollen, aber wir haben als team bemerkt dass es keinen sinn macht fisch stühle in einem fussball spiel zu haben. Deshalb änderte ich diese zu Fussball stühlen. Nächstes mal muss man die Sitzfunktion und Spielfunktion hinzufügen.
 
 **Mina**
 - [ ] Geldsystem so anpassen, dass die Spieler ihr Geld behalten, wenn sie das Spiel verlassen und später wieder beitreten.
@@ -176,8 +176,14 @@ Heute habe ich die Anzeige beim Fragen und Antworten verbessert. Man kann jetzt 
 - [ ] Das überarbeitete Fragensystem und die Speicherfunktion zusammen mit Mina testen und mögliche Fehler beheben.
 
 ## 04.12.
-
 ## Nächste Woche
+
+**Maja**
+- [ ] Den Ballstühlen die Sitzfunktion hinzufügen (dezentral a.)
+- [ ] Den Ballstühlen die Funktion hinzufügen das spiel zu starten
+- [ ] Die Ballstühle auch auf die andere Seite mit den Tischen hinzufügen
+- [ ] Eine Wand zwischen normalen Stühlen und den Fussball Stühlen erstellen damit man erst mit den Fussball Stühlen spielen kann wenn man einen genauen Geld betrag hat.
+- [ ] Ein neues Stuhldesign erstellen: Einen zusätzlichen Stuhl gestalten und als eigenes Modell speichern. Das Design soll sich sichtbar von den bisherigen Stühlen unterscheiden. Z.b. wir haben schon einen Ball als Stuhl, dann kann man weitere "komische" Stühle hinzufügen.
 
 **Mina**
 - [ ] Herausfinden, warum das Geld beim Verlassen des Spiels nicht richtig gespeichert wird.
@@ -185,3 +191,9 @@ Heute habe ich die Anzeige beim Fragen und Antworten verbessert. Man kann jetzt 
 - [ ] Dafür sorgen, dass das Guthaben eines Spielers beim Verlassen gespeichert wird.
 - [ ] Eine Funktion einbauen, die das gespeicherte Geld beim erneuten Beitreten wieder lädt.
 - [ ] Das Geldsystem testen und mögliche Fehler beim Speichern und Laden beheben.
+
+**Joshua**
+- [ ] Den Ballstühlen die Sitzfunktion hinzufügen (dezentral a.)
+- [ ] Eine Wand zwischen normalen Stühlen und den Fussball Stühlen erstellen damit man erst mit den Fussball Stühlen spielen kann wenn man einen genauen Geld betrag hat.
+- [ ] Map zum Stadion wechseln
+- [ ] 
