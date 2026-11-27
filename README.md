@@ -178,6 +178,14 @@ Heute habe ich die Anzeige beim Fragen und Antworten verbessert. Man kann jetzt 
 ## 04.12.
 ## Nächste Woche
 
+**Nena**
+- [ ] Einen kleinen Konfetti-Effekt beim richtigen Erraten eines Spielers ergänzen.
+- [ ] Ursprüngliches Spieldesign wieder aufnehmen: Farben, Buttons und Anordnung an das Design vom Anfang anpassen, damit die Oberfläche wieder diesen Spielcharakter erhält und übersichtlich bleibt.
+- [ ] Aktuelle Funktionen im neuen Design erhalten und testen: Alle bestehenden Funktionen in die angepasste Oberfläche übernehmen.
+- [ ] Spielernamen als Übersicht anzeigen: Alle möglichen Fussballspieler mit ihrem Namen anzeigen.
+- [ ] Spieler ausschliessen können: Namen durch Anklicken durchstreichen und durch erneutes Anklicken wieder aktivieren. Bei einer neuen Runde werden alle Markierungen zurückgesetzt.
+
+
 **Maja**
 - [ ] Den Ballstühlen die Sitzfunktion hinzufügen (dezentral a.)
 - [ ] Den Ballstühlen die Funktion hinzufügen das spiel zu starten
